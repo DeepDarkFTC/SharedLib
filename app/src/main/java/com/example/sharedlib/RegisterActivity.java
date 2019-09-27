@@ -2,6 +2,7 @@ package com.example.sharedlib;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -9,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +26,9 @@ public class RegisterActivity extends AppCompatActivity{
     private FirebaseAuth mAuth;
     // [END declare_auth]
 
+    private TextView userName;
+    private TextView password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,12 @@ public class RegisterActivity extends AppCompatActivity{
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
+
+        userName = findViewById(R.id.name);
+        password = findViewById(R.id.password);
+        if(checkFormat(userName.getText().toString(),password.getText().toString())){
+            
+        }
     }
 
     // [START on_start_check_user]
@@ -81,5 +92,42 @@ public class RegisterActivity extends AppCompatActivity{
                     }
                 });
         // [END create_user_with_email]
+    }
+
+    public Boolean checkFormat(String userName, String password) {
+        String email = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+        if (userName.equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("warning")
+                    .setMessage("Username cannot be empty")
+                    .setPositiveButton("ok", null)
+                    .show();
+            return false;
+        }
+        if (!userName.matches(email)) {
+            new AlertDialog.Builder(this)
+                    .setTitle("warning")
+                    .setMessage("Username should be an email")
+                    .setPositiveButton("ok", null)
+                    .show();
+            return false;
+        }
+        if (password.equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("warning")
+                    .setMessage("Password cannot be empty")
+                    .setPositiveButton("ok", null)
+                    .show();
+            return false;
+        }
+        if (password.length() < 6) {
+            new AlertDialog.Builder(this)
+                    .setTitle("warning")
+                    .setMessage("The length of Password should larger than 6")
+                    .setPositiveButton("ok", null)
+                    .show();
+            return false;
+        }
+        return true;
     }
 }
