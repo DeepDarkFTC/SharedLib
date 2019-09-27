@@ -4,6 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back"
     tools:context=".SearchSeats">
 
+    <LinearLayout
+        android:layout_width="392dp"
+        android:layout_height="620dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="167dp">
+
+        <ImageView
+            android:id="@+id/bailieu"
+            android:layout_width="match_parent"
+            android:layout_height="151dp"
+            app:srcCompat="@drawable/architecture" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            app:srcCompat="@drawable/bailieu" />
+
+        <ImageView
+            android:id="@+id/erc"
+            android:layout_width="match_parent"
+            android:layout_height="146dp"
+            app:srcCompat="@drawable/erc" />
+
+        <ImageView
+            android:id="@+id/giblin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/giblin" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="237dp"
+        android:layout_height="59dp"
+        android:text="Library List"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:background="#30000000"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="68dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
