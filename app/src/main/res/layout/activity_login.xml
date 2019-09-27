@@ -82,20 +82,20 @@
         android:gravity="bottom">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/non"
+            android:layout_width="159dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_weight="1"
             android:layout_margin="5dp"
-            android:id="@+id/non"
+            android:layout_weight="1"
             android:text="Cannot Login?" />
 
         <TextView
             android:id="@+id/news"
-            android:layout_width="wrap_content"
+            android:layout_width="158dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_gravity="bottom|right"
+            android:layout_margin="5dp"
             android:gravity="left"
             android:text="New user" />
     </LinearLayout>
