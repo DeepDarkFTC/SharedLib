@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/back"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/architecture"
+        android:orientation="vertical"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="397dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#10000000"
+            android:text="Level 1"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>
