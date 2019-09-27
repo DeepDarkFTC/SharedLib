@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        login = (Button) findViewById(R.id.login_button);
+        login = findViewById(R.id.login_button);
         userName = findViewById(R.id.name);
         password = findViewById(R.id.password);
 
@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
                 String message = "";     // message from firebase, may phase to several attributes
 
                 if (checkFormat(userName.getText().toString(), password.getText().toString())) {
-
                     Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
                     startActivity(intent);
                 }
