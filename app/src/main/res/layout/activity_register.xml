@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="162dp"
+        android:layout_height="313dp"
         android:orientation="vertical">
 
         <EditText
@@ -24,10 +24,10 @@
             android:paddingLeft="20dp"
             android:textAlignment="center"
             android:textColor="#ff000000"
-            android:textSize="14sp" />
+            android:textSize="24sp" />
 
         <View
-            android:id="@+id/view"
+            android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#11000000" />
@@ -41,7 +41,36 @@
             android:paddingLeft="20dp"
             android:textAlignment="center"
             android:textColor="#ff000000"
-            android:textSize="14sp" />
+            android:textSize="24sp" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#11000000" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:background="#ffffffff" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#11000000" />
+
+        <EditText
+            android:id="@+id/logon_answer"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="#ffffffff"
+            android:hint="Answer"
+            android:paddingLeft="20dp"
+            android:textAlignment="center"
+            android:textColor="#ff000000"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
@@ -52,15 +81,17 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/register"
             android:layout_width="307dp"
             android:layout_height="59dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="#20000000"
             android:gravity="center"
-            android:text="Login"
+            android:text="Create A New Account"
+            android:textAllCaps="false"
             android:textColor="#111010"
             android:textSize="24sp" />
     </LinearLayout>
+
 </LinearLayout>

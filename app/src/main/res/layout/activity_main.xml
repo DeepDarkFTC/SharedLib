@@ -38,7 +38,7 @@
             android:paddingLeft="20dp"
             android:textAlignment="center"
             android:textColor="#ff000000"
-            android:textSize="14sp" />
+            android:textSize="24sp" />
 
         <View
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:paddingLeft="20dp"
             android:textAlignment="center"
             android:textColor="#ff000000"
-            android:textSize="14sp" />
+            android:textSize="24sp" />
 
 
     </LinearLayout>
