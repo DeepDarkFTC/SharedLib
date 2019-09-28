@@ -24,7 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 
-public class RegisterActivity extends AppCompatActivity{
+public class RegisterActivity extends BaseActivity{
 
     // [START declare_auth]
     private FirebaseAuth mAuth;
@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity{
             public void onClick(View v) {
                 if(checkFormat(userName.getText().toString(),password.getText().toString())){
                     // send message to firebase include [userName,Psd,SecurityQ,answer]
-
+                    createAccount(userName.getText().toString(), password.getText().toString());
                 }
             }
         });
@@ -98,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity{
 //            return;
 //        }
 
-        //showProgressDialog();
+        showProgressDialog();
 
         // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -109,6 +109,8 @@ public class RegisterActivity extends AppCompatActivity{
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("ccreateUserWithEmail", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(RegisterActivity.this, "Registration failed.",
+                                    Toast.LENGTH_SHORT).show();
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -119,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity{
                         }
 
                         // [START_EXCLUDE]
-                        //hideProgressDialog();
+                        hideProgressDialog();
                         // [END_EXCLUDE]
                     }
                 });
