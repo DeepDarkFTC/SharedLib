@@ -3,6 +3,7 @@ package com.example.sharedlib;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -111,6 +112,8 @@ public class RegisterActivity extends BaseActivity{
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(RegisterActivity.this, "Registration success.",
                                     Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                            startActivity(intent);
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
