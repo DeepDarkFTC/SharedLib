@@ -109,7 +109,7 @@ public class RegisterActivity extends BaseActivity{
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("ccreateUserWithEmail", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(RegisterActivity.this, "Registration failed.",
+                            Toast.makeText(RegisterActivity.this, "Registration success.",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(user);
                         } else {
