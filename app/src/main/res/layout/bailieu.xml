@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/bai_l1"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="#10000000"
@@ -26,7 +26,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/bai_l2"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="#10000000"
@@ -35,7 +35,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/bai_l3"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="#10000000"
@@ -44,7 +44,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/bai_l4"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="#10000000"
@@ -53,7 +53,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/bai_l5"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="#10000000"
