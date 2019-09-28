@@ -46,8 +46,8 @@ public class RegisterActivity extends BaseActivity{
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
 
-        userName = findViewById(R.id.name);
-        password = findViewById(R.id.password);
+        userName = findViewById(R.id.logon_name);
+        password = findViewById(R.id.logon_password);
         securityAnswer = findViewById(R.id.logon_answer);
 
         securityQuestions = findViewById(R.id.spinner);
