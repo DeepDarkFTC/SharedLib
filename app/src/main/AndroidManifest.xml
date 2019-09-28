@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResetPasswordActivity"></activity>
+        <activity android:name=".GiblinLibraryActivity"></activity>
+        <activity android:name=".ErcLibraryActivity" />
+        <activity android:name=".BaillieuLibraryActivity" />
+        <activity android:name=".ArchitectureLibraryActivity" />
+        <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".HomePageActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".StudyTime" />
