@@ -35,29 +35,48 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/arc"
             android:layout_width="match_parent"
-            android:layout_height="151dp"
-            app:srcCompat="@drawable/architecture" />
+            android:layout_height="135dp"
+            android:background="@drawable/architecture" />
 
-        <ImageView
+        <View
+            android:id="@+id/view9"
+            android:layout_width="match_parent"
+            android:layout_height="13dp"
+            android:background="#11000000" />
+
+        <ImageButton
             android:id="@+id/bailieu"
             android:layout_width="match_parent"
-            android:layout_height="165dp"
-            app:srcCompat="@drawable/bailieu" />
+            android:layout_height="135dp"
+            android:background="@drawable/bailieu" />
 
-        <ImageView
+
+        <View
+            android:id="@+id/view10"
+            android:layout_width="match_parent"
+            android:layout_height="13dp"
+            android:background="#11000000" />
+
+        <ImageButton
             android:id="@+id/erc"
             android:layout_width="match_parent"
-            android:layout_height="146dp"
-            app:srcCompat="@drawable/erc" />
+            android:layout_height="135dp"
+            android:background="@drawable/erc" />
 
-        <ImageView
+        <View
+            android:id="@+id/view14"
+            android:layout_width="match_parent"
+            android:layout_height="13dp"
+            android:background="#11000000" />
+
+        <ImageButton
             android:id="@+id/giblin"
             android:layout_width="match_parent"
-            android:layout_height="147dp"
-            app:srcCompat="@drawable/giblin" />
+            android:layout_height="135dp"
+            android:background="@drawable/giblin" />
 
     </LinearLayout>
 
