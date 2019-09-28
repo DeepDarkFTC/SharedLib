@@ -1,86 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@drawable/back"
-    tools:context=".RegisterActivity">
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-
-    </LinearLayout>
+    android:orientation="vertical"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="163dp"
+        android:orientation="vertical"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="162dp"
         android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/logon_name"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="#ffffffff"
+            android:hint="Mail"
+            android:paddingLeft="20dp"
+            android:textAlignment="center"
+            android:textColor="#ff000000"
+            android:textSize="14sp" />
+
         <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#11000000" />
 
+        <EditText
+            android:id="@+id/logon_password"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="#ffffffff"
+            android:hint="Password"
+            android:paddingLeft="20dp"
+            android:textAlignment="center"
+            android:textColor="#ff000000"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
 
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="16dp">
-
-        <TextView
-            android:id="@+id/logon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="30dp" />
-
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="307dp"
+            android:layout_height="59dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#20000000"
+            android:gravity="center"
+            android:text="Login"
+            android:textColor="#111010"
+            android:textSize="24sp" />
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#ffffffff"
-        android:hint="Password"
-        android:paddingLeft="20dp"
-        android:textColor="#ff000000"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="328dp" />
-
-    <EditText
-        android:id="@+id/mail"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#ffffffff"
-        android:hint="Mail"
-        android:paddingLeft="20dp"
-        android:textColor="#ff000000"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="278dp" />
-
-    <Button
-        android:id="@+id/logon_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Log On"
-        android:textColor="#ffffffff"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="395dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-
+</LinearLayout>
