@@ -9,6 +9,6 @@ public class GiblinLibraryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.giblin);
+        setContentView(R.layout.activity_giblin_library);
     }
 }

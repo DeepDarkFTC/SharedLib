@@ -9,6 +9,6 @@ public class ErcLibraryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.erc);
+        setContentView(R.layout.activity_erc_library);
     }
 }

@@ -9,6 +9,6 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.arc);
+        setContentView(R.layout.activity_arc_library);
     }
 }

@@ -10,6 +10,6 @@ public class BaillieuLibraryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.bailieu);
+        setContentView(R.layout.activity_bailieu_library);
     }
 }
