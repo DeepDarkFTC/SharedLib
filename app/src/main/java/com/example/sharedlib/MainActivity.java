@@ -20,7 +20,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button login;
+    private Button loginButton;
+    private Button registerButton;
+    private Button resetPsdButton;
     private TextView userName;
     private TextView password;
 
@@ -33,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        login = findViewById(R.id.login_button);
         userName = findViewById(R.id.name);
         password = findViewById(R.id.password);
 
-        login.setOnClickListener(new View.OnClickListener() {
+        loginButton = findViewById(R.id.login_button);
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // send message to firebase
@@ -47,6 +49,24 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+
+        registerButton = findViewById(R.id.new_user);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        resetPsdButton = findViewById(R.id.forget_password);
+        resetPsdButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
             }
         });
 

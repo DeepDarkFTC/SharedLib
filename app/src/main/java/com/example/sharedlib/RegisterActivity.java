@@ -10,6 +10,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +32,9 @@ public class RegisterActivity extends AppCompatActivity{
 
     private TextView userName;
     private TextView password;
+    private Spinner securityQuestions;
+    private Button registerButton;
+    private TextView securityAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +48,34 @@ public class RegisterActivity extends AppCompatActivity{
 
         userName = findViewById(R.id.name);
         password = findViewById(R.id.password);
-        if(checkFormat(userName.getText().toString(),password.getText().toString())){
-            
-        }
+        securityAnswer = findViewById(R.id.logon_answer);
+
+        securityQuestions = findViewById(R.id.spinner);
+        final String[] list = {"What's your favourite number","What's your favourite colour"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,list);
+
+        securityQuestions.setAdapter(adapter );
+        securityQuestions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                String value = list [pos];  // get selected content
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        
+        registerButton = findViewById(R.id.register);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkFormat(userName.getText().toString(),password.getText().toString())){
+                    // send message to firebase include [userName,Psd,SecurityQ,answer]
+
+                }
+            }
+        });
+
     }
 
     // [START on_start_check_user]
