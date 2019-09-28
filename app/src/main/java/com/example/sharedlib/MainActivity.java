@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private Button loginButton;
     private Button registerButton;
@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 String message = "";     // message from firebase, may phase to several attributes
 
                 if (checkFormat(userName.getText().toString(), password.getText().toString())) {
-                    Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
-                    startActivity(intent);
+                    signIn(userName.getText().toString(), password.getText().toString());
+
                 }
             }
         });
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 //            return;
 //        }
 
-        //showProgressDialog();
+        showProgressDialog();
 
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
@@ -142,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
                             Log.d("signIn", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
+                            Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("sinIn", "signInWithEmail:failure", task.getException());
@@ -154,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 //                        if (!task.isSuccessful()) {
 //                            mStatusTextView.setText(R.string.auth_failed);
 //                        }
-                        //hideProgressDialog();
+                        hideProgressDialog();
                         // [END_EXCLUDE]
                     }
                 });
