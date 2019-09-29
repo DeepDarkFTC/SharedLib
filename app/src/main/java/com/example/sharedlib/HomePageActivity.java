@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class HomePageActivity extends AppCompatActivity {
 
@@ -13,11 +14,18 @@ public class HomePageActivity extends AppCompatActivity {
     private Button formGroups;
     private Button studyTime;
     private Button nearestLibrary;
+    private TextView userNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        Intent parentIntent = getIntent();
+        String userName = parentIntent.getStringExtra("userName");
+
+        userNameTextView = findViewById(R.id.text_username_homepage);
+        userNameTextView.setText(userName);
 
         searchSeat = findViewById(R.id.button_search_homepage);
         searchSeat.setOnClickListener(new View.OnClickListener() {
