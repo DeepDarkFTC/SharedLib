@@ -32,6 +32,7 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, SearchSeats.class);
+                intent.putExtra("userName",userNameTextView.getText().toString());
                 startActivity(intent);
             }
         });
@@ -41,6 +42,7 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, FormGroups.class);
+                intent.putExtra("userName",userNameTextView.getText().toString());
                 startActivity(intent);
             }
         });
@@ -50,6 +52,7 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, StudyTime.class);
+                intent.putExtra("userName",userNameTextView.getText().toString());
                 startActivity(intent);
             }
         });
@@ -59,6 +62,7 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, NearestLibrary.class);
+                intent.putExtra("userName",userNameTextView.getText().toString());
                 startActivity(intent);
             }
         });

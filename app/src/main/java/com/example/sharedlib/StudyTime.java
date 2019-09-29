@@ -1,11 +1,13 @@
 package com.example.sharedlib;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,11 +19,18 @@ public class StudyTime extends AppCompatActivity {
     private Button restart;
     private Boolean stopFlag = false;
     private long mRecordTime;
+    private TextView userNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_study_time);
+
+        Intent parentIntent = getIntent();
+        String userName = parentIntent.getStringExtra("userName");
+
+        userNameTextView = findViewById(R.id.text_username_studytime);
+        userNameTextView.setText(userName);
 
         // Get timer component
         timer = findViewById(R.id.study_time_screen);
