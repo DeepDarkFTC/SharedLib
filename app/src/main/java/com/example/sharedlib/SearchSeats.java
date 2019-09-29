@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class SearchSeats extends AppCompatActivity {
 
@@ -14,10 +15,18 @@ public class SearchSeats extends AppCompatActivity {
     private ImageButton bailieuLibrary;
     private ImageButton ercLibrary;
     private ImageButton giblinLibrary;
+    private TextView userNameTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_seats);
+
+        Intent parentIntent = getIntent();
+        String userName = parentIntent.getStringExtra("userName");
+
+        userNameTextView = findViewById(R.id.text_username_searchseats);
+        userNameTextView.setText(userName);
 
         architectureLibrary = findViewById(R.id.button_arc_searchseats);
         architectureLibrary.setOnClickListener(new View.OnClickListener() {

@@ -21,6 +21,8 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class RegisterActivity extends BaseActivity{
@@ -35,6 +37,9 @@ public class RegisterActivity extends BaseActivity{
     private Button registerButton;
     private TextView securityAnswer;
 
+    private DatabaseReference mDatabase;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,15 +50,18 @@ public class RegisterActivity extends BaseActivity{
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
 
-        userName = findViewById(R.id.logon_name);
-        password = findViewById(R.id.logon_password);
-        securityAnswer = findViewById(R.id.logon_answer);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        securityQuestions = findViewById(R.id.spinner);
+
+        userName = findViewById(R.id.register_email);
+        password = findViewById(R.id.register_password);
+        securityAnswer = findViewById(R.id.register_security_answer);
+
+        securityQuestions = findViewById(R.id.register_security_question);
         final String[] list = {"What's your favourite number","What's your favourite colour"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,list);
 
-        securityQuestions.setAdapter(adapter );
+        securityQuestions.setAdapter(adapter);
         securityQuestions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -68,7 +76,7 @@ public class RegisterActivity extends BaseActivity{
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkFormat(userName.getText().toString(),password.getText().toString())){
+                if(checkFormat(userName.getText().toString(),password.getText().toString(),securityAnswer.getText().toString())){
                     // send message to firebase include [userName,Psd,SecurityQ,answer]
                     createAccount(userName.getText().toString(), password.getText().toString());
                 }
@@ -106,16 +114,20 @@ public class RegisterActivity extends BaseActivity{
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("ccreateUserWithEmail", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            Log.d("createUserWithEmail", "createUserWithEmail:success");
+                            //FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(RegisterActivity.this, "Registration success.",
                                     Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = task.getResult().getUser();
+                            Log.d("createUserWithEmail", user.toString());
+
+                            onAuthSuccess(user);
                             Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
                             startActivity(intent);
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w("ccreateUserWithEmail", "createUserWithEmail:failure", task.getException());
+                            Log.w("createUserWithEmail", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
@@ -129,7 +141,7 @@ public class RegisterActivity extends BaseActivity{
         // [END create_user_with_email]
     }
 
-    public Boolean checkFormat(String userName, String password) {
+    public Boolean checkFormat(String userName, String password, String securityAns) {
         String email = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
         if (userName.equals("")) {
             new AlertDialog.Builder(this)
@@ -163,6 +175,39 @@ public class RegisterActivity extends BaseActivity{
                     .show();
             return false;
         }
+        if (securityAns.equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("warning")
+                    .setMessage("Security answer cannot be empty")
+                    .setPositiveButton("ok", null)
+                    .show();
+            return false;
+        }
         return true;
     }
+
+
+    private void onAuthSuccess(FirebaseUser user) {
+        String username = usernameFromEmail(user.getEmail());
+
+        // Write new user
+        writeNewUser(user.getUid(), username, user.getEmail());
+
+    }
+
+    private String usernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
+        }
+    }
+
+    private void writeNewUser(String userId, String name, String email) {
+
+        mDatabase.child("name").child(userId).setValue(name);
+        mDatabase.child("email").child(userId).setValue(email);
+
+    }
+
 }
