@@ -16,6 +16,7 @@ public class StudyTime extends AppCompatActivity {
     private Button pause;
     private Button restart;
     private Boolean stopFlag = false;
+    private long mRecordTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class StudyTime extends AppCompatActivity {
                 Log.v("pause time", ch.getText().toString());
                 start.setText("End");
                 ch.stop();
+                mRecordTime = SystemClock.elapsedRealtime();
                 start.setEnabled(true);
                 restart.setEnabled(true);
                 pause.setEnabled(false);
@@ -83,6 +85,11 @@ public class StudyTime extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 start.setText("End");
+                if (mRecordTime != 0) {
+                    ch.setBase(ch.getBase() + (SystemClock.elapsedRealtime() - mRecordTime));
+                } else {
+                    ch.setBase(SystemClock.elapsedRealtime());
+                }
                 ch.start();
                 start.setEnabled(true);
                 pause.setEnabled(true);
