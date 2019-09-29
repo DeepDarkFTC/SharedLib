@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,7 +42,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // send message to firebase
-                String message = "";     // message from firebase, may phase to several attributes
 
                 if (checkFormat(userName.getText().toString(), password.getText().toString())) {
                     signIn(userName.getText().toString(), password.getText().toString());

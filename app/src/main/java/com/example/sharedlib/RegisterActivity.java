@@ -1,7 +1,5 @@
 package com.example.sharedlib;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,7 +51,7 @@ public class RegisterActivity extends BaseActivity{
 
         securityQuestions = findViewById(R.id.spinner);
         final String[] list = {"What's your favourite number","What's your favourite colour"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,list);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,list);
 
         securityQuestions.setAdapter(adapter );
         securityQuestions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

@@ -8,7 +8,6 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sharedlib.R;
 
 public class BaseActivity extends AppCompatActivity {
 
