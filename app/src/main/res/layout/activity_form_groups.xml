@@ -36,25 +36,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="142dp"
+        android:layout_height="86dp"
         android:orientation="vertical">
-
-        <View
-            android:id="@+id/view18"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:layout_weight="1"
-            android:background="#00000000" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="123dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:text="Join Groups"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="36sp"
             android:textStyle="bold" />
 
@@ -68,7 +60,7 @@
         <TextView
             android:id="@+id/textView12"
             android:layout_width="match_parent"
-            android:layout_height="93dp"
+            android:layout_height="wrap_content"
             android:background="#20000000"
             android:text="Available Groups"
             android:textAlignment="center"
@@ -78,7 +70,8 @@
         <ListView
             android:id="@+id/listview_infolist_formgroup"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="50" />
     </LinearLayout>
 
     <LinearLayout
@@ -89,8 +82,8 @@
         <Button
             android:id="@+id/button_startnew_formgroup"
             android:layout_width="match_parent"
-            android:layout_height="134dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:background="#20000000"
             android:text="Start A New Group"
             android:textAllCaps="false"

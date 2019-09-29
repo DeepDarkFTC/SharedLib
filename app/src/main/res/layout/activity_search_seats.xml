@@ -42,7 +42,8 @@
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
-            android:layout_height="59dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
             android:text="Library List"
             android:textAlignment="center"
             android:textSize="36sp"
@@ -58,7 +59,8 @@
         <ImageButton
             android:id="@+id/button_arc_searchseats"
             android:layout_width="match_parent"
-            android:layout_height="135dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:background="@drawable/architecture" />
 
         <View
@@ -70,7 +72,8 @@
         <ImageButton
             android:id="@+id/button_bai_searchseats"
             android:layout_width="match_parent"
-            android:layout_height="135dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:background="@drawable/bailieu" />
 
 
@@ -83,7 +86,8 @@
         <ImageButton
             android:id="@+id/button_erc_searchseats"
             android:layout_width="match_parent"
-            android:layout_height="135dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:background="@drawable/erc" />
 
         <View
@@ -95,7 +99,8 @@
         <ImageButton
             android:id="@+id/button_giblin_searchseats"
             android:layout_width="match_parent"
-            android:layout_height="135dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:background="@drawable/giblin" />
 
     </LinearLayout>
