@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class SearchSeats extends AppCompatActivity {
 
@@ -14,12 +15,20 @@ public class SearchSeats extends AppCompatActivity {
     private ImageButton bailieuLibrary;
     private ImageButton ercLibrary;
     private ImageButton giblinLibrary;
+    private TextView userNameTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_seats);
 
-        architectureLibrary = findViewById(R.id.arc);
+        Intent parentIntent = getIntent();
+        String userName = parentIntent.getStringExtra("userName");
+
+        userNameTextView = findViewById(R.id.text_username_searchseats);
+        userNameTextView.setText(userName);
+
+        architectureLibrary = findViewById(R.id.button_arc_searchseats);
         architectureLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,7 +37,7 @@ public class SearchSeats extends AppCompatActivity {
             }
         });
 
-        bailieuLibrary = findViewById(R.id.bailieu);
+        bailieuLibrary = findViewById(R.id.button_bai_searchseats);
         bailieuLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +46,7 @@ public class SearchSeats extends AppCompatActivity {
             }
         });
 
-        ercLibrary = findViewById(R.id.erc);
+        ercLibrary = findViewById(R.id.button_erc_searchseats);
         ercLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +55,7 @@ public class SearchSeats extends AppCompatActivity {
             }
         });
 
-        giblinLibrary = findViewById(R.id.giblin);
+        giblinLibrary = findViewById(R.id.button_giblin_searchseats);
         giblinLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

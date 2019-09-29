@@ -3,37 +3,117 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/back"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_logout_studytime"
+            android:layout_width="148dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="#10000000"
+            android:text="Logout"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/text_username_studytime"
+            android:layout_width="227dp"
+            android:layout_height="47dp"
+            android:layout_weight="1"
+            android:text="UserName"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_weight="1"
+            android:text="Manage Study Time"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <Chronometer
-        android:id="@+id/test"
-        android:textSize="25pt"
-        android:format="00:00:00"
+        android:id="@+id/study_time_screen"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="168dp"
+        android:format="00:00:00"
+        android:textAlignment="center"
+        android:textSize="25pt" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
-            android:id="@+id/start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start"
-            android:layout_weight="1"/>
-        <Button
-            android:id="@+id/pause"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pause"
-            android:layout_weight="1"/>
-        <Button
-            android:id="@+id/go_on"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Continue"
-            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="332dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_start_studytime"
+                android:layout_width="382dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#20000000"
+                android:text="Start"
+                android:textSize="30sp" />
+
+            <View
+                android:id="@+id/view15"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/button_pause_studytime"
+                android:layout_width="377dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#20000000"
+                android:text="Pause"
+                android:textSize="30sp" />
+
+            <View
+                android:id="@+id/view16"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/button_goon_studytime"
+                android:layout_width="381dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#20000000"
+                android:text="Continue"
+                android:textSize="30sp" />
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

@@ -1,58 +1,68 @@
 package com.example.sharedlib;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class StudyTime extends AppCompatActivity {
-    private Chronometer ch;
+    private Chronometer timer;
     private Button start;
     private Button pause;
     private Button restart;
     private Boolean stopFlag = false;
+    private long mRecordTime;
+    private TextView userNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_study_time);
 
+        Intent parentIntent = getIntent();
+        String userName = parentIntent.getStringExtra("userName");
+
+        userNameTextView = findViewById(R.id.text_username_studytime);
+        userNameTextView.setText(userName);
+
         // Get timer component
-        ch = findViewById(R.id.test);
+        timer = findViewById(R.id.study_time_screen);
         // Get start button
-        start = findViewById(R.id.start);
+        start = findViewById(R.id.button_start_studytime);
         // Get pause button
-        pause = findViewById(R.id.pause);
+        pause = findViewById(R.id.button_pause_studytime);
         // Get continue button
-        restart = findViewById(R.id.go_on);
+        restart = findViewById(R.id.button_goon_studytime);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 // start timer
                 if (!stopFlag) {
-                    ch.setBase(SystemClock.elapsedRealtime());
-                    ch.start();
+                    timer.setBase(SystemClock.elapsedRealtime());
+                    timer.start();
                     pause.setEnabled(true);
                     restart.setEnabled(false);
                     start.setEnabled(false);
 
                     stopFlag = true;
                 } else {
-                    Log.v("current time", ch.getText().toString());
-                    int hour = Integer.parseInt(ch.getText().toString().split(":")[0]);
-                    int minute = Integer.parseInt(ch.getText().toString().split(":")[1]);
-                    int second = Integer.parseInt(ch.getText().toString().split(":")[2]);
+                    Log.v("current time", timer.getText().toString());
+                    int hour = Integer.parseInt(timer.getText().toString().split(":")[0]);
+                    int minute = Integer.parseInt(timer.getText().toString().split(":")[1]);
+                    int second = Integer.parseInt(timer.getText().toString().split(":")[2]);
 
                     int totalTime = hour * 3600 + minute * 60 + second;
                     Log.v("total time", String.valueOf(totalTime));
 
-                    ch.stop();
+                    timer.stop();
                     pause.setEnabled(false);
                     restart.setEnabled(false);
                     start.setEnabled(true);
@@ -69,9 +79,10 @@ public class StudyTime extends AppCompatActivity {
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("pause time", ch.getText().toString());
+                Log.v("pause time", timer.getText().toString());
                 start.setText("End");
-                ch.stop();
+                timer.stop();
+                mRecordTime = SystemClock.elapsedRealtime();
                 start.setEnabled(true);
                 restart.setEnabled(true);
                 pause.setEnabled(false);
@@ -83,7 +94,12 @@ public class StudyTime extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 start.setText("End");
-                ch.start();
+                if (mRecordTime != 0) {
+                    timer.setBase(timer.getBase() + (SystemClock.elapsedRealtime() - mRecordTime));
+                } else {
+                    timer.setBase(SystemClock.elapsedRealtime());
+                }
+                timer.start();
                 start.setEnabled(true);
                 pause.setEnabled(true);
                 restart.setEnabled(false);
@@ -91,10 +107,10 @@ public class StudyTime extends AppCompatActivity {
         });
 
         // Binding event listeners for Chronomter
-        ch.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+        timer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                setFormat(ch);
+                setFormat(timer);
             }
         });
     }

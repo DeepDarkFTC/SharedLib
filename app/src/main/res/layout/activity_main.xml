@@ -30,7 +30,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/text_name_main"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="#ffffffff"
@@ -46,7 +46,7 @@
             android:background="#11000000" />
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/text_password_main"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="#ffffffff"
@@ -67,7 +67,7 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/button_login_main"
             android:layout_width="336dp"
             android:layout_height="59dp"
             android:layout_marginLeft="20dp"
@@ -85,7 +85,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/forget_password"
+            android:id="@+id/button_froget_main"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -96,7 +96,7 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/new_user"
+            android:id="@+id/button_newuser_main"
             android:layout_width="141dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
