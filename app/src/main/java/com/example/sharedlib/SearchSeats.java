@@ -19,7 +19,7 @@ public class SearchSeats extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_seats);
 
-        architectureLibrary = findViewById(R.id.arc);
+        architectureLibrary = findViewById(R.id.button_arc_searchseats);
         architectureLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,7 +28,7 @@ public class SearchSeats extends AppCompatActivity {
             }
         });
 
-        bailieuLibrary = findViewById(R.id.bailieu);
+        bailieuLibrary = findViewById(R.id.button_bai_searchseats);
         bailieuLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +37,7 @@ public class SearchSeats extends AppCompatActivity {
             }
         });
 
-        ercLibrary = findViewById(R.id.erc);
+        ercLibrary = findViewById(R.id.button_erc_searchseats);
         ercLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +46,7 @@ public class SearchSeats extends AppCompatActivity {
             }
         });
 
-        giblinLibrary = findViewById(R.id.giblin);
+        giblinLibrary = findViewById(R.id.button_giblin_searchseats);
         giblinLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

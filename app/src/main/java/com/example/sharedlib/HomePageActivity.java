@@ -19,7 +19,7 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        searchSeat = findViewById(R.id.search);
+        searchSeat = findViewById(R.id.button_search_homepage);
         searchSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,7 +28,7 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        formGroups = findViewById(R.id.form);
+        formGroups = findViewById(R.id.button_form_homepage);
         formGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +37,7 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        studyTime = findViewById(R.id.time);
+        studyTime = findViewById(R.id.button_time_homepage);
         studyTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +46,7 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        nearestLibrary = findViewById(R.id.nearest);
+        nearestLibrary = findViewById(R.id.button_nearest_homepage);
         nearestLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

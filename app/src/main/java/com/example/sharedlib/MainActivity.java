@@ -34,10 +34,10 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userName = findViewById(R.id.name);
-        password = findViewById(R.id.password);
+        userName = findViewById(R.id.text_name_main);
+        password = findViewById(R.id.text_password_main);
 
-        loginButton = findViewById(R.id.login_button);
+        loginButton = findViewById(R.id.button_login_main);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        registerButton = findViewById(R.id.new_user);
+        registerButton = findViewById(R.id.button_newuser_main);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        resetPsdButton = findViewById(R.id.forget_password);
+        resetPsdButton = findViewById(R.id.button_froget_main);
         resetPsdButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

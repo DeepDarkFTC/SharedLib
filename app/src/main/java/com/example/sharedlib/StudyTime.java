@@ -24,13 +24,13 @@ public class StudyTime extends AppCompatActivity {
         setContentView(R.layout.activity_study_time);
 
         // Get timer component
-        timer = findViewById(R.id.test);
+        timer = findViewById(R.id.study_time_screen);
         // Get start button
-        start = findViewById(R.id.start);
+        start = findViewById(R.id.button_start_studytime);
         // Get pause button
-        pause = findViewById(R.id.pause);
+        pause = findViewById(R.id.button_pause_studytime);
         // Get continue button
-        restart = findViewById(R.id.go_on);
+        restart = findViewById(R.id.button_goon_studytime);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
