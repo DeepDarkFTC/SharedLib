@@ -53,15 +53,15 @@ public class RegisterActivity extends BaseActivity{
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
-        userName = findViewById(R.id.logon_name);
-        password = findViewById(R.id.logon_password);
-        securityAnswer = findViewById(R.id.logon_answer);
+        userName = findViewById(R.id.register_email);
+        password = findViewById(R.id.register_password);
+        securityAnswer = findViewById(R.id.register_security_answer);
 
-        securityQuestions = findViewById(R.id.spinner);
+        securityQuestions = findViewById(R.id.register_security_question);
         final String[] list = {"What's your favourite number","What's your favourite colour"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,list);
 
-        securityQuestions.setAdapter(adapter );
+        securityQuestions.setAdapter(adapter);
         securityQuestions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -76,7 +76,7 @@ public class RegisterActivity extends BaseActivity{
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkFormat(userName.getText().toString(),password.getText().toString())){
+                if(checkFormat(userName.getText().toString(),password.getText().toString(),securityAnswer.getText().toString())){
                     // send message to firebase include [userName,Psd,SecurityQ,answer]
                     createAccount(userName.getText().toString(), password.getText().toString());
                 }
@@ -141,7 +141,7 @@ public class RegisterActivity extends BaseActivity{
         // [END create_user_with_email]
     }
 
-    public Boolean checkFormat(String userName, String password) {
+    public Boolean checkFormat(String userName, String password, String securityAns) {
         String email = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
         if (userName.equals("")) {
             new AlertDialog.Builder(this)
@@ -171,6 +171,14 @@ public class RegisterActivity extends BaseActivity{
             new AlertDialog.Builder(this)
                     .setTitle("warning")
                     .setMessage("The length of Password should larger than 6")
+                    .setPositiveButton("ok", null)
+                    .show();
+            return false;
+        }
+        if (securityAns.equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("warning")
+                    .setMessage("Security answer cannot be empty")
                     .setPositiveButton("ok", null)
                     .show();
             return false;

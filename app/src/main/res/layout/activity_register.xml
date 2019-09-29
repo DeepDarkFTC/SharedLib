@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/logon_name"
+            android:id="@+id/register_email"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="#ffffffff"
@@ -33,7 +33,7 @@
             android:background="#11000000" />
 
         <EditText
-            android:id="@+id/logon_password"
+            android:id="@+id/register_password"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="#ffffffff"
@@ -50,7 +50,7 @@
             android:background="#11000000" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/register_security_question"
             android:layout_width="match_parent"
             android:layout_height="98dp"
             android:background="#ffffffff" />
@@ -62,7 +62,7 @@
             android:background="#11000000" />
 
         <EditText
-            android:id="@+id/logon_answer"
+            android:id="@+id/register_security_answer"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="#ffffffff"
