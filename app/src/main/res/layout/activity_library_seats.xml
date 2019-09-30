@@ -58,7 +58,7 @@
         <ListView
             android:id="@+id/seatsComments"
             android:layout_width="match_parent"
-            android:layout_height="403dp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
