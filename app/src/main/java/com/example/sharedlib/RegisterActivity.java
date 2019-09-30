@@ -58,6 +58,7 @@ public class RegisterActivity extends BaseActivity{
         securityAnswer = findViewById(R.id.register_security_answer);
 
         securityQuestions = findViewById(R.id.register_security_question);
+
         final String[] list = {"What's your favourite number","What's your favourite colour"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,list);
 
@@ -118,10 +119,9 @@ public class RegisterActivity extends BaseActivity{
                             //FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(RegisterActivity.this, "Registration success.",
                                     Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = task.getResult().getUser();
-                            Log.d("createUserWithEmail", user.toString());
 
-                            onAuthSuccess(user);
+                            writeToDatabase(task);
+
                             Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
                             startActivity(intent);
                             //updateUI(user);
@@ -186,12 +186,19 @@ public class RegisterActivity extends BaseActivity{
         return true;
     }
 
+    private void writeToDatabase(Task<AuthResult> task) {
+        FirebaseUser user = task.getResult().getUser();
+        Log.d("createUserWithEmail", user.toString());
+        securityQuestions.getSelectedItem().toString();
+        securityAnswer.getText().toString();
+        onAuthSuccess(user, securityQuestions.getSelectedItem().toString(), securityAnswer.getText().toString());
+    }
 
-    private void onAuthSuccess(FirebaseUser user) {
+    private void onAuthSuccess(FirebaseUser user, String question, String answer) {
         String username = usernameFromEmail(user.getEmail());
 
         // Write new user
-        writeNewUser(user.getUid(), username, user.getEmail());
+        writeNewUser(user.getUid(), username, user.getEmail(), question, answer);
 
     }
 
@@ -203,10 +210,13 @@ public class RegisterActivity extends BaseActivity{
         }
     }
 
-    private void writeNewUser(String userId, String name, String email) {
+    private void writeNewUser(String userId, String name, String email, String question, String answer) {
 
         mDatabase.child("name").child(userId).setValue(name);
         mDatabase.child("email").child(userId).setValue(email);
+        mDatabase.child("question").child(userId).setValue(question);
+        mDatabase.child("answer").child(userId).setValue(answer);
+
 
     }
 
