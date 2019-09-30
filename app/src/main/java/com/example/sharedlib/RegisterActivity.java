@@ -4,10 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,21 +17,20 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-public class RegisterActivity extends BaseActivity{
+public class RegisterActivity extends BaseActivity {
 
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
 
-    private TextView userName;
-    private TextView password;
-    private Spinner securityQuestions;
-    private Button registerButton;
-    private TextView securityAnswer;
+    private Spinner securityQuestionsSpinner;
+    private TextView securityAnswerTextView;
 
     private DatabaseReference mDatabase;
 
@@ -53,33 +48,34 @@ public class RegisterActivity extends BaseActivity{
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
-        userName = findViewById(R.id.register_email);
-        password = findViewById(R.id.register_password);
-        securityAnswer = findViewById(R.id.register_security_answer);
+        final TextView userNameTextView = findViewById(R.id.register_email);
+        final TextView passwordTextView = findViewById(R.id.register_password);
+        securityAnswerTextView = findViewById(R.id.register_security_answer);
 
-        securityQuestions = findViewById(R.id.register_security_question);
+        securityQuestionsSpinner = findViewById(R.id.register_security_question);
 
-        final String[] list = {"What's your favourite number","What's your favourite colour"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,list);
+        final String[] list = {"What's your favourite number", "What's your favourite colour"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, list);
 
-        securityQuestions.setAdapter(adapter);
-        securityQuestions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        securityQuestionsSpinner.setAdapter(adapter);
+        securityQuestionsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                String value = list [pos];  // get selected content
+                String value = list[pos];  // get selected content
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        
-        registerButton = findViewById(R.id.register);
+
+        Button registerButton = findViewById(R.id.register);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkFormat(userName.getText().toString(),password.getText().toString(),securityAnswer.getText().toString())){
+                if (checkFormat(userNameTextView.getText().toString(), passwordTextView.getText().toString(), securityAnswerTextView.getText().toString())) {
                     // send message to firebase include [userName,Psd,SecurityQ,answer]
-                    createAccount(userName.getText().toString(), password.getText().toString());
+                    createAccount(userNameTextView.getText().toString(), passwordTextView.getText().toString());
                 }
             }
         });
@@ -99,7 +95,7 @@ public class RegisterActivity extends BaseActivity{
     // [END on_start_check_user]
 
     private void createAccount(String email, String password) {
-        Log.d("createAccount","createAccount" + email);
+        Log.d("createAccount", "createAccount" + email);
 
         //Check the validation here
 //        if (!validateForm()) {
@@ -122,7 +118,7 @@ public class RegisterActivity extends BaseActivity{
 
                             writeToDatabase(task);
 
-                            Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                             startActivity(intent);
                             //updateUI(user);
                         } else {
@@ -189,9 +185,7 @@ public class RegisterActivity extends BaseActivity{
     private void writeToDatabase(Task<AuthResult> task) {
         FirebaseUser user = task.getResult().getUser();
         Log.d("createUserWithEmail", user.toString());
-        securityQuestions.getSelectedItem().toString();
-        securityAnswer.getText().toString();
-        onAuthSuccess(user, securityQuestions.getSelectedItem().toString(), securityAnswer.getText().toString());
+        onAuthSuccess(user, securityQuestionsSpinner.getSelectedItem().toString(), securityAnswerTextView.getText().toString());
     }
 
     private void onAuthSuccess(FirebaseUser user, String question, String answer) {

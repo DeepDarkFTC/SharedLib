@@ -11,12 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class BaillieuLibraryActivity extends AppCompatActivity {
 
     private TextView userNameTextView;
-    private Button baiLevel1;
-    private Button baiLevel2;
-    private Button baiLevel3;
-    private Button baiLevel4;
-    private Button baiLevel5;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +27,7 @@ public class BaillieuLibraryActivity extends AppCompatActivity {
         userNameTextView = findViewById(R.id.text_username_bailieu);
         userNameTextView.setText(userName);
 
-        baiLevel1 = findViewById(R.id.bai_l1);
+        Button baiLevel1 = findViewById(R.id.bai_l1);
         baiLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +38,7 @@ public class BaillieuLibraryActivity extends AppCompatActivity {
             }
         });
 
-        baiLevel2 = findViewById(R.id.bai_l2);
+        Button baiLevel2 = findViewById(R.id.bai_l2);
         baiLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +49,7 @@ public class BaillieuLibraryActivity extends AppCompatActivity {
             }
         });
 
-        baiLevel3 = findViewById(R.id.bai_l3);
+        Button baiLevel3 = findViewById(R.id.bai_l3);
         baiLevel3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +60,7 @@ public class BaillieuLibraryActivity extends AppCompatActivity {
             }
         });
 
-        baiLevel4 = findViewById(R.id.bai_l4);
+        Button baiLevel4 = findViewById(R.id.bai_l4);
         baiLevel4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +71,7 @@ public class BaillieuLibraryActivity extends AppCompatActivity {
             }
         });
 
-        baiLevel5 = findViewById(R.id.bai_l5);
+        Button baiLevel5 = findViewById(R.id.bai_l5);
         baiLevel5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -10,10 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SearchSeats extends AppCompatActivity {
 
-    private ImageButton architectureLibrary;
-    private ImageButton bailieuLibrary;
-    private ImageButton ercLibrary;
-    private ImageButton giblinLibrary;
     private TextView userNameTextView;
 
     @Override
@@ -27,7 +23,7 @@ public class SearchSeats extends AppCompatActivity {
         userNameTextView = findViewById(R.id.text_username_searchseats);
         userNameTextView.setText(userName);
 
-        architectureLibrary = findViewById(R.id.button_arc_searchseats);
+        ImageButton architectureLibrary = findViewById(R.id.button_arc_searchseats);
         architectureLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +33,7 @@ public class SearchSeats extends AppCompatActivity {
             }
         });
 
-        bailieuLibrary = findViewById(R.id.button_bai_searchseats);
+        ImageButton bailieuLibrary = findViewById(R.id.button_bai_searchseats);
         bailieuLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +43,7 @@ public class SearchSeats extends AppCompatActivity {
             }
         });
 
-        ercLibrary = findViewById(R.id.button_erc_searchseats);
+        ImageButton ercLibrary = findViewById(R.id.button_erc_searchseats);
         ercLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +53,7 @@ public class SearchSeats extends AppCompatActivity {
             }
         });
 
-        giblinLibrary = findViewById(R.id.button_giblin_searchseats);
+        ImageButton giblinLibrary = findViewById(R.id.button_giblin_searchseats);
         giblinLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

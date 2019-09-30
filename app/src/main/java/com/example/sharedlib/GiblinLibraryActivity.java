@@ -11,11 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class GiblinLibraryActivity extends AppCompatActivity {
 
     private TextView userNameTextView;
-    private Button gibLevel1;
-    private Button gibLevel2;
-    private Button gibLevel3;
-    private Button gibLevel4;
-    private Button gibLevel5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +26,7 @@ public class GiblinLibraryActivity extends AppCompatActivity {
         userNameTextView = findViewById(R.id.text_username_giblin);
         userNameTextView.setText(userName);
 
-        gibLevel1 = findViewById(R.id.gib_l1);
+        Button gibLevel1 = findViewById(R.id.gib_l1);
         gibLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +36,8 @@ public class GiblinLibraryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        gibLevel2 = findViewById(R.id.gib_l2);
+
+        Button gibLevel2 = findViewById(R.id.gib_l2);
         gibLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +47,8 @@ public class GiblinLibraryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        gibLevel3 = findViewById(R.id.gib_l3);
+
+        Button gibLevel3 = findViewById(R.id.gib_l3);
         gibLevel3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +58,8 @@ public class GiblinLibraryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        gibLevel4 = findViewById(R.id.gib_l4);
+
+        Button gibLevel4 = findViewById(R.id.gib_l4);
         gibLevel4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +69,8 @@ public class GiblinLibraryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        gibLevel5 = findViewById(R.id.gib_l5);
+
+        Button gibLevel5 = findViewById(R.id.gib_l5);
         gibLevel5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -10,10 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HomePageActivity extends AppCompatActivity {
 
-    private Button searchSeat;
-    private Button formGroups;
-    private Button studyTime;
-    private Button nearestLibrary;
     private TextView userNameTextView;
 
     @Override
@@ -27,7 +23,7 @@ public class HomePageActivity extends AppCompatActivity {
         userNameTextView = findViewById(R.id.text_username_homepage);
         userNameTextView.setText(userName);
 
-        searchSeat = findViewById(R.id.button_search_homepage);
+        Button searchSeat = findViewById(R.id.button_search_homepage);
         searchSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +33,7 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        formGroups = findViewById(R.id.button_form_homepage);
+        Button formGroups = findViewById(R.id.button_form_homepage);
         formGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +43,7 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        studyTime = findViewById(R.id.button_time_homepage);
+        Button studyTime = findViewById(R.id.button_time_homepage);
         studyTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +53,7 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        nearestLibrary = findViewById(R.id.button_nearest_homepage);
+        Button nearestLibrary = findViewById(R.id.button_nearest_homepage);
         nearestLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

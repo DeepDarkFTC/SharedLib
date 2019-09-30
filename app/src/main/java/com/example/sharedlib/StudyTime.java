@@ -13,13 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class StudyTime extends AppCompatActivity {
+
     private Chronometer timer;
     private Button start;
     private Button pause;
     private Button restart;
     private Boolean stopFlag = false;
     private long mRecordTime;
-    private TextView userNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class StudyTime extends AppCompatActivity {
         Intent parentIntent = getIntent();
         String userName = parentIntent.getStringExtra("userName");
 
-        userNameTextView = findViewById(R.id.text_username_studytime);
+        TextView userNameTextView = findViewById(R.id.text_username_studytime);
         userNameTextView.setText(userName);
 
         // Get timer component

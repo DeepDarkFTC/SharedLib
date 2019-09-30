@@ -19,11 +19,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends BaseActivity {
 
-    private Button loginButton;
-    private Button registerButton;
-    private Button resetPsdButton;
-    private TextView userName;
-    private TextView password;
+    private TextView userNameTextView;
+    private TextView passwordTextView;
 
     // [START declare_auth]
     private FirebaseAuth mAuth;
@@ -34,23 +31,22 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userName = findViewById(R.id.text_name_main);
-        password = findViewById(R.id.text_password_main);
+        userNameTextView = findViewById(R.id.text_name_main);
+        passwordTextView = findViewById(R.id.text_password_main);
 
-        loginButton = findViewById(R.id.button_login_main);
+        Button loginButton = findViewById(R.id.button_login_main);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // send message to firebase
 
-                if (checkFormat(userName.getText().toString(), password.getText().toString())) {
-                    signIn(userName.getText().toString(), password.getText().toString());
-
+                if (checkFormat(userNameTextView.getText().toString(), passwordTextView.getText().toString())) {
+                    signIn(userNameTextView.getText().toString(), passwordTextView.getText().toString());
                 }
             }
         });
 
-        registerButton = findViewById(R.id.button_newuser_main);
+        Button registerButton = findViewById(R.id.button_newuser_main);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +55,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        resetPsdButton = findViewById(R.id.button_froget_main);
+        Button resetPsdButton = findViewById(R.id.button_froget_main);
         resetPsdButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +137,7 @@ public class MainActivity extends BaseActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
                             Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
-                            intent.putExtra("userName", userName.getText().toString());
+                            intent.putExtra("userName", userNameTextView.getText().toString());
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.

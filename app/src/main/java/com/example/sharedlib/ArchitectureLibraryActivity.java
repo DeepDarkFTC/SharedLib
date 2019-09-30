@@ -11,11 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ArchitectureLibraryActivity extends AppCompatActivity {
 
     private TextView userNameTextView;
-    private Button arcLevel1;
-    private Button arcLevel2;
-    private Button arcLevel3;
-    private Button arcLevel4;
-    private Button arcLevel5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +26,7 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
         userNameTextView = findViewById(R.id.text_username_arc);
         userNameTextView.setText(userName);
 
-        arcLevel1 = findViewById(R.id.arc_l1);
+        Button arcLevel1 = findViewById(R.id.arc_l1);
         arcLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,7 +37,7 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
             }
         });
 
-        arcLevel2 = findViewById(R.id.arc_l2);
+        Button arcLevel2 = findViewById(R.id.arc_l2);
         arcLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +48,7 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
             }
         });
 
-        arcLevel3 = findViewById(R.id.arc_l3);
+        Button arcLevel3 = findViewById(R.id.arc_l3);
         arcLevel3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +59,7 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
             }
         });
 
-        arcLevel4 = findViewById(R.id.arc_l4);
+        Button arcLevel4 = findViewById(R.id.arc_l4);
         arcLevel4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +70,7 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
             }
         });
 
-        arcLevel5 = findViewById(R.id.arc_l5);
+        Button arcLevel5 = findViewById(R.id.arc_l5);
         arcLevel5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -11,11 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ErcLibraryActivity extends AppCompatActivity {
 
     private TextView userNameTextView;
-    private Button ercLevel1;
-    private Button ercLevel2;
-    private Button ercLevel3;
-    private Button ercLevel4;
-    private Button ercLevel5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +26,7 @@ public class ErcLibraryActivity extends AppCompatActivity {
         userNameTextView = findViewById(R.id.text_username_erc);
         userNameTextView.setText(userName);
 
-        ercLevel1 = findViewById(R.id.erc_l1);
+        Button ercLevel1 = findViewById(R.id.erc_l1);
         ercLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,7 +37,7 @@ public class ErcLibraryActivity extends AppCompatActivity {
             }
         });
 
-        ercLevel2 = findViewById(R.id.erc_l2);
+        Button ercLevel2 = findViewById(R.id.erc_l2);
         ercLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +48,7 @@ public class ErcLibraryActivity extends AppCompatActivity {
             }
         });
 
-        ercLevel3 = findViewById(R.id.erc_l3);
+        Button ercLevel3 = findViewById(R.id.erc_l3);
         ercLevel3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +59,7 @@ public class ErcLibraryActivity extends AppCompatActivity {
             }
         });
 
-        ercLevel4 = findViewById(R.id.erc_l4);
+        Button ercLevel4 = findViewById(R.id.erc_l4);
         ercLevel4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +70,7 @@ public class ErcLibraryActivity extends AppCompatActivity {
             }
         });
 
-        ercLevel5 = findViewById(R.id.erc_l5);
+        Button ercLevel5 = findViewById(R.id.erc_l5);
         ercLevel5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
