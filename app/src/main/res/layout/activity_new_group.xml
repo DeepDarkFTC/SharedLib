@@ -40,7 +40,7 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="382dp"
+            android:layout_width="match_parent"
             android:layout_height="66dp"
             android:layout_weight="1"
             android:text="Form New Groups"
@@ -57,7 +57,8 @@
         <EditText
             android:id="@+id/text_name_newgroup"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:background="#ffffffff"
             android:hint="Group Name"
             android:paddingLeft="20dp"
@@ -74,7 +75,8 @@
         <Spinner
             android:id="@+id/spinner_library_newgroup"
             android:layout_width="match_parent"
-            android:layout_height="98dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:background="#ffffffff" />
 
         <View
@@ -86,7 +88,8 @@
         <Spinner
             android:id="@+id/spinner_level_newgroup"
             android:layout_width="match_parent"
-            android:layout_height="98dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:background="#ffffffff" />
 
         <View
@@ -98,13 +101,14 @@
         <View
             android:id="@+id/view25"
             android:layout_width="match_parent"
-            android:layout_height="17dp"
+            android:layout_height="10dp"
             android:background="#11000000" />
 
         <EditText
             android:id="@+id/text_content_newgroup"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:background="#ffffffff"
             android:hint="Study Content"
             android:paddingLeft="20dp"
@@ -121,7 +125,8 @@
         <EditText
             android:id="@+id/text_time_newgroup"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:background="#ffffffff"
             android:hint="Study Time"
             android:paddingLeft="20dp"
@@ -144,9 +149,10 @@
         <Button
             android:id="@+id/button_form_newgroup"
             android:layout_width="match_parent"
-            android:layout_height="59dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_weight="10"
             android:background="#20000000"
             android:gravity="center"
             android:text="Form A New Group"

@@ -42,7 +42,8 @@
         <TextView
             android:id="@+id/information"
             android:layout_width="match_parent"
-            android:layout_height="118dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:text="Library and Floor"
             android:textAlignment="center"
             android:textSize="30sp" />
@@ -66,7 +67,7 @@
 
         <EditText
             android:id="@+id/text_seats_available_libraryseats"
-            android:layout_width="87dp"
+            android:layout_width="match_parent"
             android:layout_height="84dp"
             android:layout_weight="1"
             android:background="#30000000"
@@ -78,12 +79,12 @@
 
         <Button
             android:id="@+id/button_update_libraryseats"
-            android:layout_width="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
             android:layout_height="83dp"
             android:layout_weight="1"
             android:background="#30000000"
             android:text="Upload"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="24sp" />
     </LinearLayout>
 

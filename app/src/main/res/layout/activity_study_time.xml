@@ -45,8 +45,8 @@
         <TextView
             android:id="@+id/textView11"
             android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:text="Manage Study Time"
             android:textAlignment="center"
             android:textSize="36sp"
@@ -56,8 +56,8 @@
 
     <Chronometer
         android:id="@+id/study_time_screen"
-        android:layout_width="wrap_content"
-        android:layout_height="168dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:format="00:00:00"
         android:textAlignment="center"
         android:textSize="25pt" />
@@ -75,9 +75,9 @@
 
             <Button
                 android:id="@+id/button_start_studytime"
-                android:layout_width="382dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="10"
                 android:background="#20000000"
                 android:text="Start"
                 android:textSize="30sp" />
@@ -91,9 +91,9 @@
 
             <Button
                 android:id="@+id/button_pause_studytime"
-                android:layout_width="377dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="10"
                 android:background="#20000000"
                 android:text="Pause"
                 android:textSize="30sp" />
@@ -107,9 +107,9 @@
 
             <Button
                 android:id="@+id/button_goon_studytime"
-                android:layout_width="381dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="10"
                 android:background="#20000000"
                 android:text="Continue"
                 android:textSize="30sp" />
