@@ -1,10 +1,10 @@
 package com.example.sharedlib;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class FormGroups extends AppCompatActivity {
 

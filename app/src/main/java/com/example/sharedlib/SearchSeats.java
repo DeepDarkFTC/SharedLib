@@ -1,13 +1,12 @@
 package com.example.sharedlib;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SearchSeats extends AppCompatActivity {
 
@@ -33,6 +32,7 @@ public class SearchSeats extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SearchSeats.this, ArchitectureLibraryActivity.class);
+                intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
         });
@@ -42,6 +42,7 @@ public class SearchSeats extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SearchSeats.this, BaillieuLibraryActivity.class);
+                intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
         });
@@ -51,6 +52,7 @@ public class SearchSeats extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SearchSeats.this, ErcLibraryActivity.class);
+                intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
         });
@@ -60,6 +62,7 @@ public class SearchSeats extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SearchSeats.this, GiblinLibraryActivity.class);
+                intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
         });
