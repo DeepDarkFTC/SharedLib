@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LibrarySeatsActivity extends AppCompatActivity {
+public class LibrarySeatsActivity extends BaseActivity {
 
     private EditText seatsPercentageEditText;
 

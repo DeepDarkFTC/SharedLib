@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class StudyTime extends AppCompatActivity {
+
+public class StudyTime extends BaseActivity {
 
     private Chronometer timer;
     private Button start;
@@ -21,13 +24,19 @@ public class StudyTime extends AppCompatActivity {
     private Boolean stopFlag = false;
     private long mRecordTime;
 
+    private DatabaseReference mDatabase;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_study_time);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
         Intent parentIntent = getIntent();
-        String userName = parentIntent.getStringExtra("userName");
+        final String userName = parentIntent.getStringExtra("userName");
 
         TextView userNameTextView = findViewById(R.id.text_username_studytime);
         userNameTextView.setText(userName);
@@ -70,6 +79,8 @@ public class StudyTime extends AppCompatActivity {
 
                     // send record to firebase
                     stopFlag = false;
+                    String userId = emailToUid(userName);
+                    mDatabase.child("studyTime").child(userId).setValue(String.valueOf(totalTime));
                 }
 
             }

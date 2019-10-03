@@ -8,6 +8,8 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -41,6 +43,11 @@ public class BaseActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         hideProgressDialog();
+    }
+
+    public String emailToUid(String email){
+        String uid =email.replace(".",",");
+        return uid;
     }
 
 }

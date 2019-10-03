@@ -192,7 +192,7 @@ public class RegisterActivity extends BaseActivity {
         String username = usernameFromEmail(user.getEmail());
 
         // Write new user
-        writeNewUser(user.getUid(), username, user.getEmail(), question, answer);
+        writeNewUser(username, user.getEmail(), question, answer);
 
     }
 
@@ -204,8 +204,9 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    private void writeNewUser(String userId, String name, String email, String question, String answer) {
+    private void writeNewUser(String name, String email, String question, String answer) {
 
+        String userId = emailToUid(email);
         mDatabase.child("name").child(userId).setValue(name);
         mDatabase.child("email").child(userId).setValue(email);
         mDatabase.child("question").child(userId).setValue(question);
