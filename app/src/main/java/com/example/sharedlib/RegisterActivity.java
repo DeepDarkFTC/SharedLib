@@ -50,9 +50,6 @@ public class RegisterActivity extends BaseActivity {
 
         final TextView userNameTextView = findViewById(R.id.register_email);
         final TextView passwordTextView = findViewById(R.id.register_password);
-        securityAnswerTextView = findViewById(R.id.register_security_answer);
-
-        securityQuestionsSpinner = findViewById(R.id.register_security_question);
 
         final String[] list = {"What's your favourite number", "What's your favourite colour"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, list);

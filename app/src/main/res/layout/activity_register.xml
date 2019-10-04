@@ -49,28 +49,11 @@
             android:layout_height="1dp"
             android:background="#11000000" />
 
-        <Spinner
-            android:id="@+id/register_security_question"
-            android:layout_width="match_parent"
-            android:layout_height="98dp"
-            android:background="#ffffffff" />
-
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#11000000" />
-
-        <EditText
-            android:id="@+id/register_security_answer"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="#ffffffff"
-            android:hint="Answer"
-            android:paddingLeft="20dp"
-            android:textAlignment="center"
-            android:textColor="#ff000000"
-            android:textSize="24sp" />
 
     </LinearLayout>
 
