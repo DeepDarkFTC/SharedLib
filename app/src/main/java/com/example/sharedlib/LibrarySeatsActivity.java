@@ -83,8 +83,10 @@ public class LibrarySeatsActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    String content = postSnapshot.getValue().toString();
-                    commentList.add(content);
+//                    String content = postSnapshot.getValue().toString();
+//                    commentList.add(content);
+                    SearchSeatsComment comment = postSnapshot.getValue(SearchSeatsComment.class);
+                    commentList.add(comment);
                 }
                 Log.d("Database content", commentList.toString());
             }
