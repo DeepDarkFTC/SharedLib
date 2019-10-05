@@ -20,7 +20,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.firebase.ui.database.SnapshotParser;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -30,6 +33,7 @@ public class LibrarySeatsActivity extends BaseActivity {
     private Calendar calendars;
 
     private DatabaseReference mDatabase;
+    final ArrayList commentList = new ArrayList();
 
 
     @Override
@@ -44,10 +48,9 @@ public class LibrarySeatsActivity extends BaseActivity {
         String[] data = {"comment1", "comment2", "comment3", "comment4", "comment5"};// these data should from firebase
 
         Intent parentIntent = getIntent();
-        String userName = parentIntent.getStringExtra("userName");
+        final String userName = parentIntent.getStringExtra("userName");
         String location = parentIntent.getStringExtra("location");
 
-        final String userId = emailToUid(userName);
 
         TextView userNameTextView = findViewById(R.id.text_username_libraryseats);
         userNameTextView.setText(userName);
@@ -55,17 +58,35 @@ public class LibrarySeatsActivity extends BaseActivity {
         final TextView locationTextView = findViewById(R.id.information);
         locationTextView.setText(location);
 
-        DatabaseReference ref = mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).child(userId);
 
         //Read from database
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+//        SnapshotParser<SearchSeatsComment> parser = new SnapshotParser<SearchSeatsComment>() {
+//            @Override
+//            public SearchSeatsComment parseSnapshot(DataSnapshot dataSnapshot) {
+//                SearchSeatsComment content = dataSnapshot.getValue(SearchSeatsComment.class);
+//                if (content != null) {
+//                    content.setId(dataSnapshot.getKey());
+//                }
+//
+//                Log.d("Database content", content.getComment());
+//
+//                return content;
+//
+//            }
+//        };
+
+        DatabaseReference ref = mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString());
         ref.limitToLast(10).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                commentList.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     String content = postSnapshot.getValue().toString();
-                    Log.d("Database content", content);
+                    commentList.add(content);
                 }
+                Log.d("Database content", commentList.toString());
             }
 
             @Override
@@ -116,8 +137,10 @@ public class LibrarySeatsActivity extends BaseActivity {
 
                     String date = day+"/"+month+"/"+year+" "+hour+":"+min+":"+second+" "+isAm;
 
-                    mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).child(userId).child("comment").push().setValue(percentage);
-                    mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).child(userId).child("date").push().setValue(date);
+                    SearchSeatsComment comment = new
+                            SearchSeatsComment(userName, String.valueOf(percentage), date);
+
+                    mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).push().setValue(comment);
                     Toast.makeText(LibrarySeatsActivity.this, "Upload successfully.",
                             Toast.LENGTH_SHORT).show();
                 } else {
