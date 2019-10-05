@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -33,7 +31,6 @@ public class StudyTime extends BaseActivity {
         setContentView(R.layout.activity_study_time);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
 
         Intent parentIntent = getIntent();
         final String userName = parentIntent.getStringExtra("userName");
@@ -69,9 +66,10 @@ public class StudyTime extends BaseActivity {
                     int second = Integer.parseInt(timer.getText().toString().split(":")[2]);
 
                     int totalTime = hour * 3600 + minute * 60 + second;
-                    Log.v("total time", String.valueOf(totalTime));
+                    Log.v("total time", String.valueOf(totalTime));// sent message to firebase
 
                     timer.stop();
+                    timer.setBase(SystemClock.elapsedRealtime());
                     pause.setEnabled(false);
                     restart.setEnabled(false);
                     start.setEnabled(true);

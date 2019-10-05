@@ -12,19 +12,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.firebase.ui.database.SnapshotParser;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.TimeZone;
 
 public class LibrarySeatsActivity extends BaseActivity {
@@ -33,7 +29,7 @@ public class LibrarySeatsActivity extends BaseActivity {
     private Calendar calendars;
 
     private DatabaseReference mDatabase;
-    final ArrayList commentList = new ArrayList();
+    private ArrayList commentList = new ArrayList<SearchSeatsComment>();
 
 
     @Override
@@ -43,14 +39,9 @@ public class LibrarySeatsActivity extends BaseActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
-
-        String[] data = {"comment1", "comment2", "comment3", "comment4", "comment5"};// these data should from firebase
-
         Intent parentIntent = getIntent();
         final String userName = parentIntent.getStringExtra("userName");
         String location = parentIntent.getStringExtra("location");
-
 
         TextView userNameTextView = findViewById(R.id.text_username_libraryseats);
         userNameTextView.setText(userName);
@@ -58,9 +49,7 @@ public class LibrarySeatsActivity extends BaseActivity {
         final TextView locationTextView = findViewById(R.id.information);
         locationTextView.setText(location);
 
-
         //Read from database
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
 //        SnapshotParser<SearchSeatsComment> parser = new SnapshotParser<SearchSeatsComment>() {
 //            @Override
@@ -82,13 +71,23 @@ public class LibrarySeatsActivity extends BaseActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 commentList.clear();
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 //                    String content = postSnapshot.getValue().toString();
 //                    commentList.add(content);
                     SearchSeatsComment comment = postSnapshot.getValue(SearchSeatsComment.class);
                     commentList.add(comment);
                 }
                 Log.d("Database content", commentList.toString());
+                Collections.reverse(commentList);   // displayed by upload date
+                String[] data = new String[commentList.size()];
+                for (int i = 0; i < data.length; i++) {
+                    SearchSeatsComment tempObj = (SearchSeatsComment) commentList.get(i);
+                    data[i] = "Seat occupancy: " + tempObj.getComment() + "%" + "\t" + "upload date: " + tempObj.getDate() + "\t" + "uploaded by: " + tempObj.getUser();
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(LibrarySeatsActivity.this, android.R.layout.simple_list_item_1, data);
+                ListView listView = findViewById(R.id.seatsComments);
+                listView.setAdapter(adapter);
             }
 
             @Override
@@ -99,10 +98,6 @@ public class LibrarySeatsActivity extends BaseActivity {
             }
         });
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(LibrarySeatsActivity.this, android.R.layout.simple_list_item_1, data);
-        ListView listView = findViewById(R.id.seatsComments);
-        listView.setAdapter(adapter);
-
         seatsPercentageEditText = findViewById(R.id.text_seats_available_libraryseats);
 
         Button upload = findViewById(R.id.button_update_libraryseats);
@@ -112,33 +107,23 @@ public class LibrarySeatsActivity extends BaseActivity {
                 String seatsPercentage = seatsPercentageEditText.getText().toString();
                 int percentage = Integer.parseInt(seatsPercentage);
                 if (percentage >= 0 && percentage <= 100) {
-                    Log.v("upload data to firebase", seatsPercentage);
-                    calendars = Calendar.getInstance();
+                    seatsPercentageEditText.setText("");
 
+                    calendars = Calendar.getInstance();
                     calendars.setTimeZone(TimeZone.getTimeZone("GMT+10:00"));
 
                     String year = String.valueOf(calendars.get(Calendar.YEAR));
-
-                    String month = String.valueOf(calendars.get(Calendar.MONTH)+1);
-
+                    String month = String.valueOf(calendars.get(Calendar.MONTH) + 1);
                     String day = String.valueOf(calendars.get(Calendar.DATE));
 
                     String hour = String.valueOf(calendars.get(Calendar.HOUR));
-
                     String min = String.valueOf(calendars.get(Calendar.MINUTE));
-
                     String second = String.valueOf(calendars.get(Calendar.SECOND));
 
-                    String isAm = calendars.get(Calendar.AM_PM)==1 ? "PM":"AM";
+                    String isAm = calendars.get(Calendar.AM_PM) == 1 ? "PM" : "AM";
+                    Boolean is24 = DateFormat.is24HourFormat(getApplication()) ? true : false;
 
-                    Boolean is24 = DateFormat.is24HourFormat(getApplication()) ?true:false;
-
-
-                    Log.v("date", day+"/"+month+"/"+year+" "+hour+":"+min+":"+second+" "+isAm);
-                    Log.v("location",locationTextView.getText().toString());
-
-                    String date = day+"/"+month+"/"+year+" "+hour+":"+min+":"+second+" "+isAm;
-
+                    String date = day + "/" + month + "/" + year + " " + hour + ":" + min + ":" + second + " " + isAm;
                     SearchSeatsComment comment = new
                             SearchSeatsComment(userName, String.valueOf(percentage), date);
 
