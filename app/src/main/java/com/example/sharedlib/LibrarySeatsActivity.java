@@ -2,7 +2,6 @@ package com.example.sharedlib;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,10 +17,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.TimeZone;
+import java.util.Date;
 
 public class LibrarySeatsActivity extends BaseActivity {
 
@@ -29,8 +30,10 @@ public class LibrarySeatsActivity extends BaseActivity {
     private Calendar calendars;
 
     private DatabaseReference mDatabase;
-    private ArrayList commentList = new ArrayList<SearchSeatsComment>();
+    private ArrayList commentList = new ArrayList<ComWithDatabase>();
 
+    private ObtainCurrentDate obtainCurrentDate = new ObtainCurrentDate();
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,25 +70,29 @@ public class LibrarySeatsActivity extends BaseActivity {
 //        };
 
         DatabaseReference ref = mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString());
-        ref.limitToLast(10).addValueEventListener(new ValueEventListener() {
+        ref.limitToFirst(10).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 //                    String content = postSnapshot.getValue().toString();
 //                    commentList.add(content);
-                    SearchSeatsComment comment = postSnapshot.getValue(SearchSeatsComment.class);
+                    ComWithDatabase comment = postSnapshot.getValue(ComWithDatabase.class);
                     commentList.add(comment);
                 }
                 Log.d("Database content", commentList.toString());
                 Collections.reverse(commentList);   // displayed by upload date
-                String[] data = new String[commentList.size()];
-                for (int i = 0; i < data.length; i++) {
-                    SearchSeatsComment tempObj = (SearchSeatsComment) commentList.get(i);
-                    data[i] = "Seat occupancy: " + tempObj.getComment() + "%" + "\t" + "upload date: " + tempObj.getDate() + "\t" + "uploaded by: " + tempObj.getUser();
+                ArrayList temp = new ArrayList();
+
+                for (int i = 0; i < commentList.size(); i++) {
+                    ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
+                    String record = "Seat occupancy: " + tempObj.getComment() + "%" + "\t" + "upload date: " + tempObj.getDate() + "\t" + "uploaded by: " + tempObj.getUser();
+                    if (timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
+                        temp.add(record);
+                    }
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(LibrarySeatsActivity.this, android.R.layout.simple_list_item_1, data);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(LibrarySeatsActivity.this, android.R.layout.simple_list_item_1, temp);
                 ListView listView = findViewById(R.id.seatsComments);
                 listView.setAdapter(adapter);
             }
@@ -109,23 +116,9 @@ public class LibrarySeatsActivity extends BaseActivity {
                 if (percentage >= 0 && percentage <= 100) {
                     seatsPercentageEditText.setText("");
 
-                    calendars = Calendar.getInstance();
-                    calendars.setTimeZone(TimeZone.getTimeZone("GMT+10:00"));
-
-                    String year = String.valueOf(calendars.get(Calendar.YEAR));
-                    String month = String.valueOf(calendars.get(Calendar.MONTH) + 1);
-                    String day = String.valueOf(calendars.get(Calendar.DATE));
-
-                    String hour = String.valueOf(calendars.get(Calendar.HOUR));
-                    String min = String.valueOf(calendars.get(Calendar.MINUTE));
-                    String second = String.valueOf(calendars.get(Calendar.SECOND));
-
-                    String isAm = calendars.get(Calendar.AM_PM) == 1 ? "PM" : "AM";
-                    Boolean is24 = DateFormat.is24HourFormat(getApplication()) ? true : false;
-
-                    String date = day + "/" + month + "/" + year + " " + hour + ":" + min + ":" + second + " " + isAm;
-                    SearchSeatsComment comment = new
-                            SearchSeatsComment(userName, String.valueOf(percentage), date);
+                    String date = obtainCurrentDate.getDateAndTime();
+                    ComWithDatabase comment = new
+                            ComWithDatabase(userName, String.valueOf(percentage), date);
 
                     mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).push().setValue(comment);
                     Toast.makeText(LibrarySeatsActivity.this, "Upload successfully.",
@@ -137,6 +130,21 @@ public class LibrarySeatsActivity extends BaseActivity {
             }
         });
 
+    }
 
+    public long timeDifference(String time1, String time2) {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        try {
+            Date d1 = df.parse(time1);
+            Date d2 = df.parse(time2);
+            long diff = d1.getTime() - d2.getTime();
+            long hour = diff / (1000 * 60 * 60);
+            Log.v("时间差", String.valueOf(diff));
+            Log.v("时间差2", String.valueOf(hour));
+            return hour;
+        } catch (Exception e) {
+            return -1;
+        }
     }
 }
