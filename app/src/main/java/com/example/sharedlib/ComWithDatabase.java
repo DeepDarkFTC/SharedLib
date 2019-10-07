@@ -1,6 +1,6 @@
 package com.example.sharedlib;
 
-public class SearchSeatsComment {
+public class ComWithDatabase {
 
     private String id;
     private String user;
@@ -8,11 +8,17 @@ public class SearchSeatsComment {
     private String date;
 
 
-    public SearchSeatsComment() {
+    public ComWithDatabase() {
     }
 
-    public SearchSeatsComment(String user, String comment, String date) {
+    public ComWithDatabase(String user, String comment, String date) {
         this.user = user;
+        this.comment = comment;
+        this.date = date;
+
+    }
+
+    public ComWithDatabase(String comment, String date) {
         this.comment = comment;
         this.date = date;
 

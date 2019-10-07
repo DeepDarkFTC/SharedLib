@@ -77,8 +77,12 @@ public class StudyTime extends BaseActivity {
 
                     // send record to firebase
                     stopFlag = false;
+
+                    ComWithDatabase comment = new
+                            ComWithDatabase(String.valueOf(totalTime), String.valueOf(totalTime));
+
                     String userId = emailToUid(userName);
-                    mDatabase.child("studyTime").child(userId).setValue(String.valueOf(totalTime));
+                    mDatabase.child("studyTime").child(userId).setValue(comment);
                 }
 
             }

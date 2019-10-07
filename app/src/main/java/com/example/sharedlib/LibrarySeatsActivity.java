@@ -29,7 +29,7 @@ public class LibrarySeatsActivity extends BaseActivity {
     private Calendar calendars;
 
     private DatabaseReference mDatabase;
-    private ArrayList commentList = new ArrayList<SearchSeatsComment>();
+    private ArrayList commentList = new ArrayList<ComWithDatabase>();
 
 
     @Override
@@ -67,21 +67,21 @@ public class LibrarySeatsActivity extends BaseActivity {
 //        };
 
         DatabaseReference ref = mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString());
-        ref.limitToLast(10).addValueEventListener(new ValueEventListener() {
+        ref.limitToFirst(10).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 //                    String content = postSnapshot.getValue().toString();
 //                    commentList.add(content);
-                    SearchSeatsComment comment = postSnapshot.getValue(SearchSeatsComment.class);
+                    ComWithDatabase comment = postSnapshot.getValue(ComWithDatabase.class);
                     commentList.add(comment);
                 }
                 Log.d("Database content", commentList.toString());
                 Collections.reverse(commentList);   // displayed by upload date
                 String[] data = new String[commentList.size()];
                 for (int i = 0; i < data.length; i++) {
-                    SearchSeatsComment tempObj = (SearchSeatsComment) commentList.get(i);
+                    ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
                     data[i] = "Seat occupancy: " + tempObj.getComment() + "%" + "\t" + "upload date: " + tempObj.getDate() + "\t" + "uploaded by: " + tempObj.getUser();
                 }
 
@@ -124,8 +124,8 @@ public class LibrarySeatsActivity extends BaseActivity {
                     Boolean is24 = DateFormat.is24HourFormat(getApplication()) ? true : false;
 
                     String date = day + "/" + month + "/" + year + " " + hour + ":" + min + ":" + second + " " + isAm;
-                    SearchSeatsComment comment = new
-                            SearchSeatsComment(userName, String.valueOf(percentage), date);
+                    ComWithDatabase comment = new
+                            ComWithDatabase(userName, String.valueOf(percentage), date);
 
                     mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).push().setValue(comment);
                     Toast.makeText(LibrarySeatsActivity.this, "Upload successfully.",
