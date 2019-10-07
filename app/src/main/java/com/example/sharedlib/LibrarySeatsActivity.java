@@ -6,8 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,20 +20,20 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 
 public class LibrarySeatsActivity extends BaseActivity {
 
-    private EditText seatsPercentageEditText;
-    private Calendar calendars;
+    private SeekBar seekBar;
+    private TextView percentageTextView;
 
     private DatabaseReference mDatabase;
     private ArrayList commentList = new ArrayList<ComWithDatabase>();
 
     private ObtainCurrentDate obtainCurrentDate = new ObtainCurrentDate();
-    ;
+
+    private int seatsPercentage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,8 @@ public class LibrarySeatsActivity extends BaseActivity {
 
         final TextView locationTextView = findViewById(R.id.information);
         locationTextView.setText(location);
+
+        percentageTextView = findViewById(R.id.progressNum);
 
         //Read from database
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -70,7 +72,7 @@ public class LibrarySeatsActivity extends BaseActivity {
 //        };
 
         DatabaseReference ref = mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString());
-        ref.limitToFirst(10).addValueEventListener(new ValueEventListener() {
+        ref.limitToLast(10).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 commentList.clear();
@@ -78,7 +80,7 @@ public class LibrarySeatsActivity extends BaseActivity {
 //                    String content = postSnapshot.getValue().toString();
 //                    commentList.add(content);
                     ComWithDatabase comment = postSnapshot.getValue(ComWithDatabase.class);
-                    commentList.add(comment);
+                    commentList.add(0,comment);
                 }
                 Log.d("Database content", commentList.toString());
                 Collections.reverse(commentList);   // displayed by upload date
@@ -88,10 +90,9 @@ public class LibrarySeatsActivity extends BaseActivity {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
                     String record = "Seat occupancy: " + tempObj.getComment() + "%" + "\t" + "upload date: " + tempObj.getDate() + "\t" + "uploaded by: " + tempObj.getUser();
                     if (timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
-                        temp.add(record);
+                        temp.add(0,record);
                     }
                 }
-
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(LibrarySeatsActivity.this, android.R.layout.simple_list_item_1, temp);
                 ListView listView = findViewById(R.id.seatsComments);
                 listView.setAdapter(adapter);
@@ -105,28 +106,38 @@ public class LibrarySeatsActivity extends BaseActivity {
             }
         });
 
-        seatsPercentageEditText = findViewById(R.id.text_seats_available_libraryseats);
+//        seatsPercentageEditText = findViewById(R.id.text_seats_available_libraryseats);
+        seekBar = findViewById(R.id.seekBar_seatsavailable_libraryseats);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                percentageTextView.setText(String.valueOf(i));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                seatsPercentage = seekBar.getProgress();
+            }
+        });
 
         Button upload = findViewById(R.id.button_update_libraryseats);
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String seatsPercentage = seatsPercentageEditText.getText().toString();
-                int percentage = Integer.parseInt(seatsPercentage);
-                if (percentage >= 0 && percentage <= 100) {
-                    seatsPercentageEditText.setText("");
 
-                    String date = obtainCurrentDate.getDateAndTime();
-                    ComWithDatabase comment = new
-                            ComWithDatabase(userName, String.valueOf(percentage), date);
+                String date = obtainCurrentDate.getDateAndTime();
+                ComWithDatabase comment = new
+                        ComWithDatabase(userName, String.valueOf(seatsPercentage), date);
 
-                    mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).push().setValue(comment);
-                    Toast.makeText(LibrarySeatsActivity.this, "Upload successfully.",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(LibrarySeatsActivity.this, "The input data should between 0 and 100",
-                            Toast.LENGTH_SHORT).show();
-                }
+                mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).push().setValue(comment);
+                Toast.makeText(LibrarySeatsActivity.this, "Upload successfully.",
+                        Toast.LENGTH_SHORT).show();
+
             }
         });
 
