@@ -29,8 +29,6 @@ public class RegisterActivity extends BaseActivity {
     private FirebaseAuth mAuth;
     // [END declare_auth]
 
-    private Spinner securityQuestionsSpinner;
-    private TextView securityAnswerTextView;
 
     private DatabaseReference mDatabase;
 
@@ -54,23 +52,12 @@ public class RegisterActivity extends BaseActivity {
         final String[] list = {"What's your favourite number", "What's your favourite colour"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, list);
 
-        securityQuestionsSpinner.setAdapter(adapter);
-        securityQuestionsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                String value = list[pos];  // get selected content
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
 
         Button registerButton = findViewById(R.id.register);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkFormat(userNameTextView.getText().toString(), passwordTextView.getText().toString(), securityAnswerTextView.getText().toString())) {
+                if (checkFormat(userNameTextView.getText().toString(), passwordTextView.getText().toString())) {
                     // send message to firebase include [userName,Psd,SecurityQ,answer]
                     createAccount(userNameTextView.getText().toString(), passwordTextView.getText().toString());
                 }
@@ -134,7 +121,7 @@ public class RegisterActivity extends BaseActivity {
         // [END create_user_with_email]
     }
 
-    public Boolean checkFormat(String userName, String password, String securityAns) {
+    public Boolean checkFormat(String userName, String password) {
         String email = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
         if (userName.equals("")) {
             new AlertDialog.Builder(this)
@@ -168,28 +155,20 @@ public class RegisterActivity extends BaseActivity {
                     .show();
             return false;
         }
-        if (securityAns.equals("")) {
-            new AlertDialog.Builder(this)
-                    .setTitle("warning")
-                    .setMessage("Security answer cannot be empty")
-                    .setPositiveButton("ok", null)
-                    .show();
-            return false;
-        }
         return true;
     }
 
     private void writeToDatabase(Task<AuthResult> task) {
         FirebaseUser user = task.getResult().getUser();
         Log.d("createUserWithEmail", user.toString());
-        onAuthSuccess(user, securityQuestionsSpinner.getSelectedItem().toString(), securityAnswerTextView.getText().toString());
+        onAuthSuccess(user);
     }
 
-    private void onAuthSuccess(FirebaseUser user, String question, String answer) {
+    private void onAuthSuccess(FirebaseUser user) {
         String username = usernameFromEmail(user.getEmail());
 
         // Write new user
-        writeNewUser(username, user.getEmail(), question, answer);
+        writeNewUser(username, user.getEmail());
 
     }
 
@@ -201,14 +180,10 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    private void writeNewUser(String name, String email, String question, String answer) {
-
+    private void writeNewUser(String name, String email) {
         String userId = emailToUid(email);
         mDatabase.child("name").child(userId).setValue(name);
         mDatabase.child("email").child(userId).setValue(email);
-        mDatabase.child("question").child(userId).setValue(question);
-        mDatabase.child("answer").child(userId).setValue(answer);
-
 
     }
 
