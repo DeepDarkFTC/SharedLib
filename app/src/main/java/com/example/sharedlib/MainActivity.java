@@ -30,7 +30,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         userNameTextView = findViewById(R.id.text_name_main);
         passwordTextView = findViewById(R.id.text_password_main);
 

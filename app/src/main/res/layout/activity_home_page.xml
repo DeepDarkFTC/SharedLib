@@ -27,7 +27,7 @@
             android:layout_width="227dp"
             android:layout_height="47dp"
             android:layout_weight="1"
-            android:text="UserName"
+            android:text="Welcome"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="24sp" />
