@@ -79,7 +79,7 @@ public class RegisterActivity extends BaseActivity {
     }
     // [END on_start_check_user]
 
-    private void createAccount(String email, String userName, String password) {
+    private void createAccount(String email, final String userName, String password) {
         Log.d("createAccount", "createAccount" + email);
 
         //Check the validation here
@@ -101,7 +101,7 @@ public class RegisterActivity extends BaseActivity {
                             Toast.makeText(RegisterActivity.this, "Registration success.",
                                     Toast.LENGTH_SHORT).show();
 
-                            writeToDatabase(task);
+                            writeToDatabase(task, userName);
 
                             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -167,33 +167,10 @@ public class RegisterActivity extends BaseActivity {
         return true;
     }
 
-    private void writeToDatabase(Task<AuthResult> task) {
+    private void writeToDatabase(Task<AuthResult> task, String userName) {
         FirebaseUser user = task.getResult().getUser();
         Log.d("createUserWithEmail", user.toString());
-        onAuthSuccess(user);
+        String userId = emailToUid(user.getEmail());
+        mDatabase.child("userName").child(userId).setValue(userName);
     }
-
-    private void onAuthSuccess(FirebaseUser user) {
-        String username = usernameFromEmail(user.getEmail());
-
-        // Write new user
-        writeNewUser(username, user.getEmail());
-
-    }
-
-    private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
-    }
-
-    private void writeNewUser(String name, String email) {
-        String userId = emailToUid(email);
-        mDatabase.child("name").child(userId).setValue(name);
-        mDatabase.child("email").child(userId).setValue(email);
-
-    }
-
 }
