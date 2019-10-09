@@ -32,8 +32,6 @@ public class RegisterActivity extends BaseActivity {
     private FirebaseAuth mAuth;
     // [END declare_auth]
 
-    boolean isTaken;
-
 
     private DatabaseReference mDatabase;
 
@@ -41,6 +39,7 @@ public class RegisterActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
 
         // [START initialize_auth]
         // Initialize Firebase Auth
@@ -62,8 +61,9 @@ public class RegisterActivity extends BaseActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkFormat(emailTextView.getText().toString(), userNameTextView.getText().toString(),passwordTextView.getText().toString())) {
+                if (checkFormat(emailTextView.getText().toString(), userNameTextView.getText().toString(), passwordTextView.getText().toString())) {
                     // send message to firebase include [userName,Psd,SecurityQ,answer]
+
                     createAccount(emailTextView.getText().toString(), userNameTextView.getText().toString(), passwordTextView.getText().toString());
                 }
             }
@@ -92,52 +92,42 @@ public class RegisterActivity extends BaseActivity {
 //        }
 
         showProgressDialog();
-        Log.d("ifExist", String.valueOf(ifExist(userName)));
 
 
-        if(ifExist(userName)){
+        // [START create_user_with_email]
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("createUserWithEmail", "createUserWithEmail:success");
+                            //FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(RegisterActivity.this, "Registration successful.",
+                                    Toast.LENGTH_SHORT).show();
 
-            hideProgressDialog();
-
-            Toast.makeText(RegisterActivity.this, "Existing Username.",
-                    Toast.LENGTH_SHORT).show();
-
-        }else{
-
-            // [START create_user_with_email]
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d("createUserWithEmail", "createUserWithEmail:success");
-                                //FirebaseUser user = mAuth.getCurrentUser();
-                                Toast.makeText(RegisterActivity.this, "Registration successful.",
-                                        Toast.LENGTH_SHORT).show();
-
-                                writeToDatabase(task, userName);
+                            writeToDatabase(task, userName);
 
 
-                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                //updateUI(user);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w("createUserWithEmail", "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(RegisterActivity.this, "Registration failed.",
-                                        Toast.LENGTH_SHORT).show();
-                                //updateUI(null);
-                            }
-
-                            // [START_EXCLUDE]
-                            hideProgressDialog();
-                            // [END_EXCLUDE]
+                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            //updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("createUserWithEmail", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(RegisterActivity.this, "Registration failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
                         }
-                    });
-            // [END create_user_with_email]
 
-        }
+                        // [START_EXCLUDE]
+                        hideProgressDialog();
+                        // [END_EXCLUDE]
+                    }
+                });
+        // [END create_user_with_email]
+
+
 
 
     }
@@ -191,42 +181,8 @@ public class RegisterActivity extends BaseActivity {
         FirebaseUser user = task.getResult().getUser();
         Log.d("createUserWithEmail", user.toString());
         String userId = emailToUid(user.getEmail());
-        mDatabase.child("takenUserName").child(userName).setValue(true);
         mDatabase.child("userName").child(userId).setValue(userName);
     }
 
-    private boolean ifExist(final String userName)
-    {
-        DatabaseReference theTakenNameRef = mDatabase.child("takenUserName");
-        theTakenNameRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Log.d("ifExist", postSnapshot.toString());
-                    Log.d("ifExist", String.valueOf(dataSnapshot.hasChild(userName)));
 
-
-                }
-                if(dataSnapshot.hasChild(userName))
-                {
-                    isTaken = true;
-                }
-                else //if (!dataSnapshot.hasChild(userName))
-                {
-                    isTaken = false;
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(RegisterActivity.this, "Connection Error. Please try again in some time.", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        Log.d("ifExist1111", String.valueOf(isTaken));
-
-        return isTaken;
-
-    }
 }
