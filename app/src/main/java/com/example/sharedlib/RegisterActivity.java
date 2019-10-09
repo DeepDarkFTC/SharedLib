@@ -19,8 +19,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class RegisterActivity extends BaseActivity {
@@ -32,11 +35,11 @@ public class RegisterActivity extends BaseActivity {
 
     private DatabaseReference mDatabase;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
 
         // [START initialize_auth]
         // Initialize Firebase Auth
@@ -46,7 +49,8 @@ public class RegisterActivity extends BaseActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
-        final TextView userNameTextView = findViewById(R.id.register_email);
+        final TextView emailTextView = findViewById(R.id.register_email);
+        final TextView userNameTextView = findViewById(R.id.register_username);
         final TextView passwordTextView = findViewById(R.id.register_password);
 
         final String[] list = {"What's your favourite number", "What's your favourite colour"};
@@ -57,9 +61,10 @@ public class RegisterActivity extends BaseActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkFormat(userNameTextView.getText().toString(), passwordTextView.getText().toString())) {
+                if (checkFormat(emailTextView.getText().toString(), userNameTextView.getText().toString(), passwordTextView.getText().toString())) {
                     // send message to firebase include [userName,Psd,SecurityQ,answer]
-                    createAccount(userNameTextView.getText().toString(), passwordTextView.getText().toString());
+
+                    createAccount(emailTextView.getText().toString(), userNameTextView.getText().toString(), passwordTextView.getText().toString());
                 }
             }
         });
@@ -78,7 +83,7 @@ public class RegisterActivity extends BaseActivity {
     }
     // [END on_start_check_user]
 
-    private void createAccount(String email, String password) {
+    private void createAccount(String email, final String userName, String password) {
         Log.d("createAccount", "createAccount" + email);
 
         //Check the validation here
@@ -87,6 +92,7 @@ public class RegisterActivity extends BaseActivity {
 //        }
 
         showProgressDialog();
+
 
         // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -97,10 +103,11 @@ public class RegisterActivity extends BaseActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("createUserWithEmail", "createUserWithEmail:success");
                             //FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(RegisterActivity.this, "Registration success.",
+                            Toast.makeText(RegisterActivity.this, "Registration successful.",
                                     Toast.LENGTH_SHORT).show();
 
-                            writeToDatabase(task);
+                            writeToDatabase(task, userName);
+
 
                             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -108,7 +115,7 @@ public class RegisterActivity extends BaseActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("createUserWithEmail", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                            Toast.makeText(RegisterActivity.this, "Registration failed.",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
@@ -119,22 +126,34 @@ public class RegisterActivity extends BaseActivity {
                     }
                 });
         // [END create_user_with_email]
+
+
+
+
     }
 
-    public Boolean checkFormat(String userName, String password) {
-        String email = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-        if (userName.equals("")) {
+    public Boolean checkFormat(String email, String userName, String password) {
+        String emailFormat = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+        if (email.equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("warning")
-                    .setMessage("Username cannot be empty")
+                    .setMessage("Email address cannot be empty")
                     .setPositiveButton("ok", null)
                     .show();
             return false;
         }
-        if (!userName.matches(email)) {
+        if (!email.matches(emailFormat)) {
             new AlertDialog.Builder(this)
                     .setTitle("warning")
-                    .setMessage("Username should be an email")
+                    .setMessage("You should input a correct email address")
+                    .setPositiveButton("ok", null)
+                    .show();
+            return false;
+        }
+        if (userName.equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("warning")
+                    .setMessage("Username cannot be empty")
                     .setPositiveButton("ok", null)
                     .show();
             return false;
@@ -158,33 +177,12 @@ public class RegisterActivity extends BaseActivity {
         return true;
     }
 
-    private void writeToDatabase(Task<AuthResult> task) {
+    private void writeToDatabase(Task<AuthResult> task, String userName) {
         FirebaseUser user = task.getResult().getUser();
         Log.d("createUserWithEmail", user.toString());
-        onAuthSuccess(user);
+        String userId = emailToUid(user.getEmail());
+        mDatabase.child("userName").child(userId).setValue(userName);
     }
 
-    private void onAuthSuccess(FirebaseUser user) {
-        String username = usernameFromEmail(user.getEmail());
-
-        // Write new user
-        writeNewUser(username, user.getEmail());
-
-    }
-
-    private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
-    }
-
-    private void writeNewUser(String name, String email) {
-        String userId = emailToUid(email);
-        mDatabase.child("name").child(userId).setValue(name);
-        mDatabase.child("email").child(userId).setValue(email);
-
-    }
 
 }
