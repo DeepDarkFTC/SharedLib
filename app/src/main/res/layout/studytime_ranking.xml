@@ -52,14 +52,14 @@
             android:id="@+id/text_studytime_ranking"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="total time"
             android:textSize="30sp" />
 
         <TextView
             android:id="@+id/text_rank_ranking"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="rank"
             android:textSize="30sp" />
 
         <View
