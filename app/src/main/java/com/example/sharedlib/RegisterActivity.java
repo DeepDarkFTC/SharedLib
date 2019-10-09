@@ -46,7 +46,8 @@ public class RegisterActivity extends BaseActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
-        final TextView userNameTextView = findViewById(R.id.register_email);
+        final TextView emailTextView = findViewById(R.id.register_email);
+        final TextView userNameTextView = findViewById(R.id.register_username);
         final TextView passwordTextView = findViewById(R.id.register_password);
 
         final String[] list = {"What's your favourite number", "What's your favourite colour"};
@@ -57,9 +58,9 @@ public class RegisterActivity extends BaseActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkFormat(userNameTextView.getText().toString(), passwordTextView.getText().toString())) {
+                if (checkFormat(emailTextView.getText().toString(), userNameTextView.getText().toString(),passwordTextView.getText().toString())) {
                     // send message to firebase include [userName,Psd,SecurityQ,answer]
-                    createAccount(userNameTextView.getText().toString(), passwordTextView.getText().toString());
+                    createAccount(emailTextView.getText().toString(), userNameTextView.getText().toString(), passwordTextView.getText().toString());
                 }
             }
         });
@@ -78,7 +79,7 @@ public class RegisterActivity extends BaseActivity {
     }
     // [END on_start_check_user]
 
-    private void createAccount(String email, String password) {
+    private void createAccount(String email, String userName, String password) {
         Log.d("createAccount", "createAccount" + email);
 
         //Check the validation here
@@ -121,20 +122,28 @@ public class RegisterActivity extends BaseActivity {
         // [END create_user_with_email]
     }
 
-    public Boolean checkFormat(String userName, String password) {
-        String email = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-        if (userName.equals("")) {
+    public Boolean checkFormat(String email, String userName, String password) {
+        String emailFormat = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+        if (email.equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("warning")
-                    .setMessage("Username cannot be empty")
+                    .setMessage("Email address cannot be empty")
                     .setPositiveButton("ok", null)
                     .show();
             return false;
         }
-        if (!userName.matches(email)) {
+        if (!email.matches(emailFormat)) {
             new AlertDialog.Builder(this)
                     .setTitle("warning")
-                    .setMessage("Username should be an email")
+                    .setMessage("You should input a correct email address")
+                    .setPositiveButton("ok", null)
+                    .show();
+            return false;
+        }
+        if (userName.equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("warning")
+                    .setMessage("Username cannot be empty")
                     .setPositiveButton("ok", null)
                     .show();
             return false;
