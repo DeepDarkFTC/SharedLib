@@ -19,8 +19,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class RegisterActivity extends BaseActivity {
@@ -29,9 +32,10 @@ public class RegisterActivity extends BaseActivity {
     private FirebaseAuth mAuth;
     // [END declare_auth]
 
+    boolean isTaken;
+
 
     private DatabaseReference mDatabase;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,38 +92,54 @@ public class RegisterActivity extends BaseActivity {
 //        }
 
         showProgressDialog();
+        Log.d("ifExist", String.valueOf(ifExist(userName)));
 
-        // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("createUserWithEmail", "createUserWithEmail:success");
-                            //FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(RegisterActivity.this, "Registration success.",
-                                    Toast.LENGTH_SHORT).show();
 
-                            writeToDatabase(task, userName);
+        if(ifExist(userName)){
 
-                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            //updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("createUserWithEmail", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+            hideProgressDialog();
+
+            Toast.makeText(RegisterActivity.this, "Existing Username.",
+                    Toast.LENGTH_SHORT).show();
+
+        }else{
+
+            // [START create_user_with_email]
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("createUserWithEmail", "createUserWithEmail:success");
+                                //FirebaseUser user = mAuth.getCurrentUser();
+                                Toast.makeText(RegisterActivity.this, "Registration successful.",
+                                        Toast.LENGTH_SHORT).show();
+
+                                writeToDatabase(task, userName);
+
+
+                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                //updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w("createUserWithEmail", "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(RegisterActivity.this, "Registration failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                //updateUI(null);
+                            }
+
+                            // [START_EXCLUDE]
+                            hideProgressDialog();
+                            // [END_EXCLUDE]
                         }
+                    });
+            // [END create_user_with_email]
 
-                        // [START_EXCLUDE]
-                        hideProgressDialog();
-                        // [END_EXCLUDE]
-                    }
-                });
-        // [END create_user_with_email]
+        }
+
+
     }
 
     public Boolean checkFormat(String email, String userName, String password) {
@@ -171,6 +191,42 @@ public class RegisterActivity extends BaseActivity {
         FirebaseUser user = task.getResult().getUser();
         Log.d("createUserWithEmail", user.toString());
         String userId = emailToUid(user.getEmail());
+        mDatabase.child("takenUserName").child(userName).setValue(true);
         mDatabase.child("userName").child(userId).setValue(userName);
+    }
+
+    private boolean ifExist(final String userName)
+    {
+        DatabaseReference theTakenNameRef = mDatabase.child("takenUserName");
+        theTakenNameRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Log.d("ifExist", postSnapshot.toString());
+                    Log.d("ifExist", String.valueOf(dataSnapshot.hasChild(userName)));
+
+
+                }
+                if(dataSnapshot.hasChild(userName))
+                {
+                    isTaken = true;
+                }
+                else //if (!dataSnapshot.hasChild(userName))
+                {
+                    isTaken = false;
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(RegisterActivity.this, "Connection Error. Please try again in some time.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Log.d("ifExist1111", String.valueOf(isTaken));
+
+        return isTaken;
+
     }
 }
