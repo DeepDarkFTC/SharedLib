@@ -35,7 +35,7 @@ public class StudyTime extends BaseActivity {
         Intent parentIntent = getIntent();
         final String userName = parentIntent.getStringExtra("userName");
 
-        TextView userNameTextView = findViewById(R.id.text_username_studytime);
+        final TextView userNameTextView = findViewById(R.id.text_username_studytime);
         userNameTextView.setText(userName);
 
         // Get timer component
@@ -124,6 +124,16 @@ public class StudyTime extends BaseActivity {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
                 setFormat(timer);
+            }
+        });
+
+        Button timeRank = findViewById(R.id.button_rankings_studytime);
+        timeRank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StudyTime.this, Ranking.class);
+                intent.putExtra("userName", userNameTextView.getText().toString());
+                startActivity(intent);
             }
         });
     }

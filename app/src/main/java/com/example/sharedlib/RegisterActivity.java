@@ -139,7 +139,6 @@ public class RegisterActivity extends BaseActivity {
 
         }
 
-
     }
 
     public Boolean checkFormat(String email, String userName, String password) {
@@ -204,8 +203,6 @@ public class RegisterActivity extends BaseActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Log.d("ifExist", postSnapshot.toString());
                     Log.d("ifExist", String.valueOf(dataSnapshot.hasChild(userName)));
-
-
                 }
                 if(dataSnapshot.hasChild(userName))
                 {
@@ -225,7 +222,6 @@ public class RegisterActivity extends BaseActivity {
         });
 
         Log.d("ifExist1111", String.valueOf(isTaken));
-
         return isTaken;
 
     }

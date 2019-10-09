@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateNewGroup"></activity>
+        <activity android:name=".Ranking"></activity>
+        <activity android:name=".CreateNewGroup" />
         <activity android:name=".LibrarySeatsActivity" />
         <activity android:name=".GiblinLibraryActivity" />
         <activity android:name=".ErcLibraryActivity" />
