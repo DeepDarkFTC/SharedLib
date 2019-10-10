@@ -15,22 +15,35 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CreateNewGroup extends AppCompatActivity {
+public class CreateNewGroup extends BaseActivity {
 
     private Button startButton;
     private Button endButton;
+
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_group);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+
 
         final EditText groupName = findViewById(R.id.text_name_newgroup);
 
@@ -80,6 +93,20 @@ public class CreateNewGroup extends AppCompatActivity {
                             studyTheme.getText().toString() + "_" +
                             startButton.getText().toString() + "_" +
                             endButton.getText().toString());
+
+                    FirebaseUser user = mAuth.getCurrentUser();
+
+                    ArrayList studyMember = new ArrayList<String>();
+                    studyMember.add(user.getEmail());
+                    ComWithDatabase comment = new ComWithDatabase(groupName.getText().toString(),
+                            library.getSelectedItem().toString(),
+                            level.getSelectedItem().toString(),
+                            studyTheme.getText().toString(),
+                            startButton.getText().toString(),
+                    endButton.getText().toString(), studyMember);
+
+                    mDatabase.child("studyGroup").push().setValue(comment);
+
                 }
             }
         });

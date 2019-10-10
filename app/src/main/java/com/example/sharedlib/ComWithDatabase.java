@@ -1,11 +1,22 @@
 package com.example.sharedlib;
 
+import java.util.ArrayList;
+
 public class ComWithDatabase {
 
     private String id;
     private String user;
     private String comment;
     private String date;
+    private String groupName;
+    private String libraryName;
+    private String libraryLevel;
+    private String studyTopic;
+    private String startTime;
+    private String endTime;
+    private ArrayList studyMember = new ArrayList<String>();
+
+
 
 
     public ComWithDatabase() {
@@ -21,6 +32,19 @@ public class ComWithDatabase {
     public ComWithDatabase(String comment, String date) {
         this.comment = comment;
         this.date = date;
+
+    }
+
+    public ComWithDatabase(String groupName, String libraryName,
+                           String libraryLevel, String studyTopic,
+                           String startTime, String endTime, ArrayList studyMember){
+        this.groupName = groupName;
+        this.libraryName = libraryName;
+        this.libraryLevel = libraryLevel;
+        this.studyTopic = studyTopic;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.studyMember = studyMember;
 
     }
 
@@ -57,4 +81,59 @@ public class ComWithDatabase {
         return date;
     }
 
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public String getLibraryName() {
+        return libraryName;
+    }
+
+    public void setLibraryName(String libraryName) {
+        this.libraryName = libraryName;
+    }
+
+    public String getLibraryLevel() {
+        return libraryLevel;
+    }
+
+    public void setLibraryLevel(String libraryLevel) {
+        this.libraryLevel = libraryLevel;
+    }
+
+    public String getStudyTopic() {
+        return studyTopic;
+    }
+
+    public void setStudyTopic(String studyTopic) {
+        this.studyTopic = studyTopic;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public ArrayList getStudyMember() {
+        return studyMember;
+    }
+
+    public void setStudyMember(ArrayList studyMember) {
+        this.studyMember = studyMember;
+    }
 }
