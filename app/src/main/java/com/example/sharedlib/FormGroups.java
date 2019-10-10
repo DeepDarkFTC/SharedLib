@@ -38,7 +38,7 @@ public class FormGroups extends BaseActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
-        String[] data = {"group1", "group2", "group3", "group4", "group5"};// these data should from firebase
+//        String[] data = {"group1", "group2", "group3", "group4", "group5"};// these data should from firebase
 
         Intent parentIntent = getIntent();
         String userName = parentIntent.getStringExtra("userName");
@@ -46,9 +46,9 @@ public class FormGroups extends BaseActivity {
         TextView userNameTextView = findViewById(R.id.text_username_formgroups);
         userNameTextView.setText(userName);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroups.this, android.R.layout.simple_list_item_1, data);
-        ListView listView = findViewById(R.id.listview_infolist_formgroup);
-        listView.setAdapter(adapter);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroups.this, android.R.layout.simple_list_item_1, data);
+//        ListView listView = findViewById(R.id.listview_infolist_formgroup);
+//        listView.setAdapter(adapter);
 
         Button createButton = findViewById(R.id.button_startnew_formgroup);
         createButton.setOnClickListener(new View.OnClickListener() {
@@ -65,25 +65,26 @@ public class FormGroups extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//                    String content = postSnapshot.getValue().toString();
-//                    commentList.add(content);
                     ComWithDatabase comment = postSnapshot.getValue(ComWithDatabase.class);
-                    commentList.add(0,comment);
+                    commentList.add(comment);
                 }
                 Log.d("Database content", commentList.toString());
-                Collections.reverse(commentList);   // displayed by upload date
+                
                 ArrayList temp = new ArrayList();
 
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
-                    String record = "Seat occupancy: " + tempObj.getComment() + "%" + "\t" + "upload date: " + tempObj.getDate() + "\t" + "uploaded by: " + tempObj.getUser();
-                    /*
-                    if (timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
-                        temp.add(0,record);
-                    }*/
+                    String record = "Group Name: " + tempObj.getGroupName() +
+                            "Library Name:" + tempObj.getLibraryName() +
+                            "Level:" + tempObj.getLibraryLevel() +
+                            "Study Topic: " + tempObj.getStudyTopic()+
+                            "Start Time: " + tempObj.getStartTime()+
+                            "End Time: " + tempObj.getEndTime() +
+                            "Created by: " + tempObj.getStudyMember().get(0);
+                    temp.add(record);
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroups.this, android.R.layout.simple_list_item_1, temp);
-                ListView listView = findViewById(R.id.seatsComments);
+                ListView listView = findViewById(R.id.listview_infolist_formgroup);
                 listView.setAdapter(adapter);
             }
 

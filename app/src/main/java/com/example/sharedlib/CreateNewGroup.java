@@ -106,7 +106,7 @@ public class CreateNewGroup extends BaseActivity {
                     endButton.getText().toString(), studyMember);
 
                     mDatabase.child("studyGroup").push().setValue(comment);
-
+                    Log.v("测试","success");
                 }
             }
         });
