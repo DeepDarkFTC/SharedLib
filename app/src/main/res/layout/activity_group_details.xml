@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="5"
-        android:text="Personal Details"
+        android:text="Group Details"
         android:textAlignment="center"
         android:textSize="36sp"
         android:textStyle="bold" />
@@ -26,12 +26,12 @@
         android:layout_height="15dp" />
 
     <TextView
-        android:id="@+id/text_name_person"
+        android:id="@+id/text_name_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:background="#10000000"
-        android:text="Name"
+        android:text="Group Name"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -43,12 +43,12 @@
         android:background="#00000000" />
 
     <TextView
-        android:id="@+id/text_mail_person"
+        android:id="@+id/text_location_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:background="#10000000"
-        android:text="Mail"
+        android:text="Group Location"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -60,12 +60,12 @@
         android:background="#00000000" />
 
     <TextView
-        android:id="@+id/text_studytime_person"
+        android:id="@+id/text_studytime_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:background="#10000000"
-        android:text="Total Study Time"
+        android:text="Study Time"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -76,32 +76,9 @@
         android:layout_weight="1"
         android:background="#00000000" />
 
-    <TextView
-        android:id="@+id/text_rankings_person"
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="10"
-        android:background="#10000000"
-        android:text="Study Time Ranking"
-        android:textAlignment="center"
-        android:textSize="24sp" />
-
-    <View
-        android:id="@+id/view24"
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_weight="1"
-        android:background="#00000000" />
-
-    <TextView
-        android:id="@+id/text_studygroup_person"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="10"
-        android:background="#10000000"
-        android:text="Study Group"
-        android:textAlignment="center"
-        android:textSize="24sp" />
+        android:layout_height="100dp" />
 
     <View
         android:id="@+id/view21"
@@ -111,12 +88,12 @@
         android:background="#00000000" />
 
     <Button
-        android:id="@+id/button_resetname_person"
+        android:id="@+id/button_join_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:background="#10000000"
-        android:text="Reset Username"
+        android:text="Join This Group"
         android:textAllCaps="false"
         android:textSize="24sp" />
 
