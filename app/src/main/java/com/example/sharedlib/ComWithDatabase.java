@@ -14,7 +14,7 @@ public class ComWithDatabase {
     private String studyTopic;
     private String startTime;
     private String endTime;
-    private ArrayList studyMember = new ArrayList<String>();
+    private String teamLeader;
 
 
 
@@ -37,14 +37,14 @@ public class ComWithDatabase {
 
     public ComWithDatabase(String groupName, String libraryName,
                            String libraryLevel, String studyTopic,
-                           String startTime, String endTime, ArrayList studyMember){
+                           String startTime, String endTime, String teamLeader){
         this.groupName = groupName;
         this.libraryName = libraryName;
         this.libraryLevel = libraryLevel;
         this.studyTopic = studyTopic;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.studyMember = studyMember;
+        this.teamLeader = teamLeader;
 
     }
 
@@ -129,11 +129,11 @@ public class ComWithDatabase {
         this.endTime = endTime;
     }
 
-    public ArrayList getStudyMember() {
-        return studyMember;
+    public String getTeamLeader() {
+        return teamLeader;
     }
 
-    public void setStudyMember(ArrayList studyMember) {
-        this.studyMember = studyMember;
+    public void setTeamLeader(String teamLeader) {
+        this.teamLeader = teamLeader;
     }
 }
