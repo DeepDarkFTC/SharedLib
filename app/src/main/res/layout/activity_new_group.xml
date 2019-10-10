@@ -145,7 +145,7 @@
                 tools:layout_editor_absoluteX="-2dp"
                 tools:layout_editor_absoluteY="126dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/text_starttime_newgroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="35dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/text_endtime_newgroup2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
