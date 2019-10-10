@@ -1,6 +1,7 @@
 package com.example.sharedlib;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -105,7 +106,10 @@ public class CreateNewGroup extends BaseActivity {
                     endButton.getText().toString(), user.getEmail());
 
                     mDatabase.child("studyGroup").push().setValue(comment);
-                    Log.v("测试","success");
+
+                    Intent intent = new Intent(CreateNewGroup.this, FormGroups.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });

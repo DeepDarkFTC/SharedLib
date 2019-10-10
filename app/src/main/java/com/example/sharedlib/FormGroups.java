@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -72,6 +73,7 @@ public class FormGroups extends BaseActivity {
                 Log.d("Database content", commentList.toString());
                 
                 ArrayList temp = new ArrayList();
+                final ArrayList objectList = new ArrayList<ComWithDatabase>();
 
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
@@ -83,10 +85,26 @@ public class FormGroups extends BaseActivity {
                             "End Time: " + tempObj.getEndTime() +
                             "Created by: " + tempObj.getTeamLeader();
                     temp.add(record);
+                    objectList.add(tempObj);
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroups.this, android.R.layout.simple_list_item_1, temp);
                 ListView listView = findViewById(R.id.listview_infolist_formgroup);
                 listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent(FormGroups.this, GroupDetailsActivity.class);
+                        ComWithDatabase info = (ComWithDatabase)objectList.get(i);
+
+                        intent.putExtra("groupName",info.getGroupName());
+                        Log.v("列表下标",String.valueOf(i));
+                        Log.v("出来",info.getGroupName());
+                        intent.putExtra("groupLocation",info.getLibraryName()+" "+info.getLibraryLevel());
+                        intent.putExtra("studyTime","From: "+info.getStartTime()+"To: "+info.getEndTime());
+
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
