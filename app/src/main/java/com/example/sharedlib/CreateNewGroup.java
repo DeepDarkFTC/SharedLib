@@ -96,14 +96,13 @@ public class CreateNewGroup extends BaseActivity {
 
                     FirebaseUser user = mAuth.getCurrentUser();
 
-                    ArrayList studyMember = new ArrayList<String>();
-                    studyMember.add(user.getEmail());
+
                     ComWithDatabase comment = new ComWithDatabase(groupName.getText().toString(),
                             library.getSelectedItem().toString(),
                             level.getSelectedItem().toString(),
                             studyTheme.getText().toString(),
                             startButton.getText().toString(),
-                    endButton.getText().toString(), studyMember);
+                    endButton.getText().toString(), user.getEmail());
 
                     mDatabase.child("studyGroup").push().setValue(comment);
                     Log.v("测试","success");

@@ -65,6 +65,7 @@ public class FormGroups extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+//                    String comment = postSnapshot.getValue().toString();
                     ComWithDatabase comment = postSnapshot.getValue(ComWithDatabase.class);
                     commentList.add(comment);
                 }
@@ -80,7 +81,7 @@ public class FormGroups extends BaseActivity {
                             "Study Topic: " + tempObj.getStudyTopic()+
                             "Start Time: " + tempObj.getStartTime()+
                             "End Time: " + tempObj.getEndTime() +
-                            "Created by: " + tempObj.getStudyMember().get(0);
+                            "Created by: " + tempObj.getTeamLeader();
                     temp.add(record);
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroups.this, android.R.layout.simple_list_item_1, temp);
