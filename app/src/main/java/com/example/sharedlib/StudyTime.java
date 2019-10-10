@@ -40,7 +40,7 @@ public class StudyTime extends BaseActivity {
 
         // Get timer component
         timer = findViewById(R.id.study_time_screen);
-        // Get start button
+        // Get startTimeTextView button
         start = findViewById(R.id.button_start_studytime);
         // Get pause button
         pause = findViewById(R.id.button_pause_studytime);
@@ -50,7 +50,7 @@ public class StudyTime extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                // start timer
+                // startTimeTextView timer
                 if (!stopFlag) {
                     timer.setBase(SystemClock.elapsedRealtime());
                     timer.start();

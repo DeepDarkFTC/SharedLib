@@ -1,6 +1,7 @@
 package com.example.sharedlib;
 
 import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,10 +10,22 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.TimePickerView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class CreateNewGroup extends AppCompatActivity {
+
+    private Button startButton;
+    private Button endButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,22 +66,43 @@ public class CreateNewGroup extends AppCompatActivity {
 
         final EditText studyTheme = findViewById(R.id.text_content_newgroup);
 
-        final EditText studyTime = findViewById(R.id.text_time_newgroup);
 
         Button createButton = findViewById(R.id.button_form_newgroup);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // send message to firebase
-                if (checkFormat(groupName.getText().toString(), studyTheme.getText().toString(), studyTime.getText().toString())) {
-                    Log.v("Info", groupName.getText().toString() + "_" + library.getSelectedItem().toString() + "_" + level.getSelectedItem().toString() + "_" + studyTheme.getText().toString() + "_" + studyTime.getText().toString());
+                if (checkFormat(groupName.getText().toString(), studyTheme.getText().toString(),
+                        startButton.getText().toString(), endButton.getText().toString())) {
+                    Log.v("Info", groupName.getText().toString() + "_" +
+                            library.getSelectedItem().toString() + "_" +
+                            level.getSelectedItem().toString() + "_" +
+                            studyTheme.getText().toString() + "_" +
+                            startButton.getText().toString() + "_" +
+                            endButton.getText().toString());
                 }
+            }
+        });
+
+        startButton = findViewById(R.id.button_timestart);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showStartDatePicker();
+            }
+        });
+
+        endButton = findViewById(R.id.button_timeend);
+        endButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEndDatePicker();
             }
         });
 
     }
 
-    public Boolean checkFormat(String groupName, String studyTheme, String studyTime) {
+    public Boolean checkFormat(String groupName, String studyTheme, String studyTimeStart, String studyTimeEnd) {
         if (groupName.equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("warning")
@@ -85,14 +119,106 @@ public class CreateNewGroup extends AppCompatActivity {
                     .show();
             return false;
         }
-        if (studyTime.equals("")) {
+        if (studyTimeStart.equals("Start Time")) {
             new AlertDialog.Builder(this)
                     .setTitle("warning")
-                    .setMessage("You should input the study time")
+                    .setMessage("Please select the start time")
+                    .setPositiveButton("ok", null)
+                    .show();
+            return false;
+        }
+        if (studyTimeEnd.equals("End Time")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("warning")
+                    .setMessage("Please select the end time")
                     .setPositiveButton("ok", null)
                     .show();
             return false;
         }
         return true;
+    }
+
+    private void showStartDatePicker() {
+        Calendar selectedDate = Calendar.getInstance();
+        Calendar startDate = Calendar.getInstance();
+        //startDate.set(2013,1,1);
+        Calendar endDate = Calendar.getInstance();
+        //endDate.set(2020,1,1);
+
+        //正确设置方式 原因：注意事项有说明
+        startDate.set(2013, 0, 1);
+        endDate.set(2020, 11, 31);
+
+        TimePickerView pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {//选中事件回调
+                startButton.setText(getTime(date));
+            }
+        })
+                .setType(new boolean[]{false, true, true, true, true, false})// 默认全部显示
+                .setCancelText("Cancel")//取消按钮文字
+                .setSubmitText("OK")//确认按钮文字
+                .setTitleSize(20)//标题文字大小
+                .setTitleText("")//标题文字
+                .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
+                .isCyclic(true)//是否循环滚动
+                .setTitleColor(Color.BLACK)//标题文字颜色
+                //.setSubmitColor(getResources().getColor(R.color.fpyj_second_phase_color))//确定按钮文字颜色
+                //.setCancelColor(getResources().getColor(R.color.fpyj_second_phase_color))//取消按钮文字颜色
+                .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
+                .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
+                .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
+                .setRangDate(startDate, endDate)//起始终止年月日设定
+                .setLabel("year", "Month", "Day", "Hour", "Min", "Sec")//默认设置为年月日时分秒
+                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                .isDialog(true)//是否显示为对话框样式
+                .build();
+
+        pvTime.show();
+    }
+
+    private void showEndDatePicker() {
+        Calendar selectedDate = Calendar.getInstance();
+        Calendar startDate = Calendar.getInstance();
+        //startDate.set(2013,1,1);
+        Calendar endDate = Calendar.getInstance();
+        //endDate.set(2020,1,1);
+
+        //正确设置方式 原因：注意事项有说明
+        startDate.set(2013, 0, 1);
+        endDate.set(2020, 11, 31);
+
+        TimePickerView pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {//选中事件回调
+                endButton.setText(getTime(date));
+            }
+        })
+                .setType(new boolean[]{false, true, true, true, true, false})// 默认全部显示
+                .setCancelText("Cancel")//取消按钮文字
+                .setSubmitText("OK")//确认按钮文字
+                .setTitleSize(20)//标题文字大小
+                .setTitleText("")//标题文字
+                .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
+                .isCyclic(true)//是否循环滚动
+                .setTitleColor(Color.BLACK)//标题文字颜色
+                //.setSubmitColor(getResources().getColor(R.color.fpyj_second_phase_color))//确定按钮文字颜色
+                //.setCancelColor(getResources().getColor(R.color.fpyj_second_phase_color))//取消按钮文字颜色
+                .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
+                .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
+                .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
+                .setRangDate(startDate, endDate)//起始终止年月日设定
+                .setLabel("year", "Month", "Day", "Hour", "Min", "sec")//默认设置为年月日时分秒
+                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                .isDialog(true)//是否显示为对话框样式
+                .build();
+
+        pvTime.show();
+    }
+
+    private String getTime(Date date) {//可根据需要自行截取数据显示
+        Log.d("getTime()", "choice date millis: " + date.getTime());
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd HH:mm");
+        return format.format(date);
     }
 }
