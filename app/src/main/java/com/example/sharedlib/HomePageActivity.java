@@ -99,7 +99,7 @@ public class HomePageActivity extends BaseActivity {
         nearestLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomePageActivity.this, NearestLibrary.class);
+                Intent intent = new Intent(HomePageActivity.this, MapsActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
