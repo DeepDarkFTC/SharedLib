@@ -1,5 +1,6 @@
 package com.example.sharedlib;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ErcLibraryActivity extends AppCompatActivity {
+public class ErcLibraryActivity extends Activity {
 
     private TextView userNameTextView;
 

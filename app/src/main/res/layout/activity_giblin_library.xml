@@ -7,13 +7,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/button_logout_giblin"
             android:layout_width="148dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#10000000"
             android:text="Logout"
@@ -24,7 +24,7 @@
         <TextView
             android:id="@+id/text_username_giblin"
             android:layout_width="227dp"
-            android:layout_height="47dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:text="UserName"
             android:textAlignment="center"
