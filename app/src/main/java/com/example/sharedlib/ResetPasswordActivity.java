@@ -37,6 +37,7 @@ public class ResetPasswordActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
+
         final EditText emailEditText = findViewById(R.id.text_Mail_reset);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
