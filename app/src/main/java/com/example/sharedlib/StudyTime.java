@@ -5,12 +5,21 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 public class StudyTime extends BaseActivity {
@@ -23,6 +32,7 @@ public class StudyTime extends BaseActivity {
     private long mRecordTime;
 
     private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -31,12 +41,34 @@ public class StudyTime extends BaseActivity {
         setContentView(R.layout.activity_study_time);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = mAuth.getCurrentUser();
+
 
         Intent parentIntent = getIntent();
         final String userName = parentIntent.getStringExtra("userName");
 
         final TextView userNameTextView = findViewById(R.id.text_username_studytime);
         userNameTextView.setText(userName);
+
+        DatabaseReference ref = mDatabase.child("studyTime").child(emailToUid(user.getEmail()));
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()) {
+                    String lastTime = dataSnapshot.getValue().toString();
+                    Log.d("Database content", lastTime);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
 
         // Get timer component
         timer = findViewById(R.id.study_time_screen);
@@ -78,11 +110,8 @@ public class StudyTime extends BaseActivity {
                     // send record to firebase
                     stopFlag = false;
 
-                    ComWithDatabase comment = new
-                            ComWithDatabase(String.valueOf(totalTime), String.valueOf(totalTime));
-
-                    String userId = emailToUid(userName);
-                    mDatabase.child("studyTime").child(userId).setValue(comment);
+                    String userId = emailToUid(user.getEmail());
+                    mDatabase.child("studyTime").child(userId).setValue(String.valueOf(totalTime));
                 }
 
             }
