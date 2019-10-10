@@ -69,7 +69,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="332dp"
+            android:layout_height="270dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -82,13 +82,6 @@
                 android:text="Start"
                 android:textSize="30sp" />
 
-            <View
-                android:id="@+id/view15"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="#00000000" />
-
             <Button
                 android:id="@+id/button_pause_studytime"
                 android:layout_width="match_parent"
@@ -98,13 +91,6 @@
                 android:text="Pause"
                 android:textSize="30sp" />
 
-            <View
-                android:id="@+id/view16"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="#00000000" />
-
             <Button
                 android:id="@+id/button_goon_studytime"
                 android:layout_width="match_parent"
@@ -113,6 +99,20 @@
                 android:background="#20000000"
                 android:text="Continue"
                 android:textSize="30sp" />
+
+            <View
+                android:id="@+id/view16"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#00000000" />
+
+            <View
+                android:id="@+id/view15"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#00000000" />
 
             <View
                 android:id="@+id/view18"
