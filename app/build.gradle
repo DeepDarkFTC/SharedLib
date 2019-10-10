@@ -29,6 +29,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.0.0'
     implementation 'com.google.firebase:firebase-database:19.1.0'
     implementation 'com.firebaseui:firebase-ui-database:6.0.2'
+    implementation 'com.contrarywind:Android-PickerView:3.2.7'
+    implementation 'com.contrarywind:Android-PickerView:4.1.8'
 
 
     testImplementation 'junit:junit:4.12'

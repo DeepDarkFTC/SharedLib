@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@drawable/back"
     android:orientation="vertical"
@@ -122,17 +124,57 @@
             android:layout_height="17dp"
             android:background="#11000000" />
 
-        <EditText
-            android:id="@+id/text_time_newgroup"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:background="#ffffffff"
-            android:hint="Study Time"
-            android:paddingLeft="20dp"
-            android:textAlignment="center"
-            android:textColor="#ff000000"
-            android:textSize="24sp" />
+            android:layout_weight="10">
+
+            <Button
+                android:id="@+id/button_timestart"
+                android:layout_width="397dp"
+                android:layout_height="60dp"
+                android:background="#00000000"
+                tools:layout_editor_absoluteX="-2dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <Button
+                android:id="@+id/button_timeend"
+                android:layout_width="397dp"
+                android:layout_height="60dp"
+                android:background="#00000000"
+                tools:layout_editor_absoluteX="-2dp"
+                tools:layout_editor_absoluteY="126dp" />
+
+            <EditText
+                android:id="@+id/text_starttime_newgroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:background="#ffffffff"
+                android:hint="Start Study Time"
+                android:paddingLeft="20dp"
+                android:textAlignment="center"
+                android:textColor="#ff000000"
+                android:textSize="24sp"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="35dp" />
+
+            <EditText
+                android:id="@+id/text_endtime_newgroup2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:background="#ffffffff"
+                android:hint="End Study Time"
+                android:paddingLeft="20dp"
+                android:textAlignment="center"
+                android:textColor="#ff000000"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="126dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:id="@+id/view27"
