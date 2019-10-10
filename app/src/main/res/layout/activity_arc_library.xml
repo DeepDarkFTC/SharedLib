@@ -40,7 +40,7 @@
         android:orientation="vertical"></LinearLayout>
 
     <LinearLayout
-        android:layout_width="397dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -54,6 +54,14 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/text_ercl1_setas"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="Seats Available(%)"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
         <Button
             android:id="@+id/arc_l2"
             android:layout_width="match_parent"
@@ -63,6 +71,15 @@
             android:text="Level 2"
             android:textSize="30sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_ercl2_setas"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_weight="10"
+            android:text="Seats Available(%)"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/arc_l3"
@@ -74,6 +91,15 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/text_ercl3_setas"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_weight="10"
+            android:text="Seats Available(%)"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
         <Button
             android:id="@+id/arc_l4"
             android:layout_width="match_parent"
@@ -84,6 +110,15 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/text_ercl4_setas"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_weight="10"
+            android:text="Seats Available(%)"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
         <Button
             android:id="@+id/arc_l5"
             android:layout_width="match_parent"
@@ -93,5 +128,14 @@
             android:text="Level 5"
             android:textSize="30sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_ercl5_setas"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_weight="10"
+            android:text="Seats Available(%)"
+            android:textAlignment="center"
+            android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>
