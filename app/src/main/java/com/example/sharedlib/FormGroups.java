@@ -77,11 +77,12 @@ public class FormGroups extends BaseActivity {
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
                     String record = "Seat occupancy: " + tempObj.getComment() + "%" + "\t" + "upload date: " + tempObj.getDate() + "\t" + "uploaded by: " + tempObj.getUser();
+                    /*
                     if (timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
                         temp.add(0,record);
-                    }
+                    }*/
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(LibrarySeatsActivity.this, android.R.layout.simple_list_item_1, temp);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroups.this, android.R.layout.simple_list_item_1, temp);
                 ListView listView = findViewById(R.id.seatsComments);
                 listView.setAdapter(adapter);
             }
