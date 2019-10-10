@@ -33,6 +33,8 @@ public class MainActivity extends BaseActivity {
         userNameTextView = findViewById(R.id.text_name_main);
         passwordTextView = findViewById(R.id.text_password_main);
 
+        passwordTextView.setInputType(129);//不可见
+
         Button loginButton = findViewById(R.id.button_login_main);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

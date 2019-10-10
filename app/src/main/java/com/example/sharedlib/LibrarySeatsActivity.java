@@ -55,7 +55,7 @@ public class LibrarySeatsActivity extends BaseActivity {
         percentageTextView = findViewById(R.id.progressNum);
 
         //Read from database
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+//        mDatabase = FirebaseDatabase.getInstance().getReference();
 //        SnapshotParser<SearchSeatsComment> parser = new SnapshotParser<SearchSeatsComment>() {
 //            @Override
 //            public SearchSeatsComment parseSnapshot(DataSnapshot dataSnapshot) {
