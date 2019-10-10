@@ -14,7 +14,7 @@
         <Button
             android:id="@+id/button_logout_searchseats"
             android:layout_width="148dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#10000000"
             android:text="Logout"
@@ -25,7 +25,7 @@
         <TextView
             android:id="@+id/text_username_searchseats"
             android:layout_width="227dp"
-            android:layout_height="47dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:text="UserName"
             android:textAlignment="center"

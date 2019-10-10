@@ -8,13 +8,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/button_logout_libraryseats"
             android:layout_width="148dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#10000000"
             android:text="Logout"
@@ -46,13 +46,14 @@
             android:layout_weight="10"
             android:text="Library and Floor"
             android:textAlignment="center"
-            android:textSize="30sp" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:orientation="horizontal">
 
         <ListView
@@ -71,7 +72,7 @@
         <TextView
             android:id="@+id/progressNum"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:background="#40000000"
             android:text="Select the Percent of Available Seats"
             android:textAlignment="center"
