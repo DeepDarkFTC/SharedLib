@@ -53,7 +53,7 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
             }
         });
 
-        arcLevel1TextView = findViewById(R.id.text_ercl1_setas);
+        arcLevel1TextView = findViewById(R.id.text_arcl1_setas);
         calculatePersentage(libraryName + " " + libraryLevel[0],arcLevel1TextView);
 
 

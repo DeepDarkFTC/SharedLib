@@ -55,7 +55,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_ercl1_setas"
+            android:id="@+id/text_arcl1_setas"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:text="Seats Available(%)"
@@ -73,7 +73,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_ercl2_setas"
+            android:id="@+id/text_arcl2_setas"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_weight="10"
@@ -92,7 +92,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_ercl3_setas"
+            android:id="@+id/text_arcl3_setas"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_weight="10"
@@ -111,7 +111,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_ercl4_setas"
+            android:id="@+id/text_arcl4_setas"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_weight="10"
@@ -130,7 +130,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_ercl5_setas"
+            android:id="@+id/text_arcl5_setas"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_weight="10"
