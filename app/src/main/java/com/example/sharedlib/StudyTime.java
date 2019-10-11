@@ -27,6 +27,7 @@ public class StudyTime extends BaseActivity {
     private Boolean stopFlag = false;
     private long mRecordTime;
     private int lastTime;
+    private int totalTime;
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
@@ -55,6 +56,7 @@ public class StudyTime extends BaseActivity {
 
                 if(dataSnapshot.exists()) {
                     lastTime = Integer.parseInt(dataSnapshot.getValue().toString());
+                    totalTime = lastTime;
                     Log.d("上次时间", String.valueOf(lastTime));
                 }
             }
@@ -94,8 +96,8 @@ public class StudyTime extends BaseActivity {
                     int minute = Integer.parseInt(timer.getText().toString().split(":")[1]);
                     int second = Integer.parseInt(timer.getText().toString().split(":")[2]);
 
-                    int totalTime = hour * 3600 + minute * 60 + second;
-                    Log.v("total time", String.valueOf(totalTime));// sent message to firebase
+                    int currentTime = hour * 3600 + minute * 60 + second;
+                    totalTime = lastTime + currentTime;
 
                     timer.stop();
                     timer.setBase(SystemClock.elapsedRealtime());
@@ -104,11 +106,10 @@ public class StudyTime extends BaseActivity {
                     start.setEnabled(true);
                     start.setText("Start");
 
-                    // send record to firebase
                     stopFlag = false;
 
                     String userId = emailToUid(user.getEmail());
-                    mDatabase.child("studyTime").child(userId).setValue(String.valueOf(totalTime + lastTime));
+                    mDatabase.child("studyTime").child(userId).setValue(String.valueOf(totalTime));
                 }
 
             }
@@ -153,12 +154,13 @@ public class StudyTime extends BaseActivity {
             }
         });
 
-        Button timeRank = findViewById(R.id.button_rankings_studytime);
-        timeRank.setOnClickListener(new View.OnClickListener() {
+        Button timeRankButton = findViewById(R.id.button_rankings_studytime);
+        timeRankButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudyTime.this, Ranking.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
+                intent.putExtra("studyTime", String.valueOf(totalTime));
                 startActivity(intent);
             }
         });

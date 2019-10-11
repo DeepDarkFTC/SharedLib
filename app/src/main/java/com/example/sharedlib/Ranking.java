@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,11 +18,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Ranking extends BaseActivity {
 
     private DatabaseReference mDatabase;
-//    private FirebaseAuth mAuth;
     private int lastTime;
     private ArrayList commentList = new ArrayList();
     private ArrayList singleList = new ArrayList();
@@ -34,14 +37,14 @@ public class Ranking extends BaseActivity {
 
         Intent parentIntent = getIntent();
         final String userName = parentIntent.getStringExtra("userName");
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-//        final FirebaseUser user = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         TextView userNameTextView = findViewById(R.id.text_username_ranking);
         userNameTextView.setText(userName);
 
         final TextView studyTimeTextView = findViewById(R.id.text_studytime_ranking);
+        studyTimeTextView.setText(parentIntent.getStringExtra("studyTime"));
 
         DatabaseReference ref = mDatabase.child("studyTime");
         ref.addValueEventListener(new ValueEventListener() {
@@ -54,6 +57,25 @@ public class Ranking extends BaseActivity {
                             postSnapshot.getValue().toString());
                     commentList.add(comment);
                     Log.d("Database content", commentList.toString());
+
+                    ArrayList temp = new ArrayList();
+
+                    for (int i = 0; i < commentList.size(); i++) {
+                        ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
+                        temp.add(tempObj);
+                        sortByTime(temp);
+                    }
+
+                    String[] result = new String[temp.size()];
+                    for (int i = 0; i < result.length; i++) {
+                        ComWithDatabase tempObj = (ComWithDatabase) temp.get(i);
+                        String record = "No."+ (i+1) +" "+"user: " + tempObj.getComment() + "  " + "study time: " + tempObj.getDate();
+                        result[i] = record;
+                    }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(Ranking.this, android.R.layout.simple_list_item_1, result);
+                    ListView listView = findViewById(R.id.listview_ranklist_ranking);
+                    listView.setAdapter(adapter);
                 }
             }
 
@@ -65,4 +87,22 @@ public class Ranking extends BaseActivity {
             }
         });
     }
+
+    public void sortByTime(ArrayList list){
+        Collections.sort(list, new Comparator(){
+            @Override
+            public int compare(Object o1, Object o2) {
+                ComWithDatabase obj1 = (ComWithDatabase)o1;
+                ComWithDatabase obj2 = (ComWithDatabase)o2;
+                if(Integer.parseInt(obj1.getDate()) < Integer.parseInt(obj2.getDate())){
+                    return 1;
+                }else if(Integer.parseInt(obj1.getDate()) == Integer.parseInt(obj2.getDate())){
+                    return 0;
+                }else{
+                    return -1;
+                }
+            }
+        });
+    }
+
 }
