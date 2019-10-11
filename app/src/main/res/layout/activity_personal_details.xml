@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@drawable/back"
+    android:background="#ffffff"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
@@ -14,7 +14,9 @@
         android:id="@+id/textView13"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_weight="5"
+        android:background="#99cc66"
         android:text="Personal Details"
         android:textAlignment="center"
         android:textSize="36sp"
@@ -27,10 +29,11 @@
 
     <TextView
         android:id="@+id/text_name_person"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:background="#10000000"
+        android:layout_gravity="center"
         android:text="Name"
         android:textAlignment="center"
         android:textSize="24sp" />
@@ -44,11 +47,12 @@
 
     <TextView
         android:id="@+id/text_mail_person"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:background="#10000000"
         android:text="Mail"
+        android:layout_gravity="center"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -61,10 +65,11 @@
 
     <TextView
         android:id="@+id/text_studytime_person"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:background="#10000000"
+        android:layout_gravity="center"
         android:text="Total Study Time"
         android:textAlignment="center"
         android:textSize="24sp" />
@@ -78,10 +83,11 @@
 
     <TextView
         android:id="@+id/text_rankings_person"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:background="#10000000"
+        android:layout_gravity="center"
         android:text="Study Time Ranking"
         android:textAlignment="center"
         android:textSize="24sp" />
@@ -95,10 +101,11 @@
 
     <TextView
         android:id="@+id/text_studygroup_person"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:background="#10000000"
+        android:layout_gravity="center"
         android:text="Study Group"
         android:textAlignment="center"
         android:textSize="24sp" />
@@ -112,10 +119,11 @@
 
     <Button
         android:id="@+id/button_resetname_person"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_weight="10"
-        android:background="#10000000"
+        android:background="#99cc66"
+        android:layout_gravity="center"
         android:text="Reset Username"
         android:textAllCaps="false"
         android:textSize="24sp" />

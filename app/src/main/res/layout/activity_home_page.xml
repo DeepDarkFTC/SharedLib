@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/back"
+    android:background="#ffffffff"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
@@ -19,6 +20,7 @@
             android:background="#10000000"
             android:text="Logout"
             android:textAllCaps="false"
+
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="24sp" />
 
@@ -28,91 +30,145 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:text="Welcome"
+
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="24sp" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button_form_homepage"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:background="@drawable/group"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.192"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.292" />
+
+        <Button
+            android:id="@+id/button_search_homepage"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:background="@drawable/search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView5"
+            app:layout_constraintHorizontal_bias="0.87"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.292"
+            app:srcCompat="@drawable/search" />
+
+        <Button
+            android:id="@+id/button_nearest_homepage"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:background="@drawable/nearest"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.192"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8"
+            app:layout_constraintVertical_bias="0.295" />
+
+        <Button
+            android:id="@+id/button_time_homepage"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:background="@drawable/time"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.87"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9"
+            app:layout_constraintVertical_bias="0.299" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
-            android:layout_height="71dp"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:background="#99cc66"
             android:text="Homepage"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="36sp"
-            android:textStyle="bold" />
+            android:textSize="50dp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="38dp" />
 
-        <Button
-            android:id="@+id/button_search_homepage"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:background="#30000000"
-            android:text="Search Seats"
-            android:textAllCaps="false"
-            android:textSize="30sp" />
+            android:background="#00000000"
+            android:text="Groups"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.192"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_form_homepage"
+            app:layout_constraintVertical_bias="0.073" />
 
-        <View
-            android:id="@+id/view22"
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:layout_weight="1"
-            android:background="#00000000" />
-
-        <Button
-            android:id="@+id/button_form_homepage"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:background="#30000000"
-            android:text="Form Groups"
-            android:textAllCaps="false"
-            android:textSize="30sp" />
+            android:background="#00000000"
+            android:text="Search"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.87"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_search_homepage"
+            app:layout_constraintVertical_bias="0.07" />
 
-        <View
-            android:id="@+id/view12"
-            android:layout_width="match_parent"
-            android:layout_height="28dp"
-            android:background="#00000000" />
-
-        <Button
-            android:id="@+id/button_time_homepage"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:background="#30000000"
-            android:text="Study Time"
-            android:textAllCaps="false"
-            android:textSize="30sp" />
+            android:background="#00000000"
+            android:text="Nearest"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.192"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_nearest_homepage"
+            app:layout_constraintVertical_bias="0.411" />
 
-        <View
-            android:id="@+id/view11"
-            android:layout_width="match_parent"
-            android:layout_height="28dp"
-            android:background="#00000000" />
-
-        <Button
-            android:id="@+id/button_nearest_homepage"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:background="#30000000"
-            android:text="Nearest Library"
-            android:textAllCaps="false"
-            android:textSize="30sp" />
+            android:background="#00000000"
+            android:text="Timer"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.87"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_time_homepage"
+            app:layout_constraintVertical_bias="0.401" />
 
-        <View
-            android:id="@+id/view5"
-            android:layout_width="match_parent"
-            android:layout_height="28dp"
-            android:background="#00000000" />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>

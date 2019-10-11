@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@drawable/back"
+    android:background="#ffffff"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
@@ -36,54 +36,53 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="86dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="10"
+            android:background="#99cc66"
             android:text="Join Groups"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="36sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#20000000"
-            android:text="Available Groups"
-            android:textAlignment="center"
-            android:textSize="30sp"
-            app:autoSizeTextType="none" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="370dp"
         android:orientation="vertical">
 
         <ListView
             android:id="@+id/listview_infolist_formgroup"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+        </ListView>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <View
+            android:id="@+id/view34"
+            android:layout_width="wrap_content"
+            android:layout_height="5dp" />
 
         <Button
             android:id="@+id/button_startnew_formgroup"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#20000000"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#99cc66"
             android:text="Start A New Group"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"

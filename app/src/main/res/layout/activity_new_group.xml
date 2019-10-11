@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/back"
+    android:background="#ffffff"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
@@ -46,9 +46,18 @@
             android:layout_height="66dp"
             android:layout_weight="1"
             android:text="Form New Groups"
+            android:layout_gravity="center"
+            android:background="#99cc66"
             android:textAlignment="center"
             android:textSize="36sp"
             android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view33"
+            android:layout_width="match_parent"
+            android:layout_height="17dp"
+            android:layout_weight="1"
+            android:background="#11000000" />
     </LinearLayout>
 
     <LinearLayout
@@ -58,14 +67,15 @@
 
         <EditText
             android:id="@+id/text_name_newgroup"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="10"
-            android:background="#ffffffff"
+            android:background="#99cc66"
             android:hint="Group Name"
+
             android:paddingLeft="20dp"
             android:textAlignment="center"
-            android:textColor="#ff000000"
             android:textSize="24sp" />
 
         <View
@@ -102,18 +112,13 @@
             android:layout_height="17dp"
             android:background="#11000000" />
 
-        <View
-            android:id="@+id/view25"
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="#11000000" />
-
         <EditText
             android:id="@+id/text_content_newgroup"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="10"
-            android:background="#ffffffff"
+            android:background="#99cc66"
             android:hint="Study Content"
             android:paddingLeft="20dp"
             android:textAlignment="center"
@@ -129,10 +134,11 @@
 
         <Button
             android:id="@+id/button_timestart"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="10"
-            android:background="#ffffffff"
+            android:background="#99cc66"
             android:text="Start Time"
             android:textAlignment="center"
             android:textAllCaps="false"
@@ -146,23 +152,31 @@
 
         <Button
             android:id="@+id/button_timeend"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="10"
-            android:background="#ffffffff"
+            android:background="#99cc66"
             android:text="End Time"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="24sp" />
 
+        <View
+            android:id="@+id/view25"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#11000000" />
+
         <Button
             android:id="@+id/button_form_newgroup"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="10"
-            android:background="#20000000"
+            android:background="#99cc66"
             android:gravity="center"
             android:text="Form A New Group"
             android:textAllCaps="false"
