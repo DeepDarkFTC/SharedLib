@@ -74,7 +74,7 @@ public class Ranking extends BaseActivity {
                         ComWithDatabase tempObj = (ComWithDatabase) temp.get(i);
                         String record = "No."+ (i+1) +" "+"user: " + tempObj.getComment() + "  " + "study time: " + secToTime(Integer.parseInt(tempObj.getDate()));
                         result[i] = record;
-                        if(user.getEmail().equals(uidToEmail(tempObj.getComment()))){
+                        if(user.getEmail().equals(uidToEmail(postSnapshot.getKey()))){
                             rank = (i + 1)+"";
                         }
                     }

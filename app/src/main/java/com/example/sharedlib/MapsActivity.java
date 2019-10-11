@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -47,6 +48,8 @@ public class MapsActivity extends AppCompatActivity
     LatLng architecture_position = new LatLng(-37.797412, 144.962939);
     LatLng giblin_position = new LatLng(-37.801277, 144.959312);
 
+    String userName_me;
+
 
 
     // The entry point to the Fused Location Provider.
@@ -87,6 +90,9 @@ public class MapsActivity extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_activityMap);
         mapFragment.getMapAsync(this);
+
+        Intent parentIntent = getIntent();
+        userName_me = parentIntent.getStringExtra("userName");
 
 
     }
@@ -160,7 +166,7 @@ public class MapsActivity extends AppCompatActivity
 
         marker_list = new ArrayList<>();
         Library_forMapView lib_erc = new Library_forMapView("ERC", 50, R.drawable.erc, getDistance(erc_position), erc_position);
-        Library_forMapView lib_86 = new Library_forMapView("86", 60, R.drawable.bailieu, getDistance(baillieu_position), baillieu_position);
+        Library_forMapView lib_86 = new Library_forMapView("Baillieu", 60, R.drawable.bailieu, getDistance(baillieu_position), baillieu_position);
         Library_forMapView lib_architecture = new Library_forMapView("Architecture", 50, R.drawable.architecture, getDistance(architecture_position), architecture_position);
         Library_forMapView lib_giblin = new Library_forMapView("Giblin", 50, R.drawable.giblin, getDistance(giblin_position), giblin_position);
 
@@ -169,7 +175,7 @@ public class MapsActivity extends AppCompatActivity
         lib_list.add(lib_architecture);
         lib_list.add(lib_giblin);
 
-        scrollView.setAdapter(new LibraryAdapter_forMapView(lib_list, MapsActivity.this));
+        scrollView.setAdapter(new LibraryAdapter_forMapView(lib_list, MapsActivity.this, userName_me));
     }
 
 

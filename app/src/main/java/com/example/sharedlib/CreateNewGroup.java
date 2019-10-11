@@ -45,6 +45,8 @@ public class CreateNewGroup extends BaseActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
+        Intent parentIntent = getIntent();
+        String userName = parentIntent.getStringExtra("userName");
 
         final EditText groupName = findViewById(R.id.text_name_newgroup);
 
@@ -80,7 +82,6 @@ public class CreateNewGroup extends BaseActivity {
 
         final EditText studyTheme = findViewById(R.id.text_content_newgroup);
 
-
         Button createButton = findViewById(R.id.button_form_newgroup);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +97,6 @@ public class CreateNewGroup extends BaseActivity {
                             endButton.getText().toString());
 
                     FirebaseUser user = mAuth.getCurrentUser();
-
 
                     ComWithDatabase comment = new ComWithDatabase(groupName.getText().toString(),
                             library.getSelectedItem().toString(),
@@ -129,6 +129,9 @@ public class CreateNewGroup extends BaseActivity {
                 showEndDatePicker();
             }
         });
+
+        TextView userNameTextView = findViewById(R.id.text_username_newgroup);
+        userNameTextView.setText(parentIntent.getStringExtra("userName"));
 
     }
 

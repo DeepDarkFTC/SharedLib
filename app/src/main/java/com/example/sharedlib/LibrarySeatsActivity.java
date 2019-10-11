@@ -143,7 +143,7 @@ public class LibrarySeatsActivity extends BaseActivity {
 
     }
 
-    public long timeDifference(String time1, String time2) {
+    public static long timeDifference(String time1, String time2) {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         try {
@@ -151,8 +151,6 @@ public class LibrarySeatsActivity extends BaseActivity {
             Date d2 = df.parse(time2);
             long diff = d1.getTime() - d2.getTime();
             long hour = diff / (1000 * 60 * 60);
-            Log.v("时间差", String.valueOf(diff));
-            Log.v("时间差2", String.valueOf(hour));
             return hour;
         } catch (Exception e) {
             return -1;
