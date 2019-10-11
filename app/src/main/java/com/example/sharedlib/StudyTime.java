@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,8 +17,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
 
 public class StudyTime extends BaseActivity {
 
@@ -30,6 +26,7 @@ public class StudyTime extends BaseActivity {
     private Button restart;
     private Boolean stopFlag = false;
     private long mRecordTime;
+    private int lastTime;
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
@@ -57,8 +54,8 @@ public class StudyTime extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if(dataSnapshot.exists()) {
-                    String lastTime = dataSnapshot.getValue().toString();
-                    Log.d("Database content", lastTime);
+                    lastTime = Integer.parseInt(dataSnapshot.getValue().toString());
+                    Log.d("上次时间", String.valueOf(lastTime));
                 }
             }
 
@@ -111,7 +108,7 @@ public class StudyTime extends BaseActivity {
                     stopFlag = false;
 
                     String userId = emailToUid(user.getEmail());
-                    mDatabase.child("studyTime").child(userId).setValue(String.valueOf(totalTime));
+                    mDatabase.child("studyTime").child(userId).setValue(String.valueOf(totalTime + lastTime));
                 }
 
             }

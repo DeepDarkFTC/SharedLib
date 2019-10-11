@@ -66,9 +66,8 @@ public class FormGroups extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//                    String comment = postSnapshot.getValue().toString();
-                    ComWithDatabase comment = postSnapshot.getValue(ComWithDatabase.class);
-                    commentList.add(comment);
+                    ComWithDatabase groupInfo = postSnapshot.getValue(ComWithDatabase.class);
+                    commentList.add(groupInfo);
                 }
                 Log.d("Database content", commentList.toString());
                 
@@ -97,8 +96,6 @@ public class FormGroups extends BaseActivity {
                         ComWithDatabase info = (ComWithDatabase)objectList.get(i);
 
                         intent.putExtra("groupName",info.getGroupName());
-                        Log.v("列表下标",String.valueOf(i));
-                        Log.v("出来",info.getGroupName());
                         intent.putExtra("groupLocation",info.getLibraryName()+" "+info.getLibraryLevel());
                         intent.putExtra("studyTime","From: "+info.getStartTime()+"To: "+info.getEndTime());
 
