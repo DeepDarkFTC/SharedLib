@@ -1,5 +1,6 @@
 package com.example.sharedlib;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.View;
@@ -11,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends Activity {
 
     @VisibleForTesting
     public ProgressDialog mProgressDialog;
