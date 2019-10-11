@@ -54,8 +54,8 @@ public class Ranking extends BaseActivity {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
-                    ComWithDatabase comment = new ComWithDatabase(postSnapshot.getKey().toString(),
-                            postSnapshot.getValue().toString());
+                    ComWithDatabase childComment = postSnapshot.getValue(ComWithDatabase.class);
+                    ComWithDatabase comment = new ComWithDatabase(postSnapshot.getKey(), childComment.getComment(), childComment.getDate());
                     commentList.add(comment);
                     Log.d("Database content", commentList.toString());
 

@@ -55,7 +55,7 @@ public class StudyTime extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if(dataSnapshot.exists()) {
-                    lastTime = Integer.parseInt(dataSnapshot.getValue().toString());
+                    lastTime = Integer.parseInt(dataSnapshot.getValue(ComWithDatabase.class).getDate());
                     totalTime = lastTime;
                     Log.d("上次时间", String.valueOf(lastTime));
                 }
@@ -108,8 +108,10 @@ public class StudyTime extends BaseActivity {
 
                     stopFlag = false;
 
+                    ComWithDatabase comment = new ComWithDatabase(userName, String.valueOf(totalTime));
+
                     String userId = emailToUid(user.getEmail());
-                    mDatabase.child("studyTime").child(userId).setValue(String.valueOf(totalTime));
+                    mDatabase.child("studyTime").child(userId).setValue(comment);
                 }
 
             }
