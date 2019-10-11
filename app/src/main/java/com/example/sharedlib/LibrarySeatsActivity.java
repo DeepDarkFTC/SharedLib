@@ -143,7 +143,7 @@ public class LibrarySeatsActivity extends BaseActivity {
 
     }
 
-    public long timeDifference(String time1, String time2) {
+    public static long timeDifference(String time1, String time2) {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         try {

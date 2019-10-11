@@ -2,15 +2,29 @@ package com.example.sharedlib;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class ArchitectureLibraryActivity extends AppCompatActivity {
 
     private TextView userNameTextView;
+    private DatabaseReference mDatabase;
+    private ArrayList commentList = new ArrayList<ComWithDatabase>();
+
+    private ObtainCurrentDate obtainCurrentDate = new ObtainCurrentDate();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +50,9 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        TextView arcLevel1TextView = findViewById(R.id.text_ercl1_setas);
+        arcLevel1TextView.setText(calculatePersentage(libraryName + " " + libraryLevel[0]) + "");
 
         Button arcLevel2 = findViewById(R.id.arc_l2);
         arcLevel2.setOnClickListener(new View.OnClickListener() {
@@ -80,5 +97,60 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    public double calculatePersentage(String location) {
+        final ArrayList<Integer> result = new ArrayList<>();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        DatabaseReference ref = mDatabase.child("searchSeats").child("location").child(location);
+        ref.limitToLast(10).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                commentList.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+//                    String content = postSnapshot.getValue().toString();
+//                    commentList.add(content);
+                    ComWithDatabase comment = postSnapshot.getValue(ComWithDatabase.class);
+                    commentList.add(0, comment);
+                }
+                Log.d("Database content", commentList.toString());
+                Collections.reverse(commentList);   // displayed by upload date
+                ArrayList temp = new ArrayList();
+
+                for (int i = 0; i < commentList.size(); i++) {
+                    ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
+                    String record = "Seat occupancy: " + tempObj.getComment() + "%" + "\t" + "upload date: " + tempObj.getDate() + "\t" + "uploaded by: " + tempObj.getUser();
+                    result.add(0, Integer.parseInt(tempObj.getComment()));
+                    if (LibrarySeatsActivity.timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
+                        temp.add(0, record);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
+
+        int sum = 0;
+        int num = 0;
+        for (int i = 0; i < result.size(); i++) {
+            if (i <= 10) {
+                sum += result.get(i);
+                num++;
+            } else {
+                break;
+            }
+        }
+        if (num == 0) {
+            return 0;
+        } else
+            return sum / num;
     }
 }

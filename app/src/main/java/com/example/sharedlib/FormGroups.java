@@ -30,7 +30,6 @@ public class FormGroups extends BaseActivity {
     private ArrayList commentList = new ArrayList<ComWithDatabase>();
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +43,7 @@ public class FormGroups extends BaseActivity {
         Intent parentIntent = getIntent();
         String userName = parentIntent.getStringExtra("userName");
 
-        TextView userNameTextView = findViewById(R.id.text_username_formgroups);
+        final TextView userNameTextView = findViewById(R.id.text_username_formgroups);
         userNameTextView.setText(userName);
 
 //        ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroups.this, android.R.layout.simple_list_item_1, data);
@@ -56,6 +55,7 @@ public class FormGroups extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FormGroups.this, CreateNewGroup.class);
+                intent.putExtra("userName",userNameTextView.getText().toString());
                 startActivity(intent);
             }
         });
