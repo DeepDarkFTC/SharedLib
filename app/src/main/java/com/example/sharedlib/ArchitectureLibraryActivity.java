@@ -23,6 +23,8 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
     private TextView userNameTextView;
     private DatabaseReference mDatabase;
     private ArrayList commentList = new ArrayList<ComWithDatabase>();
+    private double calResult = 0.0;
+    private TextView arcLevel1TextView;
 
     private ObtainCurrentDate obtainCurrentDate = new ObtainCurrentDate();
 
@@ -51,8 +53,9 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
             }
         });
 
-        TextView arcLevel1TextView = findViewById(R.id.text_ercl1_setas);
-        arcLevel1TextView.setText(calculatePersentage(libraryName + " " + libraryLevel[0]) + "");
+        arcLevel1TextView = findViewById(R.id.text_ercl1_setas);
+        calculatePersentage(libraryName + " " + libraryLevel[0],arcLevel1TextView);
+
 
         Button arcLevel2 = findViewById(R.id.arc_l2);
         arcLevel2.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +103,7 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
 
     }
 
-    public double calculatePersentage(String location) {
+    public void calculatePersentage(String location, final TextView textView) {
         final ArrayList<Integer> result = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -110,24 +113,37 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//                    String content = postSnapshot.getValue().toString();
-//                    commentList.add(content);
                     ComWithDatabase comment = postSnapshot.getValue(ComWithDatabase.class);
                     commentList.add(0, comment);
                 }
                 Log.d("Database content", commentList.toString());
                 Collections.reverse(commentList);   // displayed by upload date
-                ArrayList temp = new ArrayList();
-
+                Log.v("commentList size",commentList.size()+"");
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
-                    String record = "Seat occupancy: " + tempObj.getComment() + "%" + "\t" + "upload date: " + tempObj.getDate() + "\t" + "uploaded by: " + tempObj.getUser();
-                    result.add(0, Integer.parseInt(tempObj.getComment()));
                     if (LibrarySeatsActivity.timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
-                        temp.add(0, record);
+                        result.add(0, Integer.parseInt(tempObj.getComment()));
                     }
                 }
-
+                Log.v("result size:",result.size()+"");
+                int sum = 0;
+                int num = 0;
+                for (int i = 0; i < result.size(); i++) {
+                    if (i <= 10) {
+                        sum += result.get(i);
+                        num++;
+                    } else {
+                        break;
+                    }
+                }
+                if (num == 0) {
+                    calResult = 0.0;
+                } else{
+                    Log.v("总比例",sum+"");
+                    Log.v("总数",num+"");
+                    calResult = sum/num;
+                }
+                textView.setText("Seat occupancy: "+ calResult+"%");
             }
 
             @Override
@@ -137,20 +153,5 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
                 // ...
             }
         });
-
-        int sum = 0;
-        int num = 0;
-        for (int i = 0; i < result.size(); i++) {
-            if (i <= 10) {
-                sum += result.get(i);
-                num++;
-            } else {
-                break;
-            }
-        }
-        if (num == 0) {
-            return 0;
-        } else
-            return sum / num;
     }
 }
