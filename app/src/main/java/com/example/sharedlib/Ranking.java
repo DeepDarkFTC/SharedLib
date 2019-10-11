@@ -24,9 +24,8 @@ import java.util.Comparator;
 public class Ranking extends BaseActivity {
 
     private DatabaseReference mDatabase;
-    private int lastTime;
     private ArrayList commentList = new ArrayList();
-    private ArrayList singleList = new ArrayList();
+    private FirebaseAuth mAuth;
 
 
 
@@ -39,6 +38,8 @@ public class Ranking extends BaseActivity {
         final String userName = parentIntent.getStringExtra("userName");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
 
         TextView userNameTextView = findViewById(R.id.text_username_ranking);
         userNameTextView.setText(userName);
