@@ -12,13 +12,20 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Ranking extends BaseActivity {
 
     private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
+//    private FirebaseAuth mAuth;
     private int lastTime;
+    private ArrayList commentList = new ArrayList();
+    private ArrayList singleList = new ArrayList();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,23 +34,26 @@ public class Ranking extends BaseActivity {
 
         Intent parentIntent = getIntent();
         final String userName = parentIntent.getStringExtra("userName");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        final FirebaseUser user = mAuth.getCurrentUser();
+//        final FirebaseUser user = mAuth.getCurrentUser();
 
         TextView userNameTextView = findViewById(R.id.text_username_ranking);
         userNameTextView.setText(userName);
 
         final TextView studyTimeTextView = findViewById(R.id.text_studytime_ranking);
 
-        DatabaseReference ref = mDatabase.child("studyTime").child(emailToUid(user.getEmail()));
+        DatabaseReference ref = mDatabase.child("studyTime");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                commentList.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
-                if(dataSnapshot.exists()) {
-                    lastTime = Integer.parseInt(dataSnapshot.getValue().toString());
-                    Log.d("上次时间", String.valueOf(lastTime));
-                    studyTimeTextView.setText("Total study time: " + lastTime);
+                    ComWithDatabase comment = new ComWithDatabase(postSnapshot.getKey().toString(),
+                            postSnapshot.getValue().toString());
+                    commentList.add(comment);
+                    Log.d("Database content", commentList.toString());
                 }
             }
 

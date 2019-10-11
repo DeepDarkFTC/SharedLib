@@ -50,4 +50,9 @@ public class BaseActivity extends AppCompatActivity {
         return uid;
     }
 
+    public String uidToEmail(String uid){
+        String email =uid.replace(",",".");
+        return email;
+    }
+
 }
