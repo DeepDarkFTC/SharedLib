@@ -1,6 +1,7 @@
 package com.example.sharedlib;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,12 @@ public class LibraryAdapter_forMapView extends RecyclerView.Adapter<LibraryAdapt
     private RecyclerView parentRecycler;
     private List<Library_forMapView> data;
     private Context mContext;
+    private String username_me;
 
-    public LibraryAdapter_forMapView(List<Library_forMapView> data, Context mContext) {
+    public LibraryAdapter_forMapView(List<Library_forMapView> data, Context mContext, String username_me) {
         this.data = data;
         this.mContext = mContext;
+        this.username_me = username_me;
     }
 
     @Override
@@ -47,8 +50,34 @@ public class LibraryAdapter_forMapView extends RecyclerView.Adapter<LibraryAdapt
         holder.botton_detail_lib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "到时候点这个就跳到"+data.get(position).getName()+"图书馆",
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "到时候点这个就跳到"+data.get(position).getName()+"图书馆",
+//                        Toast.LENGTH_SHORT).show();
+                Intent intent;
+                switch (data.get(position).getName())
+                {
+                    case "ERC":
+                        intent = new Intent(mContext, ErcLibraryActivity.class);
+                        intent.putExtra("userName", username_me);
+                        mContext.startActivity(intent);
+                        break;
+                    case "Baillieu":
+                        intent = new Intent(mContext, BaillieuLibraryActivity.class);
+                        intent.putExtra("userName", username_me);
+                        mContext.startActivity(intent);
+                        break;
+                    case "Architecture":
+                        intent = new Intent(mContext, ArchitectureLibraryActivity.class);
+                        intent.putExtra("userName", username_me);
+                        mContext.startActivity(intent);
+                        break;
+                    case "Giblin":
+                        intent = new Intent(mContext, GiblinLibraryActivity.class);
+                        intent.putExtra("userName", username_me);
+                        mContext.startActivity(intent);
+                        break;
+                    default:
+                        break;
+                }
             }
         });
 
