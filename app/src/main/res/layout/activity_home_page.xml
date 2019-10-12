@@ -144,7 +144,7 @@
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:background="#00000000"
-            android:text="Nearest"
+            android:text="Map"
             android:textAlignment="center"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
