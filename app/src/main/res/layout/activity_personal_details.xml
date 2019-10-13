@@ -31,10 +31,10 @@
         android:id="@+id/text_name_person"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_weight="10"
         android:background="#10000000"
-        android:layout_gravity="center"
-        android:text="Name"
+        android:text="UserName"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -49,10 +49,10 @@
         android:id="@+id/text_mail_person"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_weight="10"
         android:background="#10000000"
-        android:text="Mail"
-        android:layout_gravity="center"
+        android:text="Email"
         android:textAlignment="center"
         android:textSize="24sp" />
 
