@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ErcLibraryActivity extends Activity {
 
     private TextView userNameTextView;
+    private ArchitectureLibraryActivity arch = new ArchitectureLibraryActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,9 @@ public class ErcLibraryActivity extends Activity {
             }
         });
 
+        TextView ercLevel1TextView = findViewById(R.id.text_ercl1_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[0], ercLevel1TextView);
+
         Button ercLevel2 = findViewById(R.id.erc_l2);
         ercLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +52,9 @@ public class ErcLibraryActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        TextView ercLevel2TextView = findViewById(R.id.text_ercl2_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[1], ercLevel2TextView);
 
         Button ercLevel3 = findViewById(R.id.erc_l3);
         ercLevel3.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +67,9 @@ public class ErcLibraryActivity extends Activity {
             }
         });
 
+        TextView ercLevel3TextView = findViewById(R.id.text_ercl3_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[2], ercLevel3TextView);
+
         Button ercLevel4 = findViewById(R.id.erc_l4);
         ercLevel4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +81,9 @@ public class ErcLibraryActivity extends Activity {
             }
         });
 
+        TextView ercLevel4TextView = findViewById(R.id.text_ercl4_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[3], ercLevel4TextView);
+
         Button ercLevel5 = findViewById(R.id.erc_l5);
         ercLevel5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,5 +94,8 @@ public class ErcLibraryActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        TextView ercLevel5TextView = findViewById(R.id.text_ercl5_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[4], ercLevel5TextView);
     }
 }

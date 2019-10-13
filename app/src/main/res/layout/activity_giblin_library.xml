@@ -62,7 +62,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_gibl11_setas2"
+            android:id="@+id/text_gibl11_seats"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:text="Seats Available(%)"
@@ -81,7 +81,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_gibl12_setas2"
+            android:id="@+id/text_gibl12_seats"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_weight="10"
@@ -101,7 +101,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_gibl13_setas2"
+            android:id="@+id/text_gibl13_seats"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_weight="10"
@@ -121,7 +121,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_gibl14_setas2"
+            android:id="@+id/text_gibl14_seats"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_weight="10"
@@ -141,7 +141,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_gibl15_setas2"
+            android:id="@+id/text_gibl15_seats"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_weight="10"

@@ -24,7 +24,6 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private ArrayList commentList = new ArrayList<ComWithDatabase>();
     private double calResult = 0.0;
-    private TextView arcLevel1TextView;
 
     private ObtainCurrentDate obtainCurrentDate = new ObtainCurrentDate();
 
@@ -53,9 +52,8 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
             }
         });
 
-        arcLevel1TextView = findViewById(R.id.text_arcl1_setas);
-        calculatePersentage(libraryName + " " + libraryLevel[0],arcLevel1TextView);
-
+        TextView arcLevel1TextView = findViewById(R.id.text_arcl1_seats);
+        calculatePersentage(libraryName + " " + libraryLevel[0], arcLevel1TextView);
 
         Button arcLevel2 = findViewById(R.id.arc_l2);
         arcLevel2.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +66,9 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
             }
         });
 
+        TextView arcLevel2TextView = findViewById(R.id.text_arcl2_seats);
+        calculatePersentage(libraryName + " " + libraryLevel[1], arcLevel2TextView);
+
         Button arcLevel3 = findViewById(R.id.arc_l3);
         arcLevel3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +79,9 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        TextView arcLevel3TextView = findViewById(R.id.text_arcl3_seats);
+        calculatePersentage(libraryName + " " + libraryLevel[2], arcLevel3TextView);
 
         Button arcLevel4 = findViewById(R.id.arc_l4);
         arcLevel4.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +94,9 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
             }
         });
 
+        TextView arcLevel4TextView = findViewById(R.id.text_arcl4_seats);
+        calculatePersentage(libraryName + " " + libraryLevel[3], arcLevel4TextView);
+
         Button arcLevel5 = findViewById(R.id.arc_l5);
         arcLevel5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +107,9 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        TextView arcLevel5TextView = findViewById(R.id.text_arcl5_seats);
+        calculatePersentage(libraryName + " " + libraryLevel[4], arcLevel5TextView);
 
     }
 
@@ -112,20 +122,21 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 commentList.clear();
+                result.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     ComWithDatabase comment = postSnapshot.getValue(ComWithDatabase.class);
                     commentList.add(0, comment);
                 }
                 Log.d("Database content", commentList.toString());
                 Collections.reverse(commentList);   // displayed by upload date
-                Log.v("commentList size",commentList.size()+"");
+                Log.v("commentList size", commentList.size() + "");
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
                     if (LibrarySeatsActivity.timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
                         result.add(0, Integer.parseInt(tempObj.getComment()));
                     }
                 }
-                Log.v("result size:",result.size()+"");
+                Log.v("result size:", result.size() + "");
                 int sum = 0;
                 int num = 0;
                 for (int i = 0; i < result.size(); i++) {
@@ -138,12 +149,10 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
                 }
                 if (num == 0) {
                     calResult = 0.0;
-                } else{
-                    Log.v("总比例",sum+"");
-                    Log.v("总数",num+"");
-                    calResult = sum/num;
+                } else {
+                    calResult = sum / num;
                 }
-                textView.setText("Seat occupancy: "+ calResult+"%");
+                textView.setText("Seat occupancy: " + calResult + "%" + "     " + "Seat vacancy: " + (100 - calResult) + "%");
             }
 
             @Override

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class GiblinLibraryActivity extends AppCompatActivity {
 
     private TextView userNameTextView;
+    private ArchitectureLibraryActivity arch = new ArchitectureLibraryActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,9 @@ public class GiblinLibraryActivity extends AppCompatActivity {
             }
         });
 
+        TextView gibLevel1TextView = findViewById(R.id.text_gibl11_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[0], gibLevel1TextView);
+
         Button gibLevel2 = findViewById(R.id.gib_l2);
         gibLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +51,9 @@ public class GiblinLibraryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        TextView gibLevel2TextView = findViewById(R.id.text_gibl12_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[1], gibLevel2TextView);
 
         Button gibLevel3 = findViewById(R.id.gib_l3);
         gibLevel3.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +66,9 @@ public class GiblinLibraryActivity extends AppCompatActivity {
             }
         });
 
+        TextView gibLevel3TextView = findViewById(R.id.text_gibl13_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[2], gibLevel3TextView);
+
         Button gibLevel4 = findViewById(R.id.gib_l4);
         gibLevel4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +80,9 @@ public class GiblinLibraryActivity extends AppCompatActivity {
             }
         });
 
+        TextView gibLevel4TextView = findViewById(R.id.text_gibl14_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[3], gibLevel4TextView);
+
         Button gibLevel5 = findViewById(R.id.gib_l5);
         gibLevel5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,5 +93,8 @@ public class GiblinLibraryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        TextView gibLevel5TextView = findViewById(R.id.text_gibl15_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[4], gibLevel5TextView);
     }
 }

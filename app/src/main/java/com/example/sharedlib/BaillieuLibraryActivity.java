@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class BaillieuLibraryActivity extends AppCompatActivity {
 
     private TextView userNameTextView;
+    private ArchitectureLibraryActivity arch = new ArchitectureLibraryActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,9 @@ public class BaillieuLibraryActivity extends AppCompatActivity {
             }
         });
 
+        TextView baiLevel1TextView = findViewById(R.id.text_bai1_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[0], baiLevel1TextView);
+
         Button baiLevel2 = findViewById(R.id.bai_l2);
         baiLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +52,9 @@ public class BaillieuLibraryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        TextView baiLevel2TextView = findViewById(R.id.text_bai2_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[1], baiLevel2TextView);
 
         Button baiLevel3 = findViewById(R.id.bai_l3);
         baiLevel3.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +67,9 @@ public class BaillieuLibraryActivity extends AppCompatActivity {
             }
         });
 
+        TextView baiLevel3TextView = findViewById(R.id.text_bai3_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[2], baiLevel3TextView);
+
         Button baiLevel4 = findViewById(R.id.bai_l4);
         baiLevel4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +81,9 @@ public class BaillieuLibraryActivity extends AppCompatActivity {
             }
         });
 
+        TextView baiLevel4TextView = findViewById(R.id.text_bai4_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[3], baiLevel4TextView);
+
         Button baiLevel5 = findViewById(R.id.bai_l5);
         baiLevel5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,5 +94,8 @@ public class BaillieuLibraryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        TextView baiLevel5TextView = findViewById(R.id.text_bai5_seats);
+        arch.calculatePersentage(libraryName + " " + libraryLevel[4], baiLevel5TextView);
     }
 }
