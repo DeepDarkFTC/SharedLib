@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BaillieuLibraryActivity extends AppCompatActivity {
+public class BaillieuLibraryActivity extends BaseActivity {
 
     private TextView userNameTextView;
     private ArchitectureLibraryActivity arch = new ArchitectureLibraryActivity();
@@ -97,5 +97,13 @@ public class BaillieuLibraryActivity extends AppCompatActivity {
 
         TextView baiLevel5TextView = findViewById(R.id.text_bai5_seats);
         arch.calculatePersentage(libraryName + " " + libraryLevel[4], baiLevel5TextView);
+
+        Button logoutButton = findViewById(R.id.button_logout_bailieu);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutMethod(BaillieuLibraryActivity.this);
+            }
+        });
     }
 }

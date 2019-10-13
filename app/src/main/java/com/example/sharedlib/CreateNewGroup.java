@@ -133,6 +133,14 @@ public class CreateNewGroup extends BaseActivity {
         TextView userNameTextView = findViewById(R.id.text_username_newgroup);
         userNameTextView.setText(parentIntent.getStringExtra("userName"));
 
+        Button logoutButton = findViewById(R.id.button_logout_newgroup);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutMethod(CreateNewGroup.this);
+            }
+        });
+
     }
 
     public Boolean checkFormat(String groupName, String studyTheme, String studyTimeStart, String studyTimeEnd) {

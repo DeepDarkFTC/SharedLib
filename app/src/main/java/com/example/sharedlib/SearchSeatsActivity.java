@@ -3,12 +3,11 @@ package com.example.sharedlib;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class SearchSeats extends AppCompatActivity {
+public class SearchSeatsActivity extends BaseActivity {
 
     private TextView userNameTextView;
 
@@ -27,7 +26,7 @@ public class SearchSeats extends AppCompatActivity {
         architectureLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchSeats.this, ArchitectureLibraryActivity.class);
+                Intent intent = new Intent(SearchSeatsActivity.this, ArchitectureLibraryActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
@@ -37,7 +36,7 @@ public class SearchSeats extends AppCompatActivity {
         bailieuLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchSeats.this, BaillieuLibraryActivity.class);
+                Intent intent = new Intent(SearchSeatsActivity.this, BaillieuLibraryActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
@@ -47,7 +46,7 @@ public class SearchSeats extends AppCompatActivity {
         ercLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchSeats.this, ErcLibraryActivity.class);
+                Intent intent = new Intent(SearchSeatsActivity.this, ErcLibraryActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
@@ -57,9 +56,17 @@ public class SearchSeats extends AppCompatActivity {
         giblinLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchSeats.this, GiblinLibraryActivity.class);
+                Intent intent = new Intent(SearchSeatsActivity.this, GiblinLibraryActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
+            }
+        });
+
+        Button logoutButton = findViewById(R.id.button_logout_searchseats);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutMethod(SearchSeatsActivity.this);
             }
         });
     }

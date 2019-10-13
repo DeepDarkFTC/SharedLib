@@ -141,6 +141,14 @@ public class LibrarySeatsActivity extends BaseActivity {
             }
         });
 
+        Button logoutButton = findViewById(R.id.button_logout_libraryseats);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutMethod(LibrarySeatsActivity.this);
+            }
+        });
+
     }
 
     public static long timeDifference(String time1, String time2) {

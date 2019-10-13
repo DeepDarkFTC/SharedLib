@@ -159,8 +159,4 @@ public class MainActivity extends BaseActivity {
         // [END sign_in_with_email]
     }
 
-    private void signOut() {
-        mAuth.signOut();
-        //updateUI(null);
-    }
 }

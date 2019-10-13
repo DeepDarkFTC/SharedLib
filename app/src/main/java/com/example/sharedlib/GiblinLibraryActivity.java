@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GiblinLibraryActivity extends AppCompatActivity {
+public class GiblinLibraryActivity extends BaseActivity {
 
     private TextView userNameTextView;
     private ArchitectureLibraryActivity arch = new ArchitectureLibraryActivity();
@@ -96,5 +96,13 @@ public class GiblinLibraryActivity extends AppCompatActivity {
 
         TextView gibLevel5TextView = findViewById(R.id.text_gibl15_seats);
         arch.calculatePersentage(libraryName + " " + libraryLevel[4], gibLevel5TextView);
+
+        Button logoutButton = findViewById(R.id.button_logout_giblin);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutMethod(GiblinLibraryActivity.this);
+            }
+        });
     }
 }

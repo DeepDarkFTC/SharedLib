@@ -1,11 +1,11 @@
 package com.example.sharedlib;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Ranking extends BaseActivity {
+public class RankingActivity extends BaseActivity {
 
     private DatabaseReference mDatabase;
     private ArrayList commentList = new ArrayList();
@@ -79,7 +79,7 @@ public class Ranking extends BaseActivity {
                         }
                     }
 
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(Ranking.this, android.R.layout.simple_list_item_1, result);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(RankingActivity.this, android.R.layout.simple_list_item_1, result);
                     ListView listView = findViewById(R.id.listview_ranklist_ranking);
                     listView.setAdapter(adapter);
 
@@ -93,6 +93,14 @@ public class Ranking extends BaseActivity {
                 // Getting Post failed, log a message
                 Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
                 // ...
+            }
+        });
+
+        Button logoutButton = findViewById(R.id.button_logout_ranking);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutMethod(RankingActivity.this);
             }
         });
     }

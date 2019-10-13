@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -69,7 +67,7 @@ public class HomePageActivity extends BaseActivity {
         searchSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomePageActivity.this, SearchSeats.class);
+                Intent intent = new Intent(HomePageActivity.this, SearchSeatsActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
@@ -89,7 +87,7 @@ public class HomePageActivity extends BaseActivity {
         studyTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomePageActivity.this, StudyTime.class);
+                Intent intent = new Intent(HomePageActivity.this, StudyTimeActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
@@ -104,5 +102,41 @@ public class HomePageActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+        Button logoutButton = findViewById(R.id.button_logout_homepage);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutMethod(HomePageActivity.this);
+            }
+        });
+    }
+    /*
+    public void logoutMethod(final Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Message");
+        builder.setMessage("Are you sure you want to quit?");
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent logoutIntent = new Intent();
+                logoutIntent.setClass(context,MainActivity.class);
+                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //关键的一句，将新的activity置为栈顶
+                Log.v("测试测试测试",logoutIntent.toString());
+                startActivity(logoutIntent);
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        builder.show();
+    }*/
+
+    private void signOut() {
+        mAuth.signOut();
+        //updateUI(null);
     }
 }

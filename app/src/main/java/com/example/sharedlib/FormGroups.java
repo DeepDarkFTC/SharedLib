@@ -112,7 +112,13 @@ public class FormGroups extends BaseActivity {
             }
         });
 
-
+        Button logoutButton = findViewById(R.id.button_logout_formgroups);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutMethod(FormGroups.this);
+            }
+        });
     }
 
 }

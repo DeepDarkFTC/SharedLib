@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ArchitectureLibraryActivity extends AppCompatActivity {
+public class ArchitectureLibraryActivity extends BaseActivity {
 
     private TextView userNameTextView;
     private DatabaseReference mDatabase;
@@ -111,6 +111,13 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
         TextView arcLevel5TextView = findViewById(R.id.text_arcl5_seats);
         calculatePersentage(libraryName + " " + libraryLevel[4], arcLevel5TextView);
 
+        Button logoutButton = findViewById(R.id.button_logout_arc);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutMethod(ArchitectureLibraryActivity.this);
+            }
+        });
     }
 
     public void calculatePersentage(String location, final TextView textView) {
@@ -136,7 +143,6 @@ public class ArchitectureLibraryActivity extends AppCompatActivity {
                         result.add(0, Integer.parseInt(tempObj.getComment()));
                     }
                 }
-                Log.v("result size:", result.size() + "");
                 int sum = 0;
                 int num = 0;
                 for (int i = 0; i < result.size(); i++) {

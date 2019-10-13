@@ -24,7 +24,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="Map View" />
-        <activity android:name=".Ranking" />
+        <activity android:name=".RankingActivity" />
         <activity android:name=".CreateNewGroup" />
         <activity android:name=".LibrarySeatsActivity" />
         <activity android:name=".GiblinLibraryActivity" />
@@ -34,10 +34,10 @@
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".HomePageActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".StudyTime" />
+        <activity android:name=".StudyTimeActivity" />
         <activity android:name=".NearestLibrary" />
         <activity android:name=".FormGroups" />
-        <activity android:name=".SearchSeats" />
+        <activity android:name=".SearchSeatsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

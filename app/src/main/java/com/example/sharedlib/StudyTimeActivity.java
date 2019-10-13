@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class StudyTime extends BaseActivity {
+public class StudyTimeActivity extends BaseActivity {
 
     private Chronometer timer;
     private Button start;
@@ -160,10 +160,18 @@ public class StudyTime extends BaseActivity {
         timeRankButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StudyTime.this, Ranking.class);
+                Intent intent = new Intent(StudyTimeActivity.this, RankingActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 intent.putExtra("studyTime", String.valueOf(totalTime));
                 startActivity(intent);
+            }
+        });
+
+        Button logoutButton = findViewById(R.id.button_logout_studytime);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutMethod(StudyTimeActivity.this);
             }
         });
     }

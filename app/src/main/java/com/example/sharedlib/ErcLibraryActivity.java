@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ErcLibraryActivity extends Activity {
+public class ErcLibraryActivity extends BaseActivity {
 
     private TextView userNameTextView;
     private ArchitectureLibraryActivity arch = new ArchitectureLibraryActivity();
@@ -97,5 +97,13 @@ public class ErcLibraryActivity extends Activity {
 
         TextView ercLevel5TextView = findViewById(R.id.text_ercl5_seats);
         arch.calculatePersentage(libraryName + " " + libraryLevel[4], ercLevel5TextView);
+
+        Button logoutButton = findViewById(R.id.button_logout_erc);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutMethod(ErcLibraryActivity.this);
+            }
+        });
     }
 }
