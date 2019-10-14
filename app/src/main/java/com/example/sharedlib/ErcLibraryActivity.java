@@ -1,13 +1,10 @@
 package com.example.sharedlib;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class ErcLibraryActivity extends BaseActivity {
 
@@ -40,7 +37,7 @@ public class ErcLibraryActivity extends BaseActivity {
         });
 
         TextView ercLevel1TextView = findViewById(R.id.text_ercl1_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[0], ercLevel1TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[0], ercLevel1TextView);
 
         Button ercLevel2 = findViewById(R.id.erc_l2);
         ercLevel2.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +51,7 @@ public class ErcLibraryActivity extends BaseActivity {
         });
 
         TextView ercLevel2TextView = findViewById(R.id.text_ercl2_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[1], ercLevel2TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[1], ercLevel2TextView);
 
         Button ercLevel3 = findViewById(R.id.erc_l3);
         ercLevel3.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +65,7 @@ public class ErcLibraryActivity extends BaseActivity {
         });
 
         TextView ercLevel3TextView = findViewById(R.id.text_ercl3_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[2], ercLevel3TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[2], ercLevel3TextView);
 
         Button ercLevel4 = findViewById(R.id.erc_l4);
         ercLevel4.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +79,7 @@ public class ErcLibraryActivity extends BaseActivity {
         });
 
         TextView ercLevel4TextView = findViewById(R.id.text_ercl4_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[3], ercLevel4TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[3], ercLevel4TextView);
 
         Button ercLevel5 = findViewById(R.id.erc_l5);
         ercLevel5.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +93,7 @@ public class ErcLibraryActivity extends BaseActivity {
         });
 
         TextView ercLevel5TextView = findViewById(R.id.text_ercl5_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[4], ercLevel5TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[4], ercLevel5TextView);
 
         Button logoutButton = findViewById(R.id.button_logout_erc);
         logoutButton.setOnClickListener(new View.OnClickListener() {

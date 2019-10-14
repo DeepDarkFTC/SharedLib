@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +22,6 @@ public class ArchitectureLibraryActivity extends BaseActivity {
     private DatabaseReference mDatabase;
     private ArrayList commentList = new ArrayList<ComWithDatabase>();
     private double calResult = 0.0;
-
     private ObtainCurrentDate obtainCurrentDate = new ObtainCurrentDate();
 
     @Override
@@ -32,8 +29,12 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arc_library);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
         final String libraryName = "Architecture Library";
         final String[] libraryLevel = {"Level 1", "Level 2", "Level 3", "Level 4", "Level 5"};
+
 
         Intent parentIntent = getIntent();
         String userName = parentIntent.getStringExtra("userName");
@@ -53,7 +54,7 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         });
 
         TextView arcLevel1TextView = findViewById(R.id.text_arcl1_seats);
-        calculatePersentage(libraryName + " " + libraryLevel[0], arcLevel1TextView);
+        calculatePercentage(libraryName + " " + libraryLevel[0], arcLevel1TextView);
 
         Button arcLevel2 = findViewById(R.id.arc_l2);
         arcLevel2.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +68,7 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         });
 
         TextView arcLevel2TextView = findViewById(R.id.text_arcl2_seats);
-        calculatePersentage(libraryName + " " + libraryLevel[1], arcLevel2TextView);
+        calculatePercentage(libraryName + " " + libraryLevel[1], arcLevel2TextView);
 
         Button arcLevel3 = findViewById(R.id.arc_l3);
         arcLevel3.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +82,7 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         });
 
         TextView arcLevel3TextView = findViewById(R.id.text_arcl3_seats);
-        calculatePersentage(libraryName + " " + libraryLevel[2], arcLevel3TextView);
+        calculatePercentage(libraryName + " " + libraryLevel[2], arcLevel3TextView);
 
         Button arcLevel4 = findViewById(R.id.arc_l4);
         arcLevel4.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +96,7 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         });
 
         TextView arcLevel4TextView = findViewById(R.id.text_arcl4_seats);
-        calculatePersentage(libraryName + " " + libraryLevel[3], arcLevel4TextView);
+        calculatePercentage(libraryName + " " + libraryLevel[3], arcLevel4TextView);
 
         Button arcLevel5 = findViewById(R.id.arc_l5);
         arcLevel5.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +110,7 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         });
 
         TextView arcLevel5TextView = findViewById(R.id.text_arcl5_seats);
-        calculatePersentage(libraryName + " " + libraryLevel[4], arcLevel5TextView);
+        calculatePercentage(libraryName + " " + libraryLevel[4], arcLevel5TextView);
 
         Button logoutButton = findViewById(R.id.button_logout_arc);
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +121,7 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         });
     }
 
-    public void calculatePersentage(String location, final TextView textView) {
+    public void calculatePercentage(final String location, final TextView textView) {
         final ArrayList<Integer> result = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -159,6 +160,7 @@ public class ArchitectureLibraryActivity extends BaseActivity {
                     calResult = sum / num;
                 }
                 textView.setText("Seat occupancy: " + calResult + "%" + "     " + "Seat vacancy: " + (100 - calResult) + "%");
+                mDatabase.child("libraryOccupation").child(location).setValue(calResult);
             }
 
             @Override
