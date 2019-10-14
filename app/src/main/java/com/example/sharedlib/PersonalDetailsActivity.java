@@ -53,7 +53,7 @@ public class PersonalDetailsActivity extends BaseActivity {
                 if(dataSnapshot.exists()) {
                     personalStudyTime = Integer.parseInt(dataSnapshot.getValue(ComWithDatabase.class).getDate());
                     Log.d("上次时间", String.valueOf(personalStudyTime));
-                    studyTimeTextView.setText(personalStudyTime);
+                    studyTimeTextView.setText(personalStudyTime+"");
                 }
             }
 

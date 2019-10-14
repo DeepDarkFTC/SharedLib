@@ -102,6 +102,16 @@ public class HomePageActivity extends BaseActivity {
             }
         });
 
+        Button personalInfoButton = findViewById(R.id.button_username_homepage);
+        personalInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePageActivity.this, PersonalDetailsActivity.class);
+                intent.putExtra("userName", userNameTextView.getText().toString());
+                startActivity(intent);
+            }
+        });
+
         Button logoutButton = findViewById(R.id.button_logout_homepage);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
