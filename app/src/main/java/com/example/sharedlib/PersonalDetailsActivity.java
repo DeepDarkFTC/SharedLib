@@ -2,8 +2,11 @@ package com.example.sharedlib;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +30,12 @@ public class PersonalDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_details);
 
-        final TextView userNameTextView = findViewById(R.id.text_name_person);
+        Intent parentIntent = getIntent();
+
+        TextView userNameTextView = findViewById(R.id.text_username_personaldetail);
+        userNameTextView.setText(parentIntent.getStringExtra("userName"));
+
+        final TextView userNameContentTextView = findViewById(R.id.text_name_person);
         final TextView emailTextView = findViewById(R.id.text_mail_person);
         final TextView studyTimeTextView = findViewById(R.id.text_studytime_person);
 
@@ -63,7 +71,7 @@ public class PersonalDetailsActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 personalUsername = dataSnapshot.child(emailToUid(user.getEmail())).getValue().toString();
                 Log.d("Database content222", personalUsername);
-                userNameTextView.setText(personalUsername);
+                userNameContentTextView.setText(personalUsername);
             }
 
             @Override
@@ -71,6 +79,14 @@ public class PersonalDetailsActivity extends BaseActivity {
                 // Getting Post failed, log a message
                 Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
                 // ...
+            }
+        });
+
+        Button logoutButton = findViewById(R.id.button_logout_personaldetail);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutMethod(PersonalDetailsActivity.this);
             }
         });
 

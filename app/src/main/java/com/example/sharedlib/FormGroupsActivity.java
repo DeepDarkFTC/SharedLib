@@ -1,7 +1,6 @@
 package com.example.sharedlib;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,13 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class FormGroups extends BaseActivity {
+public class FormGroupsActivity extends BaseActivity {
     private DatabaseReference mDatabase;
     private ArrayList commentList = new ArrayList<ComWithDatabase>();
 
@@ -46,7 +39,7 @@ public class FormGroups extends BaseActivity {
         final TextView userNameTextView = findViewById(R.id.text_username_formgroups);
         userNameTextView.setText(userName);
 
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroups.this, android.R.layout.simple_list_item_1, data);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroupsActivity.this, android.R.layout.simple_list_item_1, data);
 //        ListView listView = findViewById(R.id.listview_infolist_formgroup);
 //        listView.setAdapter(adapter);
 
@@ -54,7 +47,7 @@ public class FormGroups extends BaseActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FormGroups.this, CreateNewGroup.class);
+                Intent intent = new Intent(FormGroupsActivity.this, CreateNewGroup.class);
                 intent.putExtra("userName",userNameTextView.getText().toString());
                 startActivity(intent);
             }
@@ -86,15 +79,16 @@ public class FormGroups extends BaseActivity {
                     temp.add(record);
                     objectList.add(tempObj);
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroups.this, android.R.layout.simple_list_item_1, temp);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroupsActivity.this, android.R.layout.simple_list_item_1, temp);
                 ListView listView = findViewById(R.id.listview_infolist_formgroup);
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent intent = new Intent(FormGroups.this, GroupDetailsActivity.class);
+                        Intent intent = new Intent(FormGroupsActivity.this, GroupDetailsActivity.class);
                         ComWithDatabase info = (ComWithDatabase)objectList.get(i);
 
+                        intent.putExtra("userName",userNameTextView.getText().toString());
                         intent.putExtra("groupName",info.getGroupName());
                         intent.putExtra("groupLocation",info.getLibraryName()+" "+info.getLibraryLevel());
                         intent.putExtra("studyTime","From: "+info.getStartTime()+"To: "+info.getEndTime());
@@ -116,7 +110,7 @@ public class FormGroups extends BaseActivity {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logoutMethod(FormGroups.this);
+                logoutMethod(FormGroupsActivity.this);
             }
         });
     }

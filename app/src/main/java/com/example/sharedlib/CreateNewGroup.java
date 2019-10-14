@@ -21,10 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -107,7 +104,7 @@ public class CreateNewGroup extends BaseActivity {
 
                     mDatabase.child("studyGroup").push().setValue(comment);
 
-                    Intent intent = new Intent(CreateNewGroup.this, FormGroups.class);
+                    Intent intent = new Intent(CreateNewGroup.this, FormGroupsActivity.class);
                     startActivity(intent);
                     finish();
                 }

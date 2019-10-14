@@ -36,7 +36,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".StudyTimeActivity" />
         <activity android:name=".NearestLibrary" />
-        <activity android:name=".FormGroups" />
+        <activity android:name=".FormGroupsActivity" />
         <activity android:name=".SearchSeatsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
