@@ -17,8 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class HomePageActivity extends BaseActivity {
 
-    private TextView userNameTextView;
-
+    private Button personalInfoButton;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private String userName;
@@ -44,8 +43,7 @@ public class HomePageActivity extends BaseActivity {
 
                 userName = dataSnapshot.child(userId).getValue().toString();
                 Log.d("Database content222", userName);
-                userNameTextView.setText(userName);
-
+                personalInfoButton.setText(userName);
             }
 
             @Override
@@ -56,18 +54,12 @@ public class HomePageActivity extends BaseActivity {
             }
         });
 
-
-//        Intent parentIntent = getIntent();
-//        String userName = parentIntent.getStringExtra("userName");
-
-        userNameTextView = findViewById(R.id.text_username_homepage);
-
         Button searchSeat = findViewById(R.id.button_search_homepage);
         searchSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, SearchSeatsActivity.class);
-                intent.putExtra("userName", userNameTextView.getText().toString());
+                intent.putExtra("userName", personalInfoButton.getText().toString());
                 startActivity(intent);
             }
         });
@@ -77,7 +69,7 @@ public class HomePageActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, FormGroupsActivity.class);
-                intent.putExtra("userName", userNameTextView.getText().toString());
+                intent.putExtra("userName", personalInfoButton.getText().toString());
                 startActivity(intent);
             }
         });
@@ -87,7 +79,7 @@ public class HomePageActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, StudyTimeActivity.class);
-                intent.putExtra("userName", userNameTextView.getText().toString());
+                intent.putExtra("userName", personalInfoButton.getText().toString());
                 startActivity(intent);
             }
         });
@@ -97,17 +89,17 @@ public class HomePageActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, MapsActivity.class);
-                intent.putExtra("userName", userNameTextView.getText().toString());
+                intent.putExtra("userName", personalInfoButton.getText().toString());
                 startActivity(intent);
             }
         });
 
-        Button personalInfoButton = findViewById(R.id.button_username_homepage);
+        personalInfoButton = findViewById(R.id.button_username_homepage);
         personalInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, PersonalDetailsActivity.class);
-                intent.putExtra("userName", userNameTextView.getText().toString());
+                intent.putExtra("userName", personalInfoButton.getText().toString());
                 startActivity(intent);
             }
         });
@@ -121,32 +113,5 @@ public class HomePageActivity extends BaseActivity {
         });
 
     }
-    /*
-    public void logoutMethod(final Context context){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Message");
-        builder.setMessage("Are you sure you want to quit?");
-        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent logoutIntent = new Intent();
-                logoutIntent.setClass(context,MainActivity.class);
-                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //关键的一句，将新的activity置为栈顶
-                Log.v("测试测试测试",logoutIntent.toString());
-                startActivity(logoutIntent);
-                finish();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-            }
-        });
-        builder.show();
-    }*/
 
-    private void signOut() {
-        mAuth.signOut();
-        //updateUI(null);
-    }
 }

@@ -138,7 +138,6 @@ public class MainActivity extends BaseActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
                             Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
-                            intent.putExtra("userName", userNameTextView.getText().toString());
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
