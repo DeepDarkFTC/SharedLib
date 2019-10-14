@@ -2,10 +2,14 @@ package com.example.sharedlib;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,8 +27,6 @@ public class HomePageActivity extends BaseActivity {
     private FirebaseAuth mAuth;
     private String userName;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,7 @@ public class HomePageActivity extends BaseActivity {
 
         final String userId = emailToUid(currentUser.getEmail());
         Log.d("Database content111", userId);
+
 
         DatabaseReference ref = mDatabase.child("userName");
         ref.addValueEventListener(new ValueEventListener() {
@@ -110,6 +113,7 @@ public class HomePageActivity extends BaseActivity {
                 logoutMethod(HomePageActivity.this);
             }
         });
+
     }
     /*
     public void logoutMethod(final Context context){
