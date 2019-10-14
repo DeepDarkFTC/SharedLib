@@ -33,17 +33,6 @@
             android:textAlignment="center"
             android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/text_username_homepage"
-            android:layout_width="227dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="Welcome"
-
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="24sp" />
-
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
