@@ -29,6 +29,9 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arc_library);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
         final String libraryName = "Architecture Library";
         final String[] libraryLevel = {"Level 1", "Level 2", "Level 3", "Level 4", "Level 5"};
 
@@ -118,7 +121,7 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         });
     }
 
-    public void calculatePercentage(String location, final TextView textView) {
+    public void calculatePercentage(final String location, final TextView textView) {
         final ArrayList<Integer> result = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -157,7 +160,7 @@ public class ArchitectureLibraryActivity extends BaseActivity {
                     calResult = sum / num;
                 }
                 textView.setText("Seat occupancy: " + calResult + "%" + "     " + "Seat vacancy: " + (100 - calResult) + "%");
-                // upload data to firebase
+                mDatabase.child("libraryOccupation").child(location).setValue(calResult);
             }
 
             @Override
