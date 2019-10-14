@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class GiblinLibraryActivity extends BaseActivity {
 
     private TextView userNameTextView;
@@ -39,7 +37,7 @@ public class GiblinLibraryActivity extends BaseActivity {
         });
 
         TextView gibLevel1TextView = findViewById(R.id.text_gibl11_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[0], gibLevel1TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[0], gibLevel1TextView);
 
         Button gibLevel2 = findViewById(R.id.gib_l2);
         gibLevel2.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +51,7 @@ public class GiblinLibraryActivity extends BaseActivity {
         });
 
         TextView gibLevel2TextView = findViewById(R.id.text_gibl12_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[1], gibLevel2TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[1], gibLevel2TextView);
 
         Button gibLevel3 = findViewById(R.id.gib_l3);
         gibLevel3.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +65,7 @@ public class GiblinLibraryActivity extends BaseActivity {
         });
 
         TextView gibLevel3TextView = findViewById(R.id.text_gibl13_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[2], gibLevel3TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[2], gibLevel3TextView);
 
         Button gibLevel4 = findViewById(R.id.gib_l4);
         gibLevel4.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +79,7 @@ public class GiblinLibraryActivity extends BaseActivity {
         });
 
         TextView gibLevel4TextView = findViewById(R.id.text_gibl14_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[3], gibLevel4TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[3], gibLevel4TextView);
 
         Button gibLevel5 = findViewById(R.id.gib_l5);
         gibLevel5.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +93,7 @@ public class GiblinLibraryActivity extends BaseActivity {
         });
 
         TextView gibLevel5TextView = findViewById(R.id.text_gibl15_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[4], gibLevel5TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[4], gibLevel5TextView);
 
         Button logoutButton = findViewById(R.id.button_logout_giblin);
         logoutButton.setOnClickListener(new View.OnClickListener() {

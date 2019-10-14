@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class BaillieuLibraryActivity extends BaseActivity {
 
     private TextView userNameTextView;
@@ -40,7 +38,7 @@ public class BaillieuLibraryActivity extends BaseActivity {
         });
 
         TextView baiLevel1TextView = findViewById(R.id.text_bai1_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[0], baiLevel1TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[0], baiLevel1TextView);
 
         Button baiLevel2 = findViewById(R.id.bai_l2);
         baiLevel2.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +52,7 @@ public class BaillieuLibraryActivity extends BaseActivity {
         });
 
         TextView baiLevel2TextView = findViewById(R.id.text_bai2_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[1], baiLevel2TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[1], baiLevel2TextView);
 
         Button baiLevel3 = findViewById(R.id.bai_l3);
         baiLevel3.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +66,7 @@ public class BaillieuLibraryActivity extends BaseActivity {
         });
 
         TextView baiLevel3TextView = findViewById(R.id.text_bai3_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[2], baiLevel3TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[2], baiLevel3TextView);
 
         Button baiLevel4 = findViewById(R.id.bai_l4);
         baiLevel4.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +80,7 @@ public class BaillieuLibraryActivity extends BaseActivity {
         });
 
         TextView baiLevel4TextView = findViewById(R.id.text_bai4_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[3], baiLevel4TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[3], baiLevel4TextView);
 
         Button baiLevel5 = findViewById(R.id.bai_l5);
         baiLevel5.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +94,7 @@ public class BaillieuLibraryActivity extends BaseActivity {
         });
 
         TextView baiLevel5TextView = findViewById(R.id.text_bai5_seats);
-        arch.calculatePersentage(libraryName + " " + libraryLevel[4], baiLevel5TextView);
+        arch.calculatePercentage(libraryName + " " + libraryLevel[4], baiLevel5TextView);
 
         Button logoutButton = findViewById(R.id.button_logout_bailieu);
         logoutButton.setOnClickListener(new View.OnClickListener() {

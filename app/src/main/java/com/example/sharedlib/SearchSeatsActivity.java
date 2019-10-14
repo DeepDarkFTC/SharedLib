@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class SearchSeatsActivity extends BaseActivity {
 
     private TextView userNameTextView;
+    private OverallSeatsSituation overallSeatsSituation = new OverallSeatsSituation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,9 @@ public class SearchSeatsActivity extends BaseActivity {
             }
         });
 
+        TextView arcSeatsTextView = findViewById(R.id.text_arc_seats);
+        arcSeatsTextView.setText(overallSeatsSituation.getArcSeats());
+
         ImageButton bailieuLibrary = findViewById(R.id.button_bai_searchseats);
         bailieuLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +45,9 @@ public class SearchSeatsActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+        TextView baiSeatsTextView = findViewById(R.id.text_bai_seats);
+        baiSeatsTextView.setText(overallSeatsSituation.getBaiSeats());
 
         ImageButton ercLibrary = findViewById(R.id.button_erc_searchseats);
         ercLibrary.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +59,9 @@ public class SearchSeatsActivity extends BaseActivity {
             }
         });
 
+        TextView ercSeatsTextView = findViewById(R.id.text_erc_seats);
+        ercSeatsTextView.setText(overallSeatsSituation.getErcSeats());
+
         ImageButton giblinLibrary = findViewById(R.id.button_giblin_searchseats);
         giblinLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +71,9 @@ public class SearchSeatsActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+        TextView gibSeatsTextView = findViewById(R.id.text_gib_seats);
+        gibSeatsTextView.setText(overallSeatsSituation.getGibSeats());
 
         Button logoutButton = findViewById(R.id.button_logout_searchseats);
         logoutButton.setOnClickListener(new View.OnClickListener() {
