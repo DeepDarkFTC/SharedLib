@@ -35,6 +35,7 @@ public class LibrarySeatsActivity extends BaseActivity {
 
     private int seatsPercentage;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +85,7 @@ public class LibrarySeatsActivity extends BaseActivity {
                 }
                 Log.d("Database content", commentList.toString());
                 Collections.reverse(commentList);   // displayed by upload date
-                ArrayList temp = new ArrayList();
+                ArrayList<String> temp = new ArrayList<String>();
 
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
@@ -93,7 +94,9 @@ public class LibrarySeatsActivity extends BaseActivity {
                         temp.add(0,record);
                     }
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(LibrarySeatsActivity.this, android.R.layout.simple_list_item_1, temp);
+                int len = temp.size();
+                Log.d("seat", String.valueOf(len));
+                SeatAdapter adapter = new SeatAdapter(temp);
                 ListView listView = findViewById(R.id.seatsComments);
                 listView.setAdapter(adapter);
             }
