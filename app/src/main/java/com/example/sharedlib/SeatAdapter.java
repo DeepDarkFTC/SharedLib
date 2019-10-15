@@ -66,6 +66,7 @@ public class SeatAdapter extends BaseAdapter implements View.OnClickListener {
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.seat_listview, null);
             viewHolder = new ViewHolder();
             viewHolder.mTv = (TextView) view.findViewById(R.id.text_seats_listview);
+            viewHolder.number = (TextView) view.findViewById(R.id.text_number_listview);
             viewHolder.good = (Button) view.findViewById(R.id.button_good_listview);
             viewHolder.bad = (Button) view.findViewById(R.id.button_bad_listview);
 
@@ -104,6 +105,7 @@ public class SeatAdapter extends BaseAdapter implements View.OnClickListener {
 
     static class ViewHolder {
         TextView mTv;
+        TextView number;
         Button good;
         Button bad;
     }

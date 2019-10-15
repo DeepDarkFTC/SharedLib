@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/text_seats_listview"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="50dp">
 
 
@@ -16,7 +16,7 @@
         android:id="@+id/button_good_listview"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/good" />
 
@@ -24,9 +24,17 @@
         android:id="@+id/button_bad_listview"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/bad" />
+
+    <TextView
+        android:id="@+id/text_number_listview"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1" />
 
 
 </LinearLayout>
