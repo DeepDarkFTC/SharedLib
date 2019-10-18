@@ -17,11 +17,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class GroupDetailsActivity extends BaseActivity {
 
     private boolean flag = true;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
+    private ArrayList groupMember = new ArrayList();
 
 
     @Override
@@ -56,8 +59,8 @@ public class GroupDetailsActivity extends BaseActivity {
 
         final Button groupButton = findViewById(R.id.button_join_group);
 
-        DatabaseReference ref = mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail()));
-        ref.addValueEventListener(new ValueEventListener() {
+        DatabaseReference ref1 = mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail()));
+        ref1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -83,6 +86,8 @@ public class GroupDetailsActivity extends BaseActivity {
                         }
                     }
                 });
+
+
             }
 
             @Override
@@ -92,6 +97,26 @@ public class GroupDetailsActivity extends BaseActivity {
                 // ...
             }
         });
+
+        DatabaseReference ref2 = mDatabase.child("groupMember").child(parentIntent.getStringExtra("key"));
+        ref2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String member = uidToEmail(postSnapshot.getKey());
+                    groupMember.add(member);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
+
 
 
 
