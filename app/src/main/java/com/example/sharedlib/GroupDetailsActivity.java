@@ -64,6 +64,7 @@ public class GroupDetailsActivity extends BaseActivity {
                 if(dataSnapshot.exists()) {
                     Log.v("先手","111111");
                     flag = false;
+                    groupButton.setText("Quit This Group");
                 }
 
                 groupButton.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +77,7 @@ public class GroupDetailsActivity extends BaseActivity {
                             groupButton.setText("Quit This Group");
                         }
                         else{   // quit button
+                            mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail())).removeValue();
                             flag = true;
                             groupButton.setText("Join This Group");
                         }
