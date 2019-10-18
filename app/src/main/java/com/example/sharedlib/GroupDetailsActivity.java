@@ -49,6 +49,8 @@ public class GroupDetailsActivity extends BaseActivity {
         TextView studyTimeTextView = findViewById(R.id.text_studytime_group);
         studyTimeTextView.setText(parentIntent.getStringExtra("studyTime"));
 
+        final TextView memberTextView = findViewById(R.id.text_member_group);
+
         Button logoutButton = findViewById(R.id.button_logout_groupdetail);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,11 +104,17 @@ public class GroupDetailsActivity extends BaseActivity {
         ref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                groupMember.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String member = uidToEmail(postSnapshot.getKey());
                     groupMember.add(member);
                 }
+
+                String members = "";
+                for(int i =0;i<groupMember.size();i++){
+                    members += groupMember.get(i);
+                }
+                memberTextView.setText(members);
             }
 
             @Override
@@ -116,8 +124,6 @@ public class GroupDetailsActivity extends BaseActivity {
                 // ...
             }
         });
-
-
 
 
     }
