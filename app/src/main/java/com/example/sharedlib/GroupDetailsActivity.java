@@ -54,14 +54,33 @@ public class GroupDetailsActivity extends BaseActivity {
             }
         });
 
+        final Button groupButton = findViewById(R.id.button_join_group);
+
         DatabaseReference ref = mDatabase.child("groupMember").child(emailToUid(user.getEmail()));
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if(dataSnapshot.exists()) {
-                    flag = true;
+                    Log.v("先手","111111");
+                    flag = false;
                 }
+
+                groupButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.v("后手","22222"+flag);
+                        if(flag){   // join button
+                            mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail())).setValue(true);
+                            flag = false;
+                            groupButton.setText("Quit This Group");
+                        }
+                        else{   // quit button
+                            flag = true;
+                            groupButton.setText("Join This Group");
+                        }
+                    }
+                });
             }
 
             @Override
@@ -71,20 +90,8 @@ public class GroupDetailsActivity extends BaseActivity {
                 // ...
             }
         });
-        final Button groupButton = findViewById(R.id.button_join_group);
-        groupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(flag){   // join button
-                    mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail())).setValue(true);
-                    flag = false;
-                    groupButton.setText("Quit This Group");
-                }
-                else{   // quit button
-                    flag = true;
-                    groupButton.setText("Join This Group");
-                }
-            }
-        });
+
+
+
     }
 }
