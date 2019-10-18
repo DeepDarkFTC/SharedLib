@@ -106,9 +106,11 @@
         android:layout_weight="1"
         android:background="#00000000" />
 
-    <ListView
+    <TextView
+        android:id="@+id/text_member_group"
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="33dp"
+        android:text="Group Members" />
 
     <View
         android:id="@+id/view21"

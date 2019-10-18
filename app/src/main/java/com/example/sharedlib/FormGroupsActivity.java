@@ -91,7 +91,7 @@ public class FormGroupsActivity extends BaseActivity {
                         intent.putExtra("userName",userNameTextView.getText().toString());
                         intent.putExtra("groupName",info.getGroupName());
                         intent.putExtra("groupLocation",info.getLibraryName()+" "+info.getLibraryLevel());
-                        intent.putExtra("studyTime","From: "+info.getStartTime()+"To: "+info.getEndTime());
+                        intent.putExtra("studyTime","From: "+info.getStartTime()+"\nTo: "+info.getEndTime());
 
                         startActivity(intent);
                     }
