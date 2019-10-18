@@ -42,7 +42,7 @@ public class CreateNewGroup extends BaseActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
-        Intent parentIntent = getIntent();
+        final Intent parentIntent = getIntent();
         String userName = parentIntent.getStringExtra("userName");
 
         final EditText groupName = findViewById(R.id.text_name_newgroup);
@@ -94,8 +94,8 @@ public class CreateNewGroup extends BaseActivity {
                             endButton.getText().toString());
 
                     FirebaseUser user = mAuth.getCurrentUser();
-
-                    ComWithDatabase comment = new ComWithDatabase(mDatabase.child("studyGroup").push().getKey(),
+                    String key = mDatabase.child("studyGroup").push().getKey();
+                    ComWithDatabase comment = new ComWithDatabase(key,
                             groupName.getText().toString(),
                             library.getSelectedItem().toString(),
                             level.getSelectedItem().toString(),
@@ -103,9 +103,10 @@ public class CreateNewGroup extends BaseActivity {
                             startButton.getText().toString(),
                     endButton.getText().toString(), user.getEmail());
 
-                    mDatabase.child("studyGroup").push().setValue(comment);
+                    mDatabase.child("studyGroup").child(key).setValue(comment);
 
                     Intent intent = new Intent(CreateNewGroup.this, FormGroupsActivity.class);
+                    intent.putExtra("userName", parentIntent.getStringExtra("userName"));
                     startActivity(intent);
                     finish();
                 }
