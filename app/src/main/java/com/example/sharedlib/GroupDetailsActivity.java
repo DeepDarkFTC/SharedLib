@@ -9,16 +9,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class GroupDetailsActivity extends BaseActivity {
 
     private boolean flag = true;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_details);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = mAuth.getCurrentUser();
 
-        Intent parentIntent = getIntent();
+        final Intent parentIntent = getIntent();
 
         TextView userNameTextView = findViewById(R.id.text_username_groupdetail);
         userNameTextView.setText(parentIntent.getStringExtra("userName"));
@@ -40,11 +54,29 @@ public class GroupDetailsActivity extends BaseActivity {
             }
         });
 
+        DatabaseReference ref = mDatabase.child("groupMember").child(emailToUid(user.getEmail()));
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()) {
+                    flag = true;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
         final Button groupButton = findViewById(R.id.button_join_group);
         groupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(flag){   // join button
+                    mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail())).setValue(true);
                     flag = false;
                     groupButton.setText("Quit This Group");
                 }

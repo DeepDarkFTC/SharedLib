@@ -104,6 +104,7 @@ public class CreateNewGroup extends BaseActivity {
                     endButton.getText().toString(), user.getEmail());
 
                     mDatabase.child("studyGroup").child(key).setValue(comment);
+                    mDatabase.child("groupMember").child(key).child(emailToUid(user.getEmail())).setValue(true);
 
                     Intent intent = new Intent(CreateNewGroup.this, FormGroupsActivity.class);
                     intent.putExtra("userName", parentIntent.getStringExtra("userName"));
