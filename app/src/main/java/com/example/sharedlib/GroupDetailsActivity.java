@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 public class GroupDetailsActivity extends BaseActivity {
 
+    private boolean flag = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,21 @@ public class GroupDetailsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 logoutMethod(GroupDetailsActivity.this);
+            }
+        });
+
+        final Button groupButton = findViewById(R.id.button_join_group);
+        groupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(flag){   // join button
+                    flag = false;
+                    groupButton.setText("Quit This Group");
+                }
+                else{   // quit button
+                    flag = true;
+                    groupButton.setText("Join This Group");
+                }
             }
         });
     }

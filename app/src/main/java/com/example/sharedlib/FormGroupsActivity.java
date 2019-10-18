@@ -10,13 +10,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class FormGroupsActivity extends BaseActivity {
     private DatabaseReference mDatabase;
@@ -41,8 +41,9 @@ public class FormGroupsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FormGroupsActivity.this, CreateNewGroup.class);
-                intent.putExtra("userName",userNameTextView.getText().toString());
+                intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -56,7 +57,7 @@ public class FormGroupsActivity extends BaseActivity {
                     commentList.add(groupInfo);
                 }
                 Log.d("Database content", commentList.toString());
-                
+
                 ArrayList temp = new ArrayList();
                 final ArrayList objectList = new ArrayList<ComWithDatabase>();
 
@@ -65,8 +66,8 @@ public class FormGroupsActivity extends BaseActivity {
                     String record = "Group Name: " + tempObj.getGroupName() +
                             "Library Name:" + tempObj.getLibraryName() +
                             "Level:" + tempObj.getLibraryLevel() +
-                            "Study Topic: " + tempObj.getStudyTopic()+
-                            "Start Time: " + tempObj.getStartTime()+
+                            "Study Topic: " + tempObj.getStudyTopic() +
+                            "Start Time: " + tempObj.getStartTime() +
                             "End Time: " + tempObj.getEndTime() +
                             "Created by: " + tempObj.getTeamLeader() +
                             "Key: " + tempObj.getId();
@@ -80,12 +81,12 @@ public class FormGroupsActivity extends BaseActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Intent intent = new Intent(FormGroupsActivity.this, GroupDetailsActivity.class);
-                        ComWithDatabase info = (ComWithDatabase)objectList.get(i);
+                        ComWithDatabase info = (ComWithDatabase) objectList.get(i);
 
-                        intent.putExtra("userName",userNameTextView.getText().toString());
-                        intent.putExtra("groupName",info.getGroupName());
-                        intent.putExtra("groupLocation",info.getLibraryName()+" "+info.getLibraryLevel());
-                        intent.putExtra("studyTime","From: "+info.getStartTime()+"\nTo: "+info.getEndTime());
+                        intent.putExtra("userName", userNameTextView.getText().toString());
+                        intent.putExtra("groupName", info.getGroupName());
+                        intent.putExtra("groupLocation", info.getLibraryName() + " " + info.getLibraryLevel());
+                        intent.putExtra("studyTime", "From: " + info.getStartTime() + "\nTo: " + info.getEndTime());
                         intent.putExtra("key", info.getId());
 
                         startActivity(intent);
