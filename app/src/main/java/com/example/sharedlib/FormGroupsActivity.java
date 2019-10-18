@@ -59,9 +59,7 @@ public class FormGroupsActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    ComWithDatabase comment = postSnapshot.getValue(ComWithDatabase.class);
-                    String key = postSnapshot.getKey();
-                    GroupInfo groupInfo = new GroupInfo(key, comment);
+                    ComWithDatabase groupInfo = postSnapshot.getValue(ComWithDatabase.class);
                     commentList.add(groupInfo);
                 }
                 Log.d("Database content", commentList.toString());

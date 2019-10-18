@@ -95,7 +95,7 @@ public class CreateNewGroup extends BaseActivity {
 
                     FirebaseUser user = mAuth.getCurrentUser();
 
-                    ComWithDatabase comment = new ComWithDatabase(groupName.getText().toString(),
+                    ComWithDatabase comment = new ComWithDatabase(mDatabase.child("studyGroup").getKey(), groupName.getText().toString(),
                             library.getSelectedItem().toString(),
                             level.getSelectedItem().toString(),
                             studyTheme.getText().toString(),

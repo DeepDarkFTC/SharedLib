@@ -103,7 +103,10 @@ public class PersonalDetailsActivity extends BaseActivity {
                 builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.v("新名字",newName.getText().toString());// send message to firebase
+                        Log.v("新名字",newName.getText().toString());
+                    // send message to firebase
+                    mDatabase.child("userName").child(emailToUid(user.getEmail())).setValue(newName.getText().toString());
+
                     }
                 });
                 builder.show();

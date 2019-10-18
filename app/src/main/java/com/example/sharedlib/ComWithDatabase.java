@@ -46,9 +46,10 @@ public class ComWithDatabase {
 
     }
 
-    public ComWithDatabase(String groupName, String libraryName,
+    public ComWithDatabase(String id, String groupName, String libraryName,
                            String libraryLevel, String studyTopic,
                            String startTime, String endTime, String teamLeader){
+        this.id = id;
         this.groupName = groupName;
         this.libraryName = libraryName;
         this.libraryLevel = libraryLevel;
