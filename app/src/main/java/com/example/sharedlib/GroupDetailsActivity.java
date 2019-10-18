@@ -56,7 +56,7 @@ public class GroupDetailsActivity extends BaseActivity {
 
         final Button groupButton = findViewById(R.id.button_join_group);
 
-        DatabaseReference ref = mDatabase.child("groupMember").child(emailToUid(user.getEmail()));
+        DatabaseReference ref = mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail()));
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
