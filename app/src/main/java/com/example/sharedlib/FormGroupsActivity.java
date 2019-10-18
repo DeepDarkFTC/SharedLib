@@ -30,18 +30,11 @@ public class FormGroupsActivity extends BaseActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
-//        String[] data = {"group1", "group2", "group3", "group4", "group5"};// these data should from firebase
-
         Intent parentIntent = getIntent();
         String userName = parentIntent.getStringExtra("userName");
 
         final TextView userNameTextView = findViewById(R.id.text_username_formgroups);
         userNameTextView.setText(userName);
-
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroupsActivity.this, android.R.layout.simple_list_item_1, data);
-//        ListView listView = findViewById(R.id.listview_infolist_formgroup);
-//        listView.setAdapter(adapter);
 
         Button createButton = findViewById(R.id.button_startnew_formgroup);
         createButton.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +68,8 @@ public class FormGroupsActivity extends BaseActivity {
                             "Study Topic: " + tempObj.getStudyTopic()+
                             "Start Time: " + tempObj.getStartTime()+
                             "End Time: " + tempObj.getEndTime() +
-                            "Created by: " + tempObj.getTeamLeader();
+                            "Created by: " + tempObj.getTeamLeader() +
+                            "Key: " + tempObj.getId();
                     temp.add(record);
                     objectList.add(tempObj);
                 }
@@ -92,6 +86,7 @@ public class FormGroupsActivity extends BaseActivity {
                         intent.putExtra("groupName",info.getGroupName());
                         intent.putExtra("groupLocation",info.getLibraryName()+" "+info.getLibraryLevel());
                         intent.putExtra("studyTime","From: "+info.getStartTime()+"\nTo: "+info.getEndTime());
+                        intent.putExtra("key", info.getId());
 
                         startActivity(intent);
                     }

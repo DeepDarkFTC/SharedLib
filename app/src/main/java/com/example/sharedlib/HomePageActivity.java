@@ -98,7 +98,6 @@ public class HomePageActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, PersonalDetailsActivity.class);
-                intent.putExtra("userName", personalInfoButton.getText().toString());
                 startActivity(intent);
             }
         });

@@ -33,10 +33,8 @@ public class PersonalDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_details);
 
-        Intent parentIntent = getIntent();
+        final TextView userNameTextView = findViewById(R.id.text_username_personaldetail);
 
-        TextView userNameTextView = findViewById(R.id.text_username_personaldetail);
-        userNameTextView.setText(parentIntent.getStringExtra("userName"));
 
         final TextView userNameContentTextView = findViewById(R.id.text_name_person);
         final TextView emailTextView = findViewById(R.id.text_mail_person);
@@ -74,6 +72,7 @@ public class PersonalDetailsActivity extends BaseActivity {
                 personalUsername = dataSnapshot.child(emailToUid(user.getEmail())).getValue().toString();
                 Log.d("Database content222", personalUsername);
                 userNameContentTextView.setText(personalUsername);
+                userNameTextView.setText(personalUsername);
             }
 
             @Override
