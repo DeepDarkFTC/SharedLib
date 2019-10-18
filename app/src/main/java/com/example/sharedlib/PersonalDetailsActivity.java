@@ -2,11 +2,14 @@ package com.example.sharedlib;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -89,5 +92,22 @@ public class PersonalDetailsActivity extends BaseActivity {
             }
         });
 
+        Button resetNameButton = findViewById(R.id.button_resetname_person);
+        resetNameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText newName = new EditText(PersonalDetailsActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(PersonalDetailsActivity.this);
+                builder.setTitle("New User Name").setIcon(android.R.drawable.ic_dialog_info).setView(newName)
+                        .setNegativeButton("Cancel", null);
+                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.v("新名字",newName.getText().toString());// send message to firebase
+                    }
+                });
+                builder.show();
+            }
+        });
     }
 }
