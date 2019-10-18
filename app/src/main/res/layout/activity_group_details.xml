@@ -108,9 +108,13 @@
 
     <TextView
         android:id="@+id/text_member_group"
-        android:layout_width="match_parent"
-        android:layout_height="33dp"
-        android:text="Group Members" />
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="5"
+        android:text="Group Members"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
     <View
         android:id="@+id/view21"
@@ -125,6 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="5"
+
         android:background="#99cc66"
         android:text="Join This Group"
         android:textAllCaps="false"

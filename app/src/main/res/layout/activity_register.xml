@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@drawable/back"
+    android:background="@drawable/grass"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
@@ -105,11 +105,11 @@
             android:layout_height="59dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="#20000000"
+            android:background="#90000000"
             android:gravity="center"
             android:text="Create A New Account"
             android:textAllCaps="false"
-            android:textColor="#111010"
+            android:textColor="#FFFFFF"
             android:textSize="24sp" />
     </LinearLayout>
 
