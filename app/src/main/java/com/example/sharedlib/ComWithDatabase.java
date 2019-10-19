@@ -40,6 +40,12 @@ public class ComWithDatabase {
         this.thumbNumber = thumbNumber;
     }
 
+    public ComWithDatabase(String user, String comment, String date) {
+        this.user = user;
+        this.comment = comment;
+        this.date = date;
+    }
+
     public ComWithDatabase(String comment, String date) {
         this.comment = comment;
         this.date = date;
