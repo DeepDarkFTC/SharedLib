@@ -84,6 +84,11 @@ public class SeatAdapter extends BaseAdapter implements View.OnClickListener {
 
         //viewHolder.bad.setText("bad");
         viewHolder.bad.setOnClickListener(this);
+
+        String[] temp = data.get(i).split("thumb num: ");
+        viewHolder.number.setText(temp[1]);
+        Log.v("查看数据",data.get(i));
+
         return view;
 
     }

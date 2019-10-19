@@ -110,7 +110,7 @@ public class GroupDetailsActivity extends BaseActivity {
                     groupMember.add(member);
                 }
 
-                String members = "";
+                String members = "Group Members: ";
                 for(int i =0;i<groupMember.size();i++){
                     members += groupMember.get(i);
                 }
