@@ -120,7 +120,7 @@ public class SeatAdapter extends BaseAdapter implements View.OnClickListener {
                 Log.d("tag", "Btn_onClick: " + "view = " + view);
                 Toast.makeText(context,"+1",Toast.LENGTH_SHORT).show();
                 viewHolder.number.setText((thumbNumer+1)+"");
-                mDatabase.child("searchSeats").child("location").child(location).child(key).child("thumbNumber").setValue(thumbNumer+1);
+                mDatabase.child("searchSeats").child("location").child(location).child(key).child("thumbNumber").setValue(String.valueOf(thumbNumer+1));
                 break;
             case R.id.button_bad_listview:
                 Log.d("tag", "Tv_onClick: " + "view = " + view);
