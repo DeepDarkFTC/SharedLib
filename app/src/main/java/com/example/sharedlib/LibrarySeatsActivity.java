@@ -89,10 +89,12 @@ public class LibrarySeatsActivity extends BaseActivity {
 
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
-                    String record = "Seat occupancy: " + tempObj.getComment() + "%" + "    "
+                    String record = "location: " + locationTextView.getText().toString() + "    "
+                            + "Seat occupancy: " + tempObj.getComment() + "%" + "    "
                             + "upload date: " + tempObj.getDate() + "    "
                             + "uploaded by: " + tempObj.getUser() + "    "
-                            + "thumb num: " + tempObj.getThumbNumber();
+                            + "thumb num: " + tempObj.getThumbNumber() + "    "
+                            + "key: " + tempObj.getId();
                     if (timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
                         temp.add(0,record);
                     }
@@ -135,12 +137,12 @@ public class LibrarySeatsActivity extends BaseActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String key = mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).push().getKey();
                 String date = obtainCurrentDate.getDateAndTime();
                 ComWithDatabase comment = new
-                        ComWithDatabase(userName, String.valueOf(seatsPercentage), date, "0");
+                        ComWithDatabase(key, userName, String.valueOf(seatsPercentage), date, "0");
 
-                mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).push().setValue(comment);
+                mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).child(key).setValue(comment);
                 Toast.makeText(LibrarySeatsActivity.this, "Upload successfully.",
                         Toast.LENGTH_SHORT).show();
 

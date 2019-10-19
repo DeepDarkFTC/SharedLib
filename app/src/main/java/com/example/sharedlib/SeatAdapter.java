@@ -15,6 +15,9 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class SeatAdapter extends BaseAdapter implements View.OnClickListener {
     //private static final SeatAdapter ourInstance = new SeatAdapter();
 
@@ -26,9 +29,13 @@ public class SeatAdapter extends BaseAdapter implements View.OnClickListener {
     private Context context;
     //数据项
     private List<String> data;
+    private String key;
+    private TextView thumbDataTextView;
     public SeatAdapter(List<String> data){
         this.data = data;
     }
+    private String location;
+    private DatabaseReference mDatabase;
 
 
 //    private SeatAdapter(Context context, int textViewReourceId, List<String> objects) {
@@ -85,9 +92,16 @@ public class SeatAdapter extends BaseAdapter implements View.OnClickListener {
         //viewHolder.bad.setText("bad");
         viewHolder.bad.setOnClickListener(this);
 
-        String[] temp = data.get(i).split("thumb num: ");
-        viewHolder.number.setText(temp[1]);
+        String[] thumbData = data.get(i).split("thumb num: ");
+        String[] thumbData1 = thumbData[1].split("    ");
+        String[] keyData = data.get(i).split("key: ");
+        String[] locationData = data.get(i).split("location: ");
+        String[] locationData1 = locationData[1].split("    ");
+        viewHolder.number.setText(thumbData1[0]);
+        key = keyData[1];
+        location = locationData1[0];
         Log.v("查看数据",data.get(i));
+
 
         return view;
 
@@ -95,14 +109,19 @@ public class SeatAdapter extends BaseAdapter implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         switch (view.getId()){
             case R.id.button_good_listview:
                 Log.d("tag", "Btn_onClick: " + "view = " + view);
-                Toast.makeText(context,"我是good",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"+1",Toast.LENGTH_SHORT).show();
+                thumbDataTextView = view.findViewById(R.id.text_number_listview);
+                thumbDataTextView.setText(Integer.valueOf(thumbDataTextView.getText().toString())+1+"");
+                mDatabase.child("searchSeats").child("location").child(location).child(key).child("thumbNumber").setValue(Integer.valueOf(thumbDataTextView.getText().toString())+1);
                 break;
             case R.id.button_bad_listview:
                 Log.d("tag", "Tv_onClick: " + "view = " + view);
-                Toast.makeText(context,"我是bad",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"-1",Toast.LENGTH_SHORT).show();
                 break;
         }
     }

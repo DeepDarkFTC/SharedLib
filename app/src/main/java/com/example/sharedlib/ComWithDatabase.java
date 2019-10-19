@@ -33,7 +33,8 @@ public class ComWithDatabase {
     public ComWithDatabase() {
     }
 
-    public ComWithDatabase(String user, String comment, String date, String thumbNumber) {
+    public ComWithDatabase(String id, String user, String comment, String date, String thumbNumber) {
+        this.id = id;
         this.user = user;
         this.comment = comment;
         this.date = date;
