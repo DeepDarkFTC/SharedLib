@@ -26,18 +26,18 @@ public class ComWithDatabase {
     private String startTime;
     private String endTime;
     private String teamLeader;
-
+    private String thumbNumber;
 
 
 
     public ComWithDatabase() {
     }
 
-    public ComWithDatabase(String user, String comment, String date) {
+    public ComWithDatabase(String user, String comment, String date, String thumbNumber) {
         this.user = user;
         this.comment = comment;
         this.date = date;
-
+        this.thumbNumber = thumbNumber;
     }
 
     public ComWithDatabase(String comment, String date) {
@@ -149,4 +149,11 @@ public class ComWithDatabase {
         this.teamLeader = teamLeader;
     }
 
+    public String getThumbNumber() {
+        return thumbNumber;
+    }
+
+    public void setThumbNumber(String thumbNumber) {
+        this.thumbNumber = thumbNumber;
+    }
 }

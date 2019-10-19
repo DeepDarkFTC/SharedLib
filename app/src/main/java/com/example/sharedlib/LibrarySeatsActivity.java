@@ -135,7 +135,7 @@ public class LibrarySeatsActivity extends BaseActivity {
 
                 String date = obtainCurrentDate.getDateAndTime();
                 ComWithDatabase comment = new
-                        ComWithDatabase(userName, String.valueOf(seatsPercentage), date);
+                        ComWithDatabase(userName, String.valueOf(seatsPercentage), date, "0");
 
                 mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).push().setValue(comment);
                 Toast.makeText(LibrarySeatsActivity.this, "Upload successfully.",
