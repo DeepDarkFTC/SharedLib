@@ -30,13 +30,14 @@ public class SeatAdapter extends BaseAdapter implements View.OnClickListener {
     //数据项
     private List<String> data;
     private String key;
-    private TextView thumbDataTextView;
     public SeatAdapter(List<String> data){
         this.data = data;
     }
     private String location;
     private DatabaseReference mDatabase;
     private int thumbNumer = 0;
+
+    private ViewHolder viewHolder;
 
 
 //    private SeatAdapter(Context context, int textViewReourceId, List<String> objects) {
@@ -64,7 +65,7 @@ public class SeatAdapter extends BaseAdapter implements View.OnClickListener {
     @NonNull
     @Override
     public View getView(int i, @Nullable View view, @NonNull ViewGroup viewGroup) {
-        ViewHolder viewHolder = null;
+        viewHolder = null;
                 //String information = getItem(position);
                 //return super.getView(position, convertView, parent);
 
@@ -94,15 +95,16 @@ public class SeatAdapter extends BaseAdapter implements View.OnClickListener {
         viewHolder.bad.setOnClickListener(this);
 
         String[] thumbData = data.get(i).split("thumb num: ");
-        String[] thumbData1 = thumbData[1].split("    ");
+        String[] thumbData1 = thumbData[1].split("____");
         String[] keyData = data.get(i).split("key: ");
         String[] locationData = data.get(i).split("location: ");
-        String[] locationData1 = locationData[1].split("    ");
+        String[] locationData1 = locationData[1].split("____");
         viewHolder.number.setText(thumbData1[0]);
         thumbNumer = Integer.parseInt(thumbData1[0]);
         key = keyData[1];
         location = locationData1[0];
         Log.v("查看数据",data.get(i));
+        Log.v("查看具体数据",thumbNumer+"||||"+key+"||||"+location);
 
 
         return view;
@@ -117,8 +119,7 @@ public class SeatAdapter extends BaseAdapter implements View.OnClickListener {
             case R.id.button_good_listview:
                 Log.d("tag", "Btn_onClick: " + "view = " + view);
                 Toast.makeText(context,"+1",Toast.LENGTH_SHORT).show();
-                thumbDataTextView = view.findViewById(R.id.text_number_listview);
-                thumbDataTextView.setText(thumbNumer+1+"");
+                viewHolder.number.setText((thumbNumer+1)+"");
                 mDatabase.child("searchSeats").child("location").child(location).child(key).child("thumbNumber").setValue(thumbNumer+1);
                 break;
             case R.id.button_bad_listview:

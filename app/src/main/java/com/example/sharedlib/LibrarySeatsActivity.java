@@ -89,11 +89,11 @@ public class LibrarySeatsActivity extends BaseActivity {
 
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
-                    String record = "location: " + locationTextView.getText().toString() + "    "
-                            + "Seat occupancy: " + tempObj.getComment() + "%" + "    "
-                            + "upload date: " + tempObj.getDate() + "    "
-                            + "uploaded by: " + tempObj.getUser() + "    "
-                            + "thumb num: " + tempObj.getThumbNumber() + "    "
+                    String record = "location: " + locationTextView.getText().toString() + "____"
+                            + "Seat occupancy: " + tempObj.getComment() + "%" + "____"
+                            + "upload date: " + tempObj.getDate() + "____"
+                            + "uploaded by: " + tempObj.getUser() + "____"
+                            + "thumb num: " + tempObj.getThumbNumber() + "____"
                             + "key: " + tempObj.getId();
                     if (timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
                         temp.add(0,record);
