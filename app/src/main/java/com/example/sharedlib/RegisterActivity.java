@@ -54,7 +54,7 @@ public class RegisterActivity extends BaseActivity {
         final TextView passwordTextView = findViewById(R.id.register_password);
         passwordTextView.setInputType(129);//不可见
 
-        final String[] list = {"What's your favourite number", "What's your favourite colour"};
+        final String[] list = {"What's your favourite numberView", "What's your favourite colour"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, list);
 
 

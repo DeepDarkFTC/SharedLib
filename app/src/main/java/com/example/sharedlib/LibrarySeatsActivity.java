@@ -101,8 +101,9 @@ public class LibrarySeatsActivity extends BaseActivity {
                 }
                 int len = temp.size();
                 Log.d("seat", String.valueOf(len));
-                SeatAdapter adapter = new SeatAdapter(temp);
+
                 ListView listView = findViewById(R.id.seatsComments);
+                SeatAdapter adapter = new SeatAdapter(temp,listView);
                 listView.setAdapter(adapter);
             }
 
