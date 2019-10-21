@@ -77,7 +77,7 @@ public class RankingActivity extends BaseActivity {
                                 "user: " + tempObj.getComment() + "  " +
                                 "study time: " + secToTime(Integer.parseInt(tempObj.getDate()));
                         result[i] = record;
-                        if (user.getEmail().equals(uidToEmail(postSnapshot.getKey()))) {
+                        if (record.contains(userName)) {
                             Log.v("测试测试","执行次数"+i);
                             rank = (i + 1) + "";
                             rankTextView.setText("Rank: " + rank);
