@@ -101,7 +101,7 @@ public class CreateNewGroup extends BaseActivity {
                             level.getSelectedItem().toString(),
                             studyTheme.getText().toString(),
                             startButton.getText().toString(),
-                    endButton.getText().toString(), user.getEmail());
+                            endButton.getText().toString(), user.getEmail());
 
                     mDatabase.child("studyGroup").child(key).setValue(comment);
                     mDatabase.child("groupMember").child(key).child(emailToUid(user.getEmail())).setValue(true);

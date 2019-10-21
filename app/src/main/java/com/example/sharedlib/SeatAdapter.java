@@ -9,15 +9,14 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.List;
 
 public class SeatAdapter extends BaseAdapter {
 
@@ -27,14 +26,13 @@ public class SeatAdapter extends BaseAdapter {
     private ListView listView;
 //    private int number;
 //    private String key;
+    //    private String location;
+    private DatabaseReference mDatabase;
 
-    public SeatAdapter(List<String> data, ListView listView){
+    public SeatAdapter(List<String> data, ListView listView) {
         this.data = data;
         this.listView = listView;
     }
-//    private String location;
-    private DatabaseReference mDatabase;
-
 
     @Override
     public int getCount() {
@@ -55,8 +53,8 @@ public class SeatAdapter extends BaseAdapter {
     @Override
     public View getView(int position, @Nullable View view, @NonNull ViewGroup viewGroup) {
         ViewHolder viewHolder = null;
-                //String information = getItem(position);
-                //return super.getView(position, convertView, parent);
+        //String information = getItem(position);
+        //return super.getView(position, convertView, parent);
 
         if (context == null)
             context = viewGroup.getContext();
@@ -74,10 +72,10 @@ public class SeatAdapter extends BaseAdapter {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //获取viewHolder实例
-        viewHolder = (ViewHolder)view.getTag();
+        viewHolder = (ViewHolder) view.getTag();
         //设置数据
         viewHolder.mTv.setText(data.get(position));
-        viewHolder.mTv.setTag("mTv"+position);
+        viewHolder.mTv.setTag("mTv" + position);
         //设置监听事件
 
         viewHolder.good.setOnClickListener(new InnerOnClickListener(position));
@@ -95,12 +93,10 @@ public class SeatAdapter extends BaseAdapter {
         String[] locationData1 = locationData[1].split("____");
 
         viewHolder.numberView.setText(thumbData1[0]);
-        viewHolder.numberView.setTag("numberView"+position);
+        viewHolder.numberView.setTag("numberView" + position);
 
         viewHolder.number = Integer.parseInt(thumbData1[0]);
         viewHolder.key = keyData[1];
-
-
 
         return view;
 
@@ -148,19 +144,20 @@ public class SeatAdapter extends BaseAdapter {
         String key;
     }
 
-    public class InnerOnClickListener implements View.OnClickListener{
+    public class InnerOnClickListener implements View.OnClickListener {
         int position;
-        public  InnerOnClickListener(int position){
+
+        public InnerOnClickListener(int position) {
             super();
             this.position = position;
         }
 
         @Override
-        public void onClick(View v){
+        public void onClick(View v) {
 
-            TextView thumbCountTextView = listView.findViewWithTag("numberView"+position);
-            TextView dataTextView = listView.findViewWithTag("mTv"+position);
-            Log.v("查看",dataTextView.getText().toString());
+            TextView thumbCountTextView = listView.findViewWithTag("numberView" + position);
+            TextView dataTextView = listView.findViewWithTag("mTv" + position);
+            Log.v("查看", dataTextView.getText().toString());
 
             String[] thumbData = dataTextView.getText().toString().split("thumb num: ");
             String[] thumbData1 = thumbData[1].split("____");
@@ -179,20 +176,20 @@ public class SeatAdapter extends BaseAdapter {
             int number = Integer.parseInt(thumbData1[0]);
             String key = keyData[1];
 
-            Log.v("查看数据",data.get(position));
-            Log.v("查看具体数据",number+"||||"+ key+"||||"+location);
+            Log.v("查看数据", data.get(position));
+            Log.v("查看具体数据", number + "||||" + key + "||||" + location);
 
 
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.button_good_listview:
-                    thumbCountTextView.setText((number+1)+"");
-                    mDatabase.child("searchSeats").child("location").child(location).child(key).child("thumbNumber").setValue(String.valueOf(number+1));
-                    Log.v("查看key",key);
+                    thumbCountTextView.setText((number + 1) + "");
+                    mDatabase.child("searchSeats").child("location").child(location).child(key).child("thumbNumber").setValue(String.valueOf(number + 1));
+                    Log.v("查看key", key);
                     break;
                 case R.id.button_bad_listview:
-                    thumbCountTextView.setText((number-1)+"");
-                    mDatabase.child("searchSeats").child("location").child(location).child(key).child("thumbNumber").setValue(String.valueOf(number-1));
-                    Log.v("查看key",key);
+                    thumbCountTextView.setText((number - 1) + "");
+                    mDatabase.child("searchSeats").child("location").child(location).child(key).child("thumbNumber").setValue(String.valueOf(number - 1));
+                    Log.v("查看key", key);
             }
         }
     }

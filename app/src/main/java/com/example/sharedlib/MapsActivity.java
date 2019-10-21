@@ -1,16 +1,16 @@
 package com.example.sharedlib;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -33,15 +33,18 @@ import java.util.ArrayList;
 public class MapsActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         DiscreteScrollView.ScrollStateChangeListener<LibraryAdapter_forMapView.ViewHolder>,
-        DiscreteScrollView.OnItemChangedListener<LibraryAdapter_forMapView.ViewHolder>{
+        DiscreteScrollView.OnItemChangedListener<LibraryAdapter_forMapView.ViewHolder> {
 
     private static final String TAG = MapsActivity.class.getSimpleName();
-    private GoogleMap mMap;
-    private CameraPosition mCameraPosition;
-
-    private ArrayList<Library_forMapView> lib_list = new ArrayList<>();
-    private ArrayList<Marker> marker_list;
-    private DiscreteScrollView scrollView;
+    // 获取不到地点时，默认地点在unihouse
+    private static final int DEFAULT_ZOOM = 16;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    // Keys for storing activity state.
+    private static final String KEY_CAMERA_POSITION = "camera_position";
+    private static final String KEY_LOCATION = "location";
+    // A default location (Sydney, Australia) and default zoom to use when location permission is
+    // not granted.
+    private final LatLng mDefaultLocation = new LatLng(-37.796771, 144.961306);
     Marker marker_current;
     LatLng erc_position = new LatLng(-37.799338, 144.962832);
     LatLng baillieu_position = new LatLng(-37.798391, 144.959406);
@@ -49,25 +52,15 @@ public class MapsActivity extends AppCompatActivity
     LatLng giblin_position = new LatLng(-37.801277, 144.959312);
 
     String userName_me;
-
-
-
+    private GoogleMap mMap;
+    private CameraPosition mCameraPosition;
+    private ArrayList<Library_forMapView> lib_list = new ArrayList<>();
+    private ArrayList<Marker> marker_list;
+    private DiscreteScrollView scrollView;
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient;
-
-    // A default location (Sydney, Australia) and default zoom to use when location permission is
-    // not granted.
-    private final LatLng mDefaultLocation = new LatLng(-37.796771, 144.961306);
-    // 获取不到地点时，默认地点在unihouse
-    private static final int DEFAULT_ZOOM = 16;
-    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean mLocationPermissionGranted;
-
     private Location mLastKnownLocation;
-
-    // Keys for storing activity state.
-    private static final String KEY_CAMERA_POSITION = "camera_position";
-    private static final String KEY_LOCATION = "location";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,8 +146,7 @@ public class MapsActivity extends AppCompatActivity
         }
     }
 
-    private void showScrollView()
-    {
+    private void showScrollView() {
         scrollView = findViewById(R.id.libPicker_activityMap);
         scrollView.setSlideOnFling(true);
         scrollView.addOnItemChangedListener(this);
@@ -199,16 +191,13 @@ public class MapsActivity extends AppCompatActivity
 
     }
 
-    private float getDistance(LatLng goalLocation)
-    {
+    private float getDistance(LatLng goalLocation) {
         float[] results = new float[1];
         if (mLastKnownLocation != null) {
             System.out.println("知道现在的位置了，正常工作");
             Location.distanceBetween(goalLocation.latitude, goalLocation.longitude,
                     mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude(), results);
-        }
-        else
-        {
+        } else {
             System.out.println("没得到现在的位置，不知道为啥，之后再排查吧");
             Location.distanceBetween(goalLocation.latitude, goalLocation.longitude,
                     mDefaultLocation.latitude, mDefaultLocation.longitude, results);

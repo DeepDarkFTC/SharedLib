@@ -1,10 +1,7 @@
 package com.example.sharedlib;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,9 +48,9 @@ public class PersonalDetailsActivity extends BaseActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
                     personalStudyTime = Integer.parseInt(dataSnapshot.getValue(ComWithDatabase.class).getDate());
-                    studyTimeTextView.setText(personalStudyTime+"");
+                    studyTimeTextView.setText(personalStudyTime + "");
                 }
             }
 
@@ -102,9 +99,9 @@ public class PersonalDetailsActivity extends BaseActivity {
                 builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.v("新名字",newName.getText().toString());
-                    // send message to firebase
-                    mDatabase.child("userName").child(emailToUid(user.getEmail())).setValue(newName.getText().toString());
+                        Log.v("新名字", newName.getText().toString());
+                        // send message to firebase
+                        mDatabase.child("userName").child(emailToUid(user.getEmail())).setValue(newName.getText().toString());
 
                     }
                 });

@@ -26,7 +26,6 @@ public class RankingActivity extends BaseActivity {
     private DatabaseReference mDatabase;
     private ArrayList commentList = new ArrayList();
     private FirebaseAuth mAuth;
-    private String rank;
 
 
     @Override
@@ -47,7 +46,7 @@ public class RankingActivity extends BaseActivity {
         final TextView studyTimeTextView = findViewById(R.id.text_studytime_ranking);
         int studyTime = Integer.parseInt(parentIntent.getStringExtra("studyTime"));
 
-        studyTimeTextView.setText("Total study time: "+ secToTime(studyTime));
+        studyTimeTextView.setText("Total study time: " + secToTime(studyTime));
 
         DatabaseReference ref = mDatabase.child("studyTime");
         ref.addValueEventListener(new ValueEventListener() {
@@ -70,12 +69,18 @@ public class RankingActivity extends BaseActivity {
                     }
 
                     String[] result = new String[temp.size()];
+                    String rank = "No ranking";
+                    TextView rankTextView = findViewById(R.id.text_rank_ranking);
                     for (int i = 0; i < result.length; i++) {
                         ComWithDatabase tempObj = (ComWithDatabase) temp.get(i);
-                        String record = "No."+ (i+1) +" "+"user: " + tempObj.getComment() + "  " + "study time: " + secToTime(Integer.parseInt(tempObj.getDate()));
+                        String record = "No." + (i + 1) + " " +
+                                "user: " + tempObj.getComment() + "  " +
+                                "study time: " + secToTime(Integer.parseInt(tempObj.getDate()));
                         result[i] = record;
-                        if(user.getEmail().equals(uidToEmail(postSnapshot.getKey()))){
-                            rank = (i + 1)+"";
+                        if (user.getEmail().equals(uidToEmail(postSnapshot.getKey()))) {
+                            Log.v("测试测试","执行次数"+i);
+                            rank = (i + 1) + "";
+                            rankTextView.setText("Rank: " + rank);
                         }
                     }
 
@@ -83,8 +88,6 @@ public class RankingActivity extends BaseActivity {
                     ListView listView = findViewById(R.id.listview_ranklist_ranking);
                     listView.setAdapter(adapter);
 
-                    TextView rankTextView = findViewById(R.id.text_rank_ranking);
-                    rankTextView.setText("Rank: " + rank);
                 }
             }
 
@@ -105,17 +108,17 @@ public class RankingActivity extends BaseActivity {
         });
     }
 
-    public void sortByTime(ArrayList list){
-        Collections.sort(list, new Comparator(){
+    public void sortByTime(ArrayList list) {
+        Collections.sort(list, new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
-                ComWithDatabase obj1 = (ComWithDatabase)o1;
-                ComWithDatabase obj2 = (ComWithDatabase)o2;
-                if(Integer.parseInt(obj1.getDate()) < Integer.parseInt(obj2.getDate())){
+                ComWithDatabase obj1 = (ComWithDatabase) o1;
+                ComWithDatabase obj2 = (ComWithDatabase) o2;
+                if (Integer.parseInt(obj1.getDate()) < Integer.parseInt(obj2.getDate())) {
                     return 1;
-                }else if(Integer.parseInt(obj1.getDate()) == Integer.parseInt(obj2.getDate())){
+                } else if (Integer.parseInt(obj1.getDate()) == Integer.parseInt(obj2.getDate())) {
                     return 0;
-                }else{
+                } else {
                     return -1;
                 }
             }

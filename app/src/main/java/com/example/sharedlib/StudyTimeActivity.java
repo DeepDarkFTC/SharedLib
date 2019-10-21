@@ -54,7 +54,7 @@ public class StudyTimeActivity extends BaseActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
                     lastTime = Integer.parseInt(dataSnapshot.getValue(ComWithDatabase.class).getDate());
                     totalTime = lastTime;
                     Log.d("上次时间", String.valueOf(lastTime));

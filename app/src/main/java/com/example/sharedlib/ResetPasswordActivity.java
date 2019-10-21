@@ -5,32 +5,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 public class ResetPasswordActivity extends BaseActivity {
 
-    private DatabaseReference mDatabase;
     Boolean resetFlag = false;
-
-
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +38,7 @@ public class ResetPasswordActivity extends BaseActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkFormat(emailEditText.getText().toString())){
+                if (checkFormat(emailEditText.getText().toString())) {
                     // send message to firebase
 //                    Log.v("Info",email+"_"+securityQuestion+"_"+securityAnswer+"_"+newPassword);
                     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -64,9 +54,9 @@ public class ResetPasswordActivity extends BaseActivity {
                                                 Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(ResetPasswordActivity.this, MainActivity.class);
                                         startActivity(intent);
-                                    }else{
+                                    } else {
                                         Toast.makeText(ResetPasswordActivity.this, "Cannot find this email.",
-                                        Toast.LENGTH_SHORT).show();
+                                                Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

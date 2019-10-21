@@ -11,9 +11,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.auth.FirebaseAuth;
 
 
 public class BaseActivity extends Activity {
@@ -50,17 +47,17 @@ public class BaseActivity extends Activity {
         hideProgressDialog();
     }
 
-    public String emailToUid(String email){
-        String uid =email.replace(".",",");
+    public String emailToUid(String email) {
+        String uid = email.replace(".", ",");
         return uid;
     }
 
-    public String uidToEmail(String uid){
-        String email =uid.replace(",",".");
+    public String uidToEmail(String uid) {
+        String email = uid.replace(",", ".");
         return email;
     }
 
-    public void logoutMethod(final Context context){
+    public void logoutMethod(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Message");
         builder.setMessage("Are you sure you want to quit?");
@@ -68,9 +65,9 @@ public class BaseActivity extends Activity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Intent logoutIntent = new Intent();
-                logoutIntent.setClass(context,MainActivity.class);
+                logoutIntent.setClass(context, MainActivity.class);
                 logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //关键的一句，将新的activity置为栈顶
-                Log.v("测试测试测试",logoutIntent.toString());
+                Log.v("测试测试测试", logoutIntent.toString());
                 startActivity(logoutIntent);
                 finish();
             }

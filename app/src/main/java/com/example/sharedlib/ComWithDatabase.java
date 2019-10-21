@@ -1,18 +1,5 @@
 package com.example.sharedlib;
 
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.Collections;
-
 public class ComWithDatabase {
 
     private String id;
@@ -27,7 +14,6 @@ public class ComWithDatabase {
     private String endTime;
     private String teamLeader;
     private String thumbNumber;
-
 
 
     public ComWithDatabase() {
@@ -55,7 +41,7 @@ public class ComWithDatabase {
 
     public ComWithDatabase(String id, String groupName, String libraryName,
                            String libraryLevel, String studyTopic,
-                           String startTime, String endTime, String teamLeader){
+                           String startTime, String endTime, String teamLeader) {
         this.id = id;
         this.groupName = groupName;
         this.libraryName = libraryName;
@@ -83,21 +69,20 @@ public class ComWithDatabase {
         this.user = user;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
     public String getComment() {
         return comment;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
-
 
     public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getGroupName() {

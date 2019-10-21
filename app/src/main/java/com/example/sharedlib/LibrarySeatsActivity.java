@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SeekBar;
@@ -35,6 +34,19 @@ public class LibrarySeatsActivity extends BaseActivity {
 
     private int seatsPercentage;
 
+    public static long timeDifference(String time1, String time2) {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        try {
+            Date d1 = df.parse(time1);
+            Date d2 = df.parse(time2);
+            long diff = d1.getTime() - d2.getTime();
+            long hour = diff / (1000 * 60 * 60);
+            return hour;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +93,7 @@ public class LibrarySeatsActivity extends BaseActivity {
 //                    String content = postSnapshot.getValue().toString();
 //                    commentList.add(content);
                     ComWithDatabase comment = postSnapshot.getValue(ComWithDatabase.class);
-                    commentList.add(0,comment);
+                    commentList.add(0, comment);
                 }
                 Log.d("Database content", commentList.toString());
                 Collections.reverse(commentList);   // displayed by upload date
@@ -96,14 +108,14 @@ public class LibrarySeatsActivity extends BaseActivity {
                             + "thumb num: " + tempObj.getThumbNumber() + "____"
                             + "key: " + tempObj.getId();
                     if (timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
-                        temp.add(0,record);
+                        temp.add(0, record);
                     }
                 }
                 int len = temp.size();
                 Log.d("seat", String.valueOf(len));
 
                 ListView listView = findViewById(R.id.seatsComments);
-                SeatAdapter adapter = new SeatAdapter(temp,listView);
+                SeatAdapter adapter = new SeatAdapter(temp, listView);
                 listView.setAdapter(adapter);
             }
 
@@ -158,19 +170,5 @@ public class LibrarySeatsActivity extends BaseActivity {
             }
         });
 
-    }
-
-    public static long timeDifference(String time1, String time2) {
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
-        try {
-            Date d1 = df.parse(time1);
-            Date d2 = df.parse(time2);
-            long diff = d1.getTime() - d2.getTime();
-            long hour = diff / (1000 * 60 * 60);
-            return hour;
-        } catch (Exception e) {
-            return -1;
-        }
     }
 }

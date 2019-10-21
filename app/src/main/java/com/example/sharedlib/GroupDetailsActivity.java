@@ -1,7 +1,5 @@
 package com.example.sharedlib;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,8 +64,8 @@ public class GroupDetailsActivity extends BaseActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.exists()) {
-                    Log.v("先手","111111");
+                if (dataSnapshot.exists()) {
+                    Log.v("先手", "111111");
                     flag = false;
                     groupButton.setText("Quit This Group");
                 }
@@ -75,13 +73,12 @@ public class GroupDetailsActivity extends BaseActivity {
                 groupButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.v("后手","22222"+flag);
-                        if(flag){   // join button
+                        Log.v("后手", "22222" + flag);
+                        if (flag) {   // join button
                             mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail())).setValue(true);
                             flag = false;
                             groupButton.setText("Quit This Group");
-                        }
-                        else{   // quit button
+                        } else {   // quit button
                             mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail())).removeValue();
                             flag = true;
                             groupButton.setText("Join This Group");
@@ -111,7 +108,7 @@ public class GroupDetailsActivity extends BaseActivity {
                 }
 
                 String members = "Group Members: ";
-                for(int i =0;i<groupMember.size();i++){
+                for (int i = 0; i < groupMember.size(); i++) {
                     members += groupMember.get(i);
                 }
                 memberTextView.setText(members);

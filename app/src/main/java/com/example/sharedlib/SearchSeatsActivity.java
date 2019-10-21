@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,7 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class SearchSeatsActivity extends BaseActivity {
 
@@ -104,7 +101,7 @@ public class SearchSeatsActivity extends BaseActivity {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     ComWithDatabase comment = new ComWithDatabase(postSnapshot.getKey(), postSnapshot.getValue().toString());
-                    commentList.add(0,comment);
+                    commentList.add(0, comment);
                 }
                 Log.d("Database content", commentList.toString());
                 ArrayList temp = new ArrayList();
@@ -112,36 +109,36 @@ public class SearchSeatsActivity extends BaseActivity {
                 double baiData = 0.0;
                 double ercData = 0.0;
                 double gibData = 0.0;
-                for(int i=0;i<commentList.size();i++){
-                    ComWithDatabase tempObj = (ComWithDatabase)commentList.get(i);
-                    Log.v("数目",i+"");
-                    temp.add(tempObj.getComment()+" "+ tempObj.getDate());
+                for (int i = 0; i < commentList.size(); i++) {
+                    ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
+                    Log.v("数目", i + "");
+                    temp.add(tempObj.getComment() + " " + tempObj.getDate());
                     String record = temp.get(i).toString();
                     String[] infoSegment = record.split(" ");
-                    Log.v("查看查看",record);
-                    if(infoSegment[0].equals("Architecture")){
+                    Log.v("查看查看", record);
+                    if (infoSegment[0].equals("Architecture")) {
                         arcData += Integer.parseInt(infoSegment[4]);
                     }
-                    if(infoSegment[0].equals("Baillieu")){
+                    if (infoSegment[0].equals("Baillieu")) {
                         baiData += Integer.parseInt(infoSegment[4]);
                     }
-                    if(infoSegment[0].equals("Erc")){
+                    if (infoSegment[0].equals("Erc")) {
                         ercData += Integer.parseInt(infoSegment[4]);
                     }
-                    if(infoSegment[0].equals("Giblin")){
+                    if (infoSegment[0].equals("Giblin")) {
                         gibData += Integer.parseInt(infoSegment[4]);
                     }
                 }
-                overallSeatsSituation.setArcSeats(arcData/5+"");
+                overallSeatsSituation.setArcSeats(arcData / 5 + "");
                 arcSeatsTextView.setText("Seat occupancy: " + overallSeatsSituation.getArcSeats() + "%" + "     " + "Seat vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getArcSeats())) + "%");
 
-                overallSeatsSituation.setBaiSeats(baiData/5+"");
+                overallSeatsSituation.setBaiSeats(baiData / 5 + "");
                 baiSeatsTextView.setText("Seat occupancy: " + overallSeatsSituation.getBaiSeats() + "%" + "     " + "Seat vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getBaiSeats())) + "%");
 
-                overallSeatsSituation.setErcSeats(ercData/5+"");
+                overallSeatsSituation.setErcSeats(ercData / 5 + "");
                 ercSeatsTextView.setText("Seat occupancy: " + overallSeatsSituation.getErcSeats() + "%" + "     " + "Seat vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getErcSeats())) + "%");
 
-                overallSeatsSituation.setGibSeats(gibData/5+"");
+                overallSeatsSituation.setGibSeats(gibData / 5 + "");
                 gibSeatsTextView.setText("Seat occupancy: " + overallSeatsSituation.getGibSeats() + "%" + "     " + "Seat vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getGibSeats())) + "%");
             }
 

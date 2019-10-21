@@ -8,13 +8,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class LibraryAdapter_forMapView extends RecyclerView.Adapter<LibraryAdapter_forMapView.ViewHolder>{
+public class LibraryAdapter_forMapView extends RecyclerView.Adapter<LibraryAdapter_forMapView.ViewHolder> {
 
     private RecyclerView parentRecycler;
     private List<Library_forMapView> data;
@@ -45,16 +44,15 @@ public class LibraryAdapter_forMapView extends RecyclerView.Adapter<LibraryAdapt
         Library_forMapView library = data.get(position);
         holder.imageView_lib.setImageResource(library.getPicture());
         holder.textView_name_lib.setText(library.getName());
-        holder.textView_crowed_lib.setText("Crowded degree: "+ String.valueOf(library.getCrowded())+"%");
-        holder.textView_distance_lib.setText("Distance: "+ String.valueOf((int)library.getDistance())+"m");
+        holder.textView_crowed_lib.setText("Crowded degree: " + String.valueOf(library.getCrowded()) + "%");
+        holder.textView_distance_lib.setText("Distance: " + String.valueOf((int) library.getDistance()) + "m");
         holder.botton_detail_lib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Toast.makeText(mContext, "到时候点这个就跳到"+data.get(position).getName()+"图书馆",
 //                        Toast.LENGTH_SHORT).show();
                 Intent intent;
-                switch (data.get(position).getName())
-                {
+                switch (data.get(position).getName()) {
                     case "ERC":
                         intent = new Intent(mContext, ErcLibraryActivity.class);
                         intent.putExtra("userName", username_me);
@@ -110,7 +108,7 @@ public class LibraryAdapter_forMapView extends RecyclerView.Adapter<LibraryAdapt
 
         @Override
         public void onClick(View v) {
-            System.out.println("你点击了第"+ String.valueOf(getAdapterPosition())+"个图");
+            System.out.println("你点击了第" + String.valueOf(getAdapterPosition()) + "个图");
             parentRecycler.smoothScrollToPosition(getAdapterPosition());
         }
     }
