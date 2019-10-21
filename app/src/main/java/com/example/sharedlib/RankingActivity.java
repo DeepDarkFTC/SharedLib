@@ -76,8 +76,9 @@ public class RankingActivity extends BaseActivity {
                         String record = "No." + (i + 1) + " " +
                                 "user: " + tempObj.getComment() + "  " +
                                 "study time: " + secToTime(Integer.parseInt(tempObj.getDate()));
+                        String userEmail = "email" + uidToEmail(tempObj.getUser());
                         result[i] = record;
-                        if (record.contains(userName)) {
+                        if (userEmail.contains(user.getEmail())) {
                             Log.v("测试测试","执行次数"+i);
                             rank = (i + 1) + "";
                             rankTextView.setText("Rank: " + rank);
