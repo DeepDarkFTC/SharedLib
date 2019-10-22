@@ -130,16 +130,16 @@ public class SearchSeatsActivity extends BaseActivity {
                     }
                 }
                 overallSeatsSituation.setArcSeats(arcData / 5 + "");
-                arcSeatsTextView.setText("Seat occupancy: " + overallSeatsSituation.getArcSeats() + "%" + "     " + "Seat vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getArcSeats())) + "%");
+                arcSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getArcSeats() + "%" + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getArcSeats())) + "%");
 
                 overallSeatsSituation.setBaiSeats(baiData / 5 + "");
-                baiSeatsTextView.setText("Seat occupancy: " + overallSeatsSituation.getBaiSeats() + "%" + "     " + "Seat vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getBaiSeats())) + "%");
+                baiSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getBaiSeats() + "%" + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getBaiSeats())) + "%");
 
                 overallSeatsSituation.setErcSeats(ercData / 5 + "");
-                ercSeatsTextView.setText("Seat occupancy: " + overallSeatsSituation.getErcSeats() + "%" + "     " + "Seat vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getErcSeats())) + "%");
+                ercSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getErcSeats() + "%" + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getErcSeats())) + "%");
 
                 overallSeatsSituation.setGibSeats(gibData / 5 + "");
-                gibSeatsTextView.setText("Seat occupancy: " + overallSeatsSituation.getGibSeats() + "%" + "     " + "Seat vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getGibSeats())) + "%");
+                gibSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getGibSeats() + "%" + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getGibSeats())) + "%");
             }
 
             @Override

@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#99cc66"
-            android:text="The Total Study Time On This Month"
+            android:text="Total Study Time On This Month"
             android:textAlignment="center"
             android:textSize="30sp" />
 

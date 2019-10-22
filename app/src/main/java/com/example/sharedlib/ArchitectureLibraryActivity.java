@@ -159,7 +159,7 @@ public class ArchitectureLibraryActivity extends BaseActivity {
                 } else {
                     calResult = sum / num;
                 }
-                textView.setText("Seat occupancy: " + calResult + "%" + "     " + "Seat vacancy: " + (100 - calResult) + "%");
+                textView.setText("Occupancy: " + calResult + "%" + "     " + "Vacancy: " + (100 - calResult) + "%");
                 mDatabase.child("libraryOccupation").child(location).setValue(calResult);
             }
 
