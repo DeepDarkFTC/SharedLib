@@ -82,7 +82,6 @@ public class SeatAdapter extends BaseAdapter {
         String[] thumbData1 = thumbData[1].split("____");
         String[] keyData = data.get(position).split("key: ");
         String[] locationData = data.get(position).split("location: ");
-        String[] locationData1 = locationData[1].split("____");
 
         viewHolder.numberView.setText(thumbData1[0]);
         viewHolder.numberView.setTag("numberView" + position);
@@ -115,7 +114,6 @@ public class SeatAdapter extends BaseAdapter {
         public void onClick(View v) {
 
             TextView thumbCountTextView = listView.findViewWithTag("numberView" + position);
-            TextView dataTextView = listView.findViewWithTag("mTv" + position);
 
             String[] thumbData = data.get(position).split("thumb num: ");
             String[] thumbData1 = thumbData[1].split("____");
