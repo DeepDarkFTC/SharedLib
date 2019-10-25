@@ -1,5 +1,6 @@
 package com.example.sharedlib.Activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -110,40 +111,47 @@ public class StudyTimeActivity extends BaseActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkInAnyLib()) {
+                    // startTimeTextView timer
+                    if (!stopFlag) {
+                        timer.setBase(SystemClock.elapsedRealtime());
+                        timer.start();
+                        pause.setEnabled(true);
+                        restart.setEnabled(false);
+                        start.setEnabled(false);
 
-                // startTimeTextView timer
-                if (!stopFlag) {
-                    timer.setBase(SystemClock.elapsedRealtime());
-                    timer.start();
-                    pause.setEnabled(true);
-                    restart.setEnabled(false);
-                    start.setEnabled(false);
+                        stopFlag = true;
+                    } else {
+                        Log.v("current time", timer.getText().toString());
+                        int hour = Integer.parseInt(timer.getText().toString().split(":")[0]);
+                        int minute = Integer.parseInt(timer.getText().toString().split(":")[1]);
+                        int second = Integer.parseInt(timer.getText().toString().split(":")[2]);
 
-                    stopFlag = true;
-                } else {
-                    Log.v("current time", timer.getText().toString());
-                    int hour = Integer.parseInt(timer.getText().toString().split(":")[0]);
-                    int minute = Integer.parseInt(timer.getText().toString().split(":")[1]);
-                    int second = Integer.parseInt(timer.getText().toString().split(":")[2]);
+                        int currentTime = hour * 3600 + minute * 60 + second;
+                        totalTime = lastTime + currentTime;
 
-                    int currentTime = hour * 3600 + minute * 60 + second;
-                    totalTime = lastTime + currentTime;
+                        timer.stop();
+                        timer.setBase(SystemClock.elapsedRealtime());
+                        pause.setEnabled(false);
+                        restart.setEnabled(false);
+                        start.setEnabled(true);
+                        start.setText("Start");
 
-                    timer.stop();
-                    timer.setBase(SystemClock.elapsedRealtime());
-                    pause.setEnabled(false);
-                    restart.setEnabled(false);
-                    start.setEnabled(true);
-                    start.setText("Start");
+                        stopFlag = false;
 
-                    stopFlag = false;
+                        ComWithDatabase comment = new ComWithDatabase(userName, String.valueOf(totalTime));
 
-                    ComWithDatabase comment = new ComWithDatabase(userName, String.valueOf(totalTime));
-
-                    String userId = emailToUid(user.getEmail());
-                    mDatabase.child("studyTime").child(userId).setValue(comment);
+                        String userId = emailToUid(user.getEmail());
+                        mDatabase.child("studyTime").child(userId).setValue(comment);
+                    }
                 }
-
+                else{
+                    new AlertDialog.Builder(StudyTimeActivity.this)
+                            .setTitle("Warning")
+                            .setMessage("You are not located in any library.")
+                            .setPositiveButton("ok", null)
+                            .show();
+                }
             }
         });
 
