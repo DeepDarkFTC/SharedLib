@@ -66,7 +66,6 @@ public class GroupDetailsActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
-                    Log.v("先手", "111111");
                     flag = false;
                     groupButton.setText("Quit This Group");
                 }
@@ -74,7 +73,6 @@ public class GroupDetailsActivity extends BaseActivity {
                 groupButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.v("后手", "22222" + flag);
                         if (flag) {   // join button
                             mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail())).setValue(true);
                             flag = false;
@@ -108,9 +106,9 @@ public class GroupDetailsActivity extends BaseActivity {
                     groupMember.add(member);
                 }
 
-                String members = "Group Members: ";
+                String members = "Group Members: " + "\n";
                 for (int i = 0; i < groupMember.size(); i++) {
-                    members += groupMember.get(i);
+                    members += groupMember.get(i) + "\n";
                 }
                 memberTextView.setText(members);
             }

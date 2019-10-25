@@ -43,7 +43,7 @@ public class PersonalDetailsActivity extends BaseActivity {
         mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = mAuth.getCurrentUser();
         personalEmail = user.getEmail();
-        emailTextView.setText(personalEmail);
+        emailTextView.setText("Email: " + personalEmail);
 
         DatabaseReference ref1 = mDatabase.child("studyTime").child(emailToUid(user.getEmail()));
         ref1.addValueEventListener(new ValueEventListener() {
@@ -52,7 +52,7 @@ public class PersonalDetailsActivity extends BaseActivity {
 
                 if (dataSnapshot.exists()) {
                     personalStudyTime = Integer.parseInt(dataSnapshot.getValue(ComWithDatabase.class).getDate());
-                    studyTimeTextView.setText(personalStudyTime + "");
+                    studyTimeTextView.setText("Total study time: " + personalStudyTime);
                 }
             }
 
@@ -69,8 +69,7 @@ public class PersonalDetailsActivity extends BaseActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 personalUsername = dataSnapshot.child(emailToUid(user.getEmail())).getValue().toString();
-                Log.d("Database content222", personalUsername);
-                userNameContentTextView.setText(personalUsername);
+                userNameContentTextView.setText("Username: " + personalUsername);
                 userNameTextView.setText(personalUsername);
             }
 
@@ -101,7 +100,6 @@ public class PersonalDetailsActivity extends BaseActivity {
                 builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.v("新名字", newName.getText().toString());
                         // send message to firebase
                         mDatabase.child("userName").child(emailToUid(user.getEmail())).setValue(newName.getText().toString());
 

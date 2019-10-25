@@ -65,6 +65,7 @@ public class FormGroupsActivity extends BaseActivity {
 
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
+                    /*
                     String record = "Group Name: " + tempObj.getGroupName() +
                             "Library Name:" + tempObj.getLibraryName() +
                             "Level:" + tempObj.getLibraryLevel() +
@@ -73,6 +74,14 @@ public class FormGroupsActivity extends BaseActivity {
                             "End Time: " + tempObj.getEndTime() +
                             "Created by: " + tempObj.getTeamLeader() +
                             "Key: " + tempObj.getId();
+                    */
+                    String record = "Group Name: " + tempObj.getGroupName() + "\n" +
+                            "Library: " + tempObj.getLibraryName() + "\n" +
+                            "Level:" + tempObj.getLibraryLevel() + "\n" +
+                            "Study Topic: " + tempObj.getStudyTopic() + "\n" +
+                            "Start Time: " + tempObj.getStartTime() + "\n" +
+                            "End Time: " + tempObj.getEndTime() + "\n" +
+                            "Created by: " + tempObj.getTeamLeader() + "\n";
                     temp.add(record);
                     objectList.add(tempObj);
                 }
@@ -88,7 +97,7 @@ public class FormGroupsActivity extends BaseActivity {
                         intent.putExtra("userName", userNameTextView.getText().toString());
                         intent.putExtra("groupName", info.getGroupName());
                         intent.putExtra("groupLocation", info.getLibraryName() + " " + info.getLibraryLevel());
-                        intent.putExtra("studyTime", "From: " + info.getStartTime() + "\nTo: " + info.getEndTime());
+                        intent.putExtra("studyTime", "From: " + info.getStartTime() + "\nTo  : " + info.getEndTime());
                         intent.putExtra("key", info.getId());
 
                         startActivity(intent);
