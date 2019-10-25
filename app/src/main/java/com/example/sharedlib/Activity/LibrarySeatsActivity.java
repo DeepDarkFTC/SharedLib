@@ -1,4 +1,4 @@
-package com.example.sharedlib;
+package com.example.sharedlib.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sharedlib.Object.ComWithDatabase;
+import com.example.sharedlib.Object.ObtainCurrentDate;
+import com.example.sharedlib.R;
+import com.example.sharedlib.Object.SeatAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

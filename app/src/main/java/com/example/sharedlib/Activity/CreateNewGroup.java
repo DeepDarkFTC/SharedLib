@@ -1,4 +1,4 @@
-package com.example.sharedlib;
+package com.example.sharedlib.Activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.example.sharedlib.Object.ComWithDatabase;
+import com.example.sharedlib.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;

@@ -1,4 +1,4 @@
-package com.example.sharedlib;
+package com.example.sharedlib.Object;
 
 public class OverallSeatsSituation {
     private String arcSeats = "No data";

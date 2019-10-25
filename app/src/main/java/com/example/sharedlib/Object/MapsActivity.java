@@ -1,4 +1,4 @@
-package com.example.sharedlib;
+package com.example.sharedlib.Object;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.sharedlib.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,7 +37,6 @@ public class MapsActivity extends AppCompatActivity
         DiscreteScrollView.OnItemChangedListener<LibraryAdapter_forMapView.ViewHolder> {
 
     private static final String TAG = MapsActivity.class.getSimpleName();
-    // 获取不到地点时，默认地点在unihouse
     private static final int DEFAULT_ZOOM = 16;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     // Keys for storing activity state.

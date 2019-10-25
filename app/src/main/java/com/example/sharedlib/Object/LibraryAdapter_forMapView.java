@@ -1,4 +1,4 @@
-package com.example.sharedlib;
+package com.example.sharedlib.Object;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.sharedlib.Activity.ArchitectureLibraryActivity;
+import com.example.sharedlib.Activity.BaillieuLibraryActivity;
+import com.example.sharedlib.Activity.ErcLibraryActivity;
+import com.example.sharedlib.Activity.GiblinLibraryActivity;
+import com.example.sharedlib.R;
 
 import java.util.List;
 

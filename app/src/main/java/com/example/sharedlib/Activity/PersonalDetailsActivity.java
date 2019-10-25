@@ -1,4 +1,4 @@
-package com.example.sharedlib;
+package com.example.sharedlib.Activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.sharedlib.Object.ComWithDatabase;
+import com.example.sharedlib.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

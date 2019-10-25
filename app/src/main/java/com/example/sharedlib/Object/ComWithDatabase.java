@@ -1,4 +1,4 @@
-package com.example.sharedlib;
+package com.example.sharedlib.Object;
 
 public class ComWithDatabase {
 

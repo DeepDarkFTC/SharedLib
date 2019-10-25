@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PersonalDetailsActivity"></activity>
-        <activity android:name=".GroupDetailsActivity" />
+        <activity android:name=".Activity.PersonalDetailsActivity"></activity>
+        <activity android:name=".Activity.GroupDetailsActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -22,23 +22,22 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <activity
-            android:name=".MapsActivity"
+            android:name=".Object.MapsActivity"
             android:label="Map View" />
-        <activity android:name=".RankingActivity" />
-        <activity android:name=".CreateNewGroup" />
-        <activity android:name=".LibrarySeatsActivity" />
-        <activity android:name=".GiblinLibraryActivity" />
-        <activity android:name=".ErcLibraryActivity" />
-        <activity android:name=".BaillieuLibraryActivity" />
-        <activity android:name=".ArchitectureLibraryActivity" />
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".HomePageActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".StudyTimeActivity" />
-        <activity android:name=".NearestLibrary" />
-        <activity android:name=".FormGroupsActivity" />
-        <activity android:name=".SearchSeatsActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.RankingActivity" />
+        <activity android:name=".Activity.CreateNewGroup" />
+        <activity android:name=".Activity.LibrarySeatsActivity" />
+        <activity android:name=".Activity.GiblinLibraryActivity" />
+        <activity android:name=".Activity.ErcLibraryActivity" />
+        <activity android:name=".Activity.BaillieuLibraryActivity" />
+        <activity android:name=".Activity.ArchitectureLibraryActivity" />
+        <activity android:name=".Activity.ResetPasswordActivity" />
+        <activity android:name=".Activity.HomePageActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.StudyTimeActivity" />
+        <activity android:name=".Activity.FormGroupsActivity" />
+        <activity android:name=".Activity.SearchSeatsActivity" />
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

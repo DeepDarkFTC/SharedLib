@@ -1,4 +1,4 @@
-package com.example.sharedlib;
+package com.example.sharedlib.Activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.sharedlib.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

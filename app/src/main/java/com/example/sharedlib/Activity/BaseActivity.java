@@ -1,4 +1,4 @@
-package com.example.sharedlib;
+package com.example.sharedlib.Activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

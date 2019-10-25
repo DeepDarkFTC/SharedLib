@@ -1,4 +1,4 @@
-package com.example.sharedlib;
+package com.example.sharedlib.Object;
 
 import com.google.android.gms.maps.model.LatLng;
 
