@@ -23,6 +23,7 @@ public class SeatAdapter extends BaseAdapter {
 
     private Context context;
     private List<String> data;
+    private List<String> displayData;
 
     private ListView listView;
 //    private int number;
@@ -30,8 +31,9 @@ public class SeatAdapter extends BaseAdapter {
     //    private String location;
     private DatabaseReference mDatabase;
 
-    public SeatAdapter(List<String> data, ListView listView) {
+    public SeatAdapter(List<String> data, List<String> displayData, ListView listView) {
         this.data = data;
+        this.displayData = displayData;
         this.listView = listView;
     }
 
@@ -75,7 +77,7 @@ public class SeatAdapter extends BaseAdapter {
         //获取viewHolder实例
         viewHolder = (ViewHolder) view.getTag();
         //设置数据
-        viewHolder.mTv.setText(data.get(position));
+        viewHolder.mTv.setText(displayData.get(position));
         viewHolder.mTv.setTag("mTv" + position);
         //设置监听事件
 
@@ -160,10 +162,13 @@ public class SeatAdapter extends BaseAdapter {
             TextView dataTextView = listView.findViewWithTag("mTv" + position);
             Log.v("查看", dataTextView.getText().toString());
 
-            String[] thumbData = dataTextView.getText().toString().split("thumb num: ");
+//            String[] thumbData = dataTextView.getText().toString().split("thumb num: ");
+            String[] thumbData = data.get(position).split("thumb num: ");
             String[] thumbData1 = thumbData[1].split("____");
-            String[] keyData = dataTextView.getText().toString().split("key: ");
-            String[] locationData = dataTextView.getText().toString().split("location: ");
+//            String[] keyData = dataTextView.getText().toString().split("key: ");
+            String[] keyData = data.get(position).split("key: ");
+//            String[] locationData = dataTextView.getText().toString().split("location: ");
+            String[] locationData = data.get(position).split("location: ");
             String[] locationData1 = locationData[1].split("____");
 
 //            viewHolder.numberView.setText(thumbData1[0]);

@@ -128,6 +128,8 @@ public class LibrarySeatsActivity extends BaseActivity {
                 Collections.reverse(commentList);   // displayed by upload date
                 ArrayList<String> temp = new ArrayList<String>();
 
+                ArrayList<String> displayData = new ArrayList<>();
+
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
                     String record = "location: " + locationTextView.getText().toString() + "____"
@@ -136,15 +138,21 @@ public class LibrarySeatsActivity extends BaseActivity {
                             + "uploaded by: " + tempObj.getUser() + "____"
                             + "thumb num: " + tempObj.getThumbNumber() + "____"
                             + "key: " + tempObj.getId();
+
+                    String displayRecord = "Seat occupancy: " + tempObj.getComment() + "%" + "\n"
+                            + "upload date: " + tempObj.getDate() + "\n"
+                            + "uploaded by: " + tempObj.getUser() + "\n";
+
                     if (timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
                         temp.add(0, record);
+                        displayData.add(0,displayRecord);
                     }
                 }
                 int len = temp.size();
                 Log.d("seat", String.valueOf(len));
 
                 ListView listView = findViewById(R.id.seatsComments);
-                SeatAdapter adapter = new SeatAdapter(temp, listView);
+                SeatAdapter adapter = new SeatAdapter(temp, displayData, listView);
                 listView.setAdapter(adapter);
             }
 
