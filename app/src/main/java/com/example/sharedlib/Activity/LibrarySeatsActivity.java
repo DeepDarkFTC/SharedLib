@@ -1,5 +1,6 @@
 package com.example.sharedlib.Activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -18,11 +19,10 @@ import androidx.core.content.ContextCompat;
 
 import com.example.sharedlib.Object.ComWithDatabase;
 import com.example.sharedlib.Object.ObtainCurrentDate;
-import com.example.sharedlib.R;
 import com.example.sharedlib.Object.SeatAdapter;
+import com.example.sharedlib.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,25 +40,20 @@ import java.util.Date;
 
 public class LibrarySeatsActivity extends BaseActivity {
 
-    private SeekBar seekBar;
-    private TextView percentageTextView;
-
-    private DatabaseReference mDatabase;
-    private ArrayList commentList = new ArrayList<ComWithDatabase>();
-
-    private ObtainCurrentDate obtainCurrentDate = new ObtainCurrentDate();
-
-    private int seatsPercentage;
-
-    private FusedLocationProviderClient mFusedLocationProviderClient;
-    private boolean mLocationPermissionGranted;
-    private Location mLastKnownLocation;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     LatLng erc_position = new LatLng(-37.799338, 144.962832);
     LatLng baillieu_position = new LatLng(-37.798391, 144.959406);
     LatLng architecture_position = new LatLng(-37.797412, 144.962939);
     LatLng giblin_position = new LatLng(-37.801277, 144.959312);
-
+    private SeekBar seekBar;
+    private TextView percentageTextView;
+    private DatabaseReference mDatabase;
+    private ArrayList commentList = new ArrayList<ComWithDatabase>();
+    private ObtainCurrentDate obtainCurrentDate = new ObtainCurrentDate();
+    private int seatsPercentage;
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private boolean mLocationPermissionGranted;
+    private Location mLastKnownLocation;
 
     public static long timeDifference(String time1, String time2) {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -99,7 +94,6 @@ public class LibrarySeatsActivity extends BaseActivity {
         // Prompt the user for permission.
         getLocationPermission();
         // Get the current location of the device and set the position of the map.
-        System.out.println("开始获取位置");
         getDeviceLocation();
 
         //Read from database
@@ -185,16 +179,28 @@ public class LibrarySeatsActivity extends BaseActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String key = mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).push().getKey();
-                String date = obtainCurrentDate.getDateAndTime();
-                ComWithDatabase comment = new
-                        ComWithDatabase(key, userName, String.valueOf(seatsPercentage), date, "0");
 
-                mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).child(key).setValue(comment);
-                Toast.makeText(LibrarySeatsActivity.this, "Upload successfully.",
-                        Toast.LENGTH_SHORT).show();
+                String libraryCommand = locationTextView.getText().toString().split(" ")[0];
 
+                if (checkInLib(libraryCommand)) {
+                    String key = mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).push().getKey();
+                    String date = obtainCurrentDate.getDateAndTime();
+                    ComWithDatabase comment = new
+                            ComWithDatabase(key, userName, String.valueOf(seatsPercentage), date, "0");
+
+                    mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString()).child(key).setValue(comment);
+                    Toast.makeText(LibrarySeatsActivity.this, "Upload successfully.",
+                            Toast.LENGTH_SHORT).show();
+
+                } else {
+                    new AlertDialog.Builder(LibrarySeatsActivity.this)
+                            .setTitle("Upload failed")
+                            .setMessage("You are not located in this library.")
+                            .setPositiveButton("ok", null)
+                            .show();
+                }
             }
+
         });
 
         Button logoutButton = findViewById(R.id.button_logout_libraryseats);
@@ -206,8 +212,6 @@ public class LibrarySeatsActivity extends BaseActivity {
         });
 
     }
-
-
 
 
     /**
@@ -230,9 +234,7 @@ public class LibrarySeatsActivity extends BaseActivity {
                         }
                     }
                 });
-            }
-            else
-            {
+            } else {
                 getLocationPermission();
             }
         } catch (SecurityException e) {
@@ -289,33 +291,31 @@ public class LibrarySeatsActivity extends BaseActivity {
         return results[0];
     }
 
-    private boolean checkInLib(String command)
-    {
+    private boolean checkInLib(String command) {
         int distance_to_lib;
-        switch(command)
-        {
-            case "ERC":
-                distance_to_lib = (int)getDistance(erc_position);
-                System.out.println("到ERC的距离是："+distance_to_lib);
-                if(distance_to_lib <= 30)
+        switch (command) {
+            case "Erc":
+                distance_to_lib = (int) getDistance(erc_position);
+                System.out.println("到ERC的距离是：" + distance_to_lib);
+                if (distance_to_lib <= 30)
                     return true;
                 break;
             case "Baillieu":
-                distance_to_lib = (int)getDistance(baillieu_position);
-                System.out.println("到Bailliew的距离是："+distance_to_lib);
-                if(distance_to_lib <= 30)
+                distance_to_lib = (int) getDistance(baillieu_position);
+                System.out.println("到Bailliew的距离是：" + distance_to_lib);
+                if (distance_to_lib <= 30)
                     return true;
                 break;
             case "Architecture":
-                distance_to_lib = (int)getDistance(architecture_position);
-                System.out.println("到Architecture的距离是："+distance_to_lib);
-                if(distance_to_lib <= 30)
+                distance_to_lib = (int) getDistance(architecture_position);
+                System.out.println("到Architecture的距离是：" + distance_to_lib);
+                if (distance_to_lib <= 30)
                     return true;
                 break;
             case "Giblin":
-                distance_to_lib = (int)getDistance(giblin_position);
-                System.out.println("到giblin的距离是："+distance_to_lib);
-                if(distance_to_lib <= 30)
+                distance_to_lib = (int) getDistance(giblin_position);
+                System.out.println("到giblin的距离是：" + distance_to_lib);
+                if (distance_to_lib <= 30)
                     return true;
                 break;
             default:
