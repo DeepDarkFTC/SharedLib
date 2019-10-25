@@ -1,6 +1,7 @@
 package com.example.sharedlib.Object;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class SeatAdapter extends BaseAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View view, @NonNull ViewGroup viewGroup) {
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder;
 
         if (context == null)
             context = viewGroup.getContext();
@@ -81,7 +82,6 @@ public class SeatAdapter extends BaseAdapter {
         String[] thumbData = data.get(position).split("thumb num: ");
         String[] thumbData1 = thumbData[1].split("____");
         String[] keyData = data.get(position).split("key: ");
-        String[] locationData = data.get(position).split("location: ");
 
         viewHolder.numberView.setText(thumbData1[0]);
         viewHolder.numberView.setTag("numberView" + position);
@@ -105,7 +105,7 @@ public class SeatAdapter extends BaseAdapter {
     public class InnerOnClickListener implements View.OnClickListener {
         int position;
 
-        public InnerOnClickListener(int position) {
+        private InnerOnClickListener(int position) {
             super();
             this.position = position;
         }
@@ -122,9 +122,9 @@ public class SeatAdapter extends BaseAdapter {
             String[] locationData1 = locationData[1].split("____");
 
             String location = locationData1[0];
+
             int number = Integer.parseInt(thumbData1[0]);
             String key = keyData[1];
-
 
             switch (v.getId()) {
                 case R.id.button_good_listview:

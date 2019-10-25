@@ -102,6 +102,7 @@ public class StudyTimeActivity extends BaseActivity {
         pause = findViewById(R.id.button_pause_studytime);
         // Get continue button
         restart = findViewById(R.id.button_goon_studytime);
+        restart.setEnabled(false);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
