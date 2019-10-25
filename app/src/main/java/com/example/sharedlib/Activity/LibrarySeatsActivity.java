@@ -1,6 +1,8 @@
 package com.example.sharedlib.Activity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,10 +12,20 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.example.sharedlib.Object.ComWithDatabase;
 import com.example.sharedlib.Object.ObtainCurrentDate;
 import com.example.sharedlib.R;
 import com.example.sharedlib.Object.SeatAdapter;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +49,16 @@ public class LibrarySeatsActivity extends BaseActivity {
     private ObtainCurrentDate obtainCurrentDate = new ObtainCurrentDate();
 
     private int seatsPercentage;
+
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private boolean mLocationPermissionGranted;
+    private Location mLastKnownLocation;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    LatLng erc_position = new LatLng(-37.799338, 144.962832);
+    LatLng baillieu_position = new LatLng(-37.798391, 144.959406);
+    LatLng architecture_position = new LatLng(-37.797412, 144.962939);
+    LatLng giblin_position = new LatLng(-37.801277, 144.959312);
+
 
     public static long timeDifference(String time1, String time2) {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -70,6 +92,15 @@ public class LibrarySeatsActivity extends BaseActivity {
         locationTextView.setText(location);
 
         percentageTextView = findViewById(R.id.progressNum);
+
+        // Construct a FusedLocationProviderClient.
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+        // Prompt the user for permission.
+        getLocationPermission();
+        // Get the current location of the device and set the position of the map.
+        System.out.println("开始获取位置");
+        getDeviceLocation();
 
         //Read from database
 //        mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -174,5 +205,122 @@ public class LibrarySeatsActivity extends BaseActivity {
             }
         });
 
+    }
+
+
+
+
+    /**
+     * Gets the current location of the device, and positions the map's camera.
+     */
+    private void getDeviceLocation() {
+        /*
+         * Get the best and most recent location of the device, which may be null in rare
+         * cases when a location is not available.
+         */
+        try {
+            if (mLocationPermissionGranted) {
+                Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
+                locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Location> task) {
+                        if (task.isSuccessful()) {
+                            // Set the map's camera position to the current location of the device.
+                            mLastKnownLocation = task.getResult();
+                        }
+                    }
+                });
+            }
+            else
+            {
+                getLocationPermission();
+            }
+        } catch (SecurityException e) {
+            Log.e("Exception: %s", e.getMessage());
+        }
+    }
+
+
+    /**
+     * Prompts the user for permission to use the device location.
+     */
+    private void getLocationPermission() {
+        /*
+         * Request location permission, so that we can get the location of the
+         * device. The result of the permission request is handled by a callback,
+         * onRequestPermissionsResult.
+         */
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mLocationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
+
+    /**
+     * Handles the result of the request for location permissions.
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        mLocationPermissionGranted = false;
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mLocationPermissionGranted = true;
+                }
+            }
+        }
+    }
+
+    private float getDistance(LatLng goalLocation) {
+        float[] results = new float[1];
+        if (mLastKnownLocation != null) {
+            Location.distanceBetween(goalLocation.latitude, goalLocation.longitude,
+                    mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude(), results);
+        }
+        return results[0];
+    }
+
+    private boolean checkInLib(String command)
+    {
+        int distance_to_lib;
+        switch(command)
+        {
+            case "ERC":
+                distance_to_lib = (int)getDistance(erc_position);
+                System.out.println("到ERC的距离是："+distance_to_lib);
+                if(distance_to_lib <= 30)
+                    return true;
+                break;
+            case "Baillieu":
+                distance_to_lib = (int)getDistance(baillieu_position);
+                System.out.println("到Bailliew的距离是："+distance_to_lib);
+                if(distance_to_lib <= 30)
+                    return true;
+                break;
+            case "Architecture":
+                distance_to_lib = (int)getDistance(architecture_position);
+                System.out.println("到Architecture的距离是："+distance_to_lib);
+                if(distance_to_lib <= 30)
+                    return true;
+                break;
+            case "Giblin":
+                distance_to_lib = (int)getDistance(giblin_position);
+                System.out.println("到giblin的距离是："+distance_to_lib);
+                if(distance_to_lib <= 30)
+                    return true;
+                break;
+            default:
+                break;
+        }
+        return false;
     }
 }

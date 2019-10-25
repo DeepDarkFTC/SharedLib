@@ -194,11 +194,9 @@ public class MapsActivity extends AppCompatActivity
     private float getDistance(LatLng goalLocation) {
         float[] results = new float[1];
         if (mLastKnownLocation != null) {
-            System.out.println("知道现在的位置了，正常工作");
             Location.distanceBetween(goalLocation.latitude, goalLocation.longitude,
                     mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude(), results);
         } else {
-            System.out.println("没得到现在的位置，不知道为啥，之后再排查吧");
             Location.distanceBetween(goalLocation.latitude, goalLocation.longitude,
                     mDefaultLocation.latitude, mDefaultLocation.longitude, results);
         }
@@ -227,7 +225,6 @@ public class MapsActivity extends AppCompatActivity
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                             showScrollView();
                         } else {
-                            System.out.println("虽然已经获得权限，但获取不到当前位置");
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
                             mMap.moveCamera(CameraUpdateFactory
