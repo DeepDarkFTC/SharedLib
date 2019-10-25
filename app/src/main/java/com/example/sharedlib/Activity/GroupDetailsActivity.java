@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.sharedlib.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,7 +24,6 @@ public class GroupDetailsActivity extends BaseActivity {
 
     private boolean flag = true;
     private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
     private ArrayList groupMember = new ArrayList();
 
 
@@ -31,7 +32,7 @@ public class GroupDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_details);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = mAuth.getCurrentUser();
 
         final Intent parentIntent = getIntent();
@@ -63,7 +64,7 @@ public class GroupDetailsActivity extends BaseActivity {
         DatabaseReference ref1 = mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail()));
         ref1.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
                     flag = false;
@@ -89,7 +90,7 @@ public class GroupDetailsActivity extends BaseActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Getting Post failed, log a message
                 Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
                 // ...
@@ -99,7 +100,7 @@ public class GroupDetailsActivity extends BaseActivity {
         DatabaseReference ref2 = mDatabase.child("groupMember").child(parentIntent.getStringExtra("key"));
         ref2.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 groupMember.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String member = uidToEmail(postSnapshot.getKey());

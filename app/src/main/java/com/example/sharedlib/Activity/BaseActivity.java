@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -66,8 +65,7 @@ public class BaseActivity extends Activity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Intent logoutIntent = new Intent();
                 logoutIntent.setClass(context, MainActivity.class);
-                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //关键的一句，将新的activity置为栈顶
-                Log.v("测试测试测试", logoutIntent.toString());
+                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // put the new activity to the top of the stack
                 startActivity(logoutIntent);
                 finish();
             }

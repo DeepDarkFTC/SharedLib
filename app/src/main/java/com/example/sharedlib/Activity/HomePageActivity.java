@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+
 import com.example.sharedlib.Object.MapsActivity;
 import com.example.sharedlib.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,8 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 public class HomePageActivity extends BaseActivity {
 
     private Button personalInfoButton;
-    private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
     private String userName;
 
     @Override
@@ -28,8 +28,8 @@ public class HomePageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
@@ -40,7 +40,7 @@ public class HomePageActivity extends BaseActivity {
         DatabaseReference ref = mDatabase.child("userName");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 userName = dataSnapshot.child(userId).getValue().toString();
                 Log.d("Database content222", userName);

@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.sharedlib.Object.ComWithDatabase;
 import com.example.sharedlib.Object.ObtainCurrentDate;
 import com.example.sharedlib.R;
@@ -131,7 +133,7 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         DatabaseReference ref = mDatabase.child("searchSeats").child("location").child(location);
         ref.limitToLast(10).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 commentList.clear();
                 result.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {

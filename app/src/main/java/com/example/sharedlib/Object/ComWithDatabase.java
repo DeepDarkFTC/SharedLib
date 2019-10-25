@@ -15,10 +15,6 @@ public class ComWithDatabase {
     private String teamLeader;
     private String thumbNumber;
 
-
-    public ComWithDatabase() {
-    }
-
     public ComWithDatabase(String id, String user, String comment, String date, String thumbNumber) {
         this.id = id;
         this.user = user;

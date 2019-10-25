@@ -45,7 +45,6 @@ public class CreateNewGroup extends BaseActivity {
         mAuth = FirebaseAuth.getInstance();
 
         final Intent parentIntent = getIntent();
-        String userName = parentIntent.getStringExtra("userName");
 
         final EditText groupName = findViewById(R.id.text_name_newgroup);
 
@@ -56,7 +55,7 @@ public class CreateNewGroup extends BaseActivity {
         library.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                String value = librayList[pos];  // get selected content
+
             }
 
             @Override
@@ -71,7 +70,7 @@ public class CreateNewGroup extends BaseActivity {
         level.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                String value = levelList[pos];  // get selected content
+
             }
 
             @Override
@@ -188,33 +187,31 @@ public class CreateNewGroup extends BaseActivity {
         Calendar endDate = Calendar.getInstance();
         //endDate.set(2020,1,1);
 
-        //正确设置方式 原因：注意事项有说明
         startDate.set(2013, 0, 1);
         endDate.set(2020, 11, 31);
 
         TimePickerView pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
-            public void onTimeSelect(Date date, View v) {//选中事件回调
+            public void onTimeSelect(Date date, View v) {
                 startButton.setText(getTime(date));
             }
         })
-                .setType(new boolean[]{false, true, true, true, true, false})// 默认全部显示
-                .setCancelText("Cancel")//取消按钮文字
-                .setSubmitText("OK")//确认按钮文字
-                .setTitleSize(20)//标题文字大小
-                .setTitleText("")//标题文字
-                .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
-                .isCyclic(true)//是否循环滚动
-                .setTitleColor(Color.BLACK)//标题文字颜色
-                //.setSubmitColor(getResources().getColor(R.color.fpyj_second_phase_color))//确定按钮文字颜色
-                //.setCancelColor(getResources().getColor(R.color.fpyj_second_phase_color))//取消按钮文字颜色
-                .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
-                .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
-                .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
-                .setRangDate(startDate, endDate)//起始终止年月日设定
-                .setLabel("year", "Month", "Day", "Hour", "Min", "Sec")//默认设置为年月日时分秒
-                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                .isDialog(true)//是否显示为对话框样式
+                .setType(new boolean[]{false, true, true, true, true, false})
+                .setCancelText("Cancel")
+                .setSubmitText("OK")
+                .setTitleSize(20)
+                .setTitleText("")
+                .setOutSideCancelable(true)
+                .isCyclic(true)
+                .setTitleColor(Color.BLACK)
+                .setTitleBgColor(Color.WHITE)
+                .setBgColor(Color.WHITE)
+                .setDate(selectedDate)
+                .setRangDate(startDate, endDate)
+                .setLabel("year", "Month", "Day",
+                        "Hour", "Min", "Sec")
+                .isCenterLabel(false)
+                .isDialog(true)
                 .build();
 
         pvTime.show();
@@ -223,43 +220,39 @@ public class CreateNewGroup extends BaseActivity {
     private void showEndDatePicker() {
         Calendar selectedDate = Calendar.getInstance();
         Calendar startDate = Calendar.getInstance();
-        //startDate.set(2013,1,1);
         Calendar endDate = Calendar.getInstance();
-        //endDate.set(2020,1,1);
 
-        //正确设置方式 原因：注意事项有说明
         startDate.set(2013, 0, 1);
         endDate.set(2020, 11, 31);
 
         TimePickerView pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
-            public void onTimeSelect(Date date, View v) {//选中事件回调
+            public void onTimeSelect(Date date, View v) {
                 endButton.setText(getTime(date));
             }
         })
-                .setType(new boolean[]{false, true, true, true, true, false})// 默认全部显示
-                .setCancelText("Cancel")//取消按钮文字
-                .setSubmitText("OK")//确认按钮文字
-                .setTitleSize(20)//标题文字大小
-                .setTitleText("")//标题文字
-                .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
-                .isCyclic(true)//是否循环滚动
-                .setTitleColor(Color.BLACK)//标题文字颜色
-                //.setSubmitColor(getResources().getColor(R.color.fpyj_second_phase_color))//确定按钮文字颜色
-                //.setCancelColor(getResources().getColor(R.color.fpyj_second_phase_color))//取消按钮文字颜色
-                .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
-                .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
-                .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
-                .setRangDate(startDate, endDate)//起始终止年月日设定
-                .setLabel("year", "Month", "Day", "Hour", "Min", "sec")//默认设置为年月日时分秒
-                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                .isDialog(true)//是否显示为对话框样式
+                .setType(new boolean[]{false, true, true, true, true, false})
+                .setCancelText("Cancel")
+                .setSubmitText("OK")
+                .setTitleSize(20)
+                .setTitleText("")
+                .setOutSideCancelable(true)
+                .isCyclic(true)
+                .setTitleColor(Color.BLACK)
+                .setTitleBgColor(Color.WHITE)
+                .setBgColor(Color.WHITE)
+                .setDate(selectedDate)
+                .setRangDate(startDate, endDate)
+                .setLabel("year", "Month", "Day",
+                        "Hour", "Min", "sec")
+                .isCenterLabel(false)
+                .isDialog(true)
                 .build();
 
         pvTime.show();
     }
 
-    private String getTime(Date date) {//可根据需要自行截取数据显示
+    private String getTime(Date date) {
         Log.d("getTime()", "choice date millis: " + date.getTime());
         SimpleDateFormat format = new SimpleDateFormat("MM-dd HH:mm");
         return format.format(date);

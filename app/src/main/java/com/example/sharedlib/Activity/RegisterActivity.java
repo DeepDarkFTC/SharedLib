@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,11 +47,7 @@ public class RegisterActivity extends BaseActivity {
         final TextView emailTextView = findViewById(R.id.register_email);
         final TextView userNameTextView = findViewById(R.id.register_username);
         final TextView passwordTextView = findViewById(R.id.register_password);
-        passwordTextView.setInputType(129);//不可见
-
-        final String[] list = {"What's your favourite numberView", "What's your favourite colour"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, list);
-
+        passwordTextView.setInputType(129);
 
         Button registerButton = findViewById(R.id.register);
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +55,6 @@ public class RegisterActivity extends BaseActivity {
             public void onClick(View v) {
                 if (checkFormat(emailTextView.getText().toString(), userNameTextView.getText().toString(), passwordTextView.getText().toString())) {
                     // send message to firebase include [userName,Psd,SecurityQ,answer]
-
                     createAccount(emailTextView.getText().toString(), userNameTextView.getText().toString(), passwordTextView.getText().toString());
                 }
             }
@@ -72,24 +66,12 @@ public class RegisterActivity extends BaseActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        //Can add updateUI function
-        //updateUI(currentUser);
     }
     // [END on_start_check_user]
 
     private void createAccount(String email, final String userName, String password) {
-        Log.d("createAccount", "createAccount" + email);
-
-        //Check the validation here
-//        if (!validateForm()) {
-//            return;
-//        }
-
         showProgressDialog();
-
 
         // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -104,7 +86,6 @@ public class RegisterActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
 
                             writeToDatabase(task, userName);
-
 
                             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -123,8 +104,6 @@ public class RegisterActivity extends BaseActivity {
                     }
                 });
         // [END create_user_with_email]
-
-
     }
 
     public Boolean checkFormat(String email, String userName, String password) {

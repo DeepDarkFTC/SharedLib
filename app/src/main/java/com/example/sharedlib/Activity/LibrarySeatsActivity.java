@@ -45,7 +45,6 @@ public class LibrarySeatsActivity extends BaseActivity {
     LatLng baillieu_position = new LatLng(-37.798391, 144.959406);
     LatLng architecture_position = new LatLng(-37.797412, 144.962939);
     LatLng giblin_position = new LatLng(-37.801277, 144.959312);
-    private SeekBar seekBar;
     private TextView percentageTextView;
     private DatabaseReference mDatabase;
     private ArrayList commentList = new ArrayList<ComWithDatabase>();
@@ -97,30 +96,12 @@ public class LibrarySeatsActivity extends BaseActivity {
         getDeviceLocation();
 
         //Read from database
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        SnapshotParser<SearchSeatsComment> parser = new SnapshotParser<SearchSeatsComment>() {
-//            @Override
-//            public SearchSeatsComment parseSnapshot(DataSnapshot dataSnapshot) {
-//                SearchSeatsComment content = dataSnapshot.getValue(SearchSeatsComment.class);
-//                if (content != null) {
-//                    content.setId(dataSnapshot.getKey());
-//                }
-//
-//                Log.d("Database content", content.getComment());
-//
-//                return content;
-//
-//            }
-//        };
-
         DatabaseReference ref = mDatabase.child("searchSeats").child("location").child(locationTextView.getText().toString());
         ref.limitToLast(10).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//                    String content = postSnapshot.getValue().toString();
-//                    commentList.add(content);
                     ComWithDatabase comment = postSnapshot.getValue(ComWithDatabase.class);
                     commentList.add(0, comment);
                 }
@@ -145,7 +126,7 @@ public class LibrarySeatsActivity extends BaseActivity {
 
                     if (timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
                         temp.add(0, record);
-                        displayData.add(0,displayRecord);
+                        displayData.add(0, displayRecord);
                     }
                 }
                 int len = temp.size();
@@ -164,8 +145,7 @@ public class LibrarySeatsActivity extends BaseActivity {
             }
         });
 
-//        seatsPercentageEditText = findViewById(R.id.text_seats_available_libraryseats);
-        seekBar = findViewById(R.id.seekBar_seatsavailable_libraryseats);
+        SeekBar seekBar = findViewById(R.id.seekBar_seatsavailable_libraryseats);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -304,25 +284,21 @@ public class LibrarySeatsActivity extends BaseActivity {
         switch (command) {
             case "Erc":
                 distance_to_lib = (int) getDistance(erc_position);
-                System.out.println("到ERC的距离是：" + distance_to_lib);
                 if (distance_to_lib <= 30)
                     return true;
                 break;
             case "Baillieu":
                 distance_to_lib = (int) getDistance(baillieu_position);
-                System.out.println("到Bailliew的距离是：" + distance_to_lib);
                 if (distance_to_lib <= 30)
                     return true;
                 break;
             case "Architecture":
                 distance_to_lib = (int) getDistance(architecture_position);
-                System.out.println("到Architecture的距离是：" + distance_to_lib);
                 if (distance_to_lib <= 30)
                     return true;
                 break;
             case "Giblin":
                 distance_to_lib = (int) getDistance(giblin_position);
-                System.out.println("到giblin的距离是：" + distance_to_lib);
                 if (distance_to_lib <= 30)
                     return true;
                 break;

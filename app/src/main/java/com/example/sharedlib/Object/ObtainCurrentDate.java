@@ -23,7 +23,6 @@ public class ObtainCurrentDate {
         String second = String.valueOf(calendar.get(Calendar.SECOND));
 
         String date = format(day) + "/" + format(month) + "/" + year + " " + format(hour) + ":" + format(min) + ":" + format(second) + " ";
-        System.out.println("当前时间：" + date);
         return date;
     }
 

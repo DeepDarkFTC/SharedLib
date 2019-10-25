@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.sharedlib.Object.ComWithDatabase;
 import com.example.sharedlib.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,10 +27,7 @@ import java.util.Comparator;
 
 public class RankingActivity extends BaseActivity {
 
-    private DatabaseReference mDatabase;
     private ArrayList commentList = new ArrayList();
-    private FirebaseAuth mAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +37,8 @@ public class RankingActivity extends BaseActivity {
         Intent parentIntent = getIntent();
         final String userName = parentIntent.getStringExtra("userName");
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = mAuth.getCurrentUser();
 
         TextView userNameTextView = findViewById(R.id.text_username_ranking);
@@ -53,7 +52,7 @@ public class RankingActivity extends BaseActivity {
         DatabaseReference ref = mDatabase.child("studyTime");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
@@ -81,7 +80,6 @@ public class RankingActivity extends BaseActivity {
                         String userEmail = "email" + uidToEmail(tempObj.getUser());
                         result[i] = record;
                         if (userEmail.contains(user.getEmail())) {
-                            Log.v("测试测试","执行次数"+i);
                             rank = (i + 1) + "";
                             rankTextView.setText("Rank: " + rank);
                         }
@@ -95,7 +93,7 @@ public class RankingActivity extends BaseActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Getting Post failed, log a message
                 Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
                 // ...
@@ -129,10 +127,10 @@ public class RankingActivity extends BaseActivity {
     }
 
     public String secToTime(int time) {
-        String timeStr = null;
+        String timeStr;
         int hour = 0;
-        int minute = 0;
-        int second = 0;
+        int minute;
+        int second;
         if (time <= 0)
             return "00:00:00";
         else {

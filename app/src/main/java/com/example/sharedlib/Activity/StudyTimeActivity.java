@@ -34,6 +34,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class StudyTimeActivity extends BaseActivity {
 
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    LatLng erc_position = new LatLng(-37.799338, 144.962832);
+    LatLng baillieu_position = new LatLng(-37.798391, 144.959406);
+    LatLng architecture_position = new LatLng(-37.797412, 144.962939);
+    LatLng giblin_position = new LatLng(-37.801277, 144.959312);
     private Chronometer timer;
     private Button start;
     private Button pause;
@@ -42,19 +47,10 @@ public class StudyTimeActivity extends BaseActivity {
     private long mRecordTime;
     private int lastTime;
     private int totalTime;
-
     private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
-
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private boolean mLocationPermissionGranted;
     private Location mLastKnownLocation;
-    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    LatLng erc_position = new LatLng(-37.799338, 144.962832);
-    LatLng baillieu_position = new LatLng(-37.798391, 144.959406);
-    LatLng architecture_position = new LatLng(-37.797412, 144.962939);
-    LatLng giblin_position = new LatLng(-37.801277, 144.959312);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +58,7 @@ public class StudyTimeActivity extends BaseActivity {
         setContentView(R.layout.activity_study_time);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = mAuth.getCurrentUser();
 
         // Construct a FusedLocationProviderClient.
@@ -71,7 +67,6 @@ public class StudyTimeActivity extends BaseActivity {
         getLocationPermission();
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
-
 
 
         Intent parentIntent = getIntent();
@@ -88,7 +83,6 @@ public class StudyTimeActivity extends BaseActivity {
                 if (dataSnapshot.exists()) {
                     lastTime = Integer.parseInt(dataSnapshot.getValue(ComWithDatabase.class).getDate());
                     totalTime = lastTime;
-                    Log.d("上次时间", String.valueOf(lastTime));
                 }
             }
 
@@ -111,7 +105,7 @@ public class StudyTimeActivity extends BaseActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkInAnyLib()) {
+                if (checkInAnyLib()) {
                     // startTimeTextView timer
                     if (!stopFlag) {
                         timer.setBase(SystemClock.elapsedRealtime());
@@ -144,8 +138,7 @@ public class StudyTimeActivity extends BaseActivity {
                         String userId = emailToUid(user.getEmail());
                         mDatabase.child("studyTime").child(userId).setValue(comment);
                     }
-                }
-                else{
+                } else {
                     new AlertDialog.Builder(StudyTimeActivity.this)
                             .setTitle("Warning")
                             .setMessage("You are not located in any library.")
@@ -251,9 +244,7 @@ public class StudyTimeActivity extends BaseActivity {
                         }
                     }
                 });
-            }
-            else
-            {
+            } else {
                 getLocationPermission();
             }
         } catch (SecurityException e) {
@@ -310,25 +301,20 @@ public class StudyTimeActivity extends BaseActivity {
         return results[0];
     }
 
-    private boolean checkInAnyLib()
-    {
+    private boolean checkInAnyLib() {
         int distance_to_lib;
 
-        distance_to_lib = (int)getDistance(erc_position);
-        System.out.println("到ERC的距离是："+distance_to_lib);
-        if(distance_to_lib <= 30)
+        distance_to_lib = (int) getDistance(erc_position);
+        if (distance_to_lib <= 30)
             return true;
-        distance_to_lib = (int)getDistance(baillieu_position);
-        System.out.println("到Bailliew的距离是："+distance_to_lib);
-        if(distance_to_lib <= 30)
+        distance_to_lib = (int) getDistance(baillieu_position);
+        if (distance_to_lib <= 30)
             return true;
-        distance_to_lib = (int)getDistance(architecture_position);
-        System.out.println("到Architecture的距离是："+distance_to_lib);
-        if(distance_to_lib <= 30)
+        distance_to_lib = (int) getDistance(architecture_position);
+        if (distance_to_lib <= 30)
             return true;
-        distance_to_lib = (int)getDistance(giblin_position);
-        System.out.println("到giblin的距离是："+distance_to_lib);
-        if(distance_to_lib <= 30)
+        distance_to_lib = (int) getDistance(giblin_position);
+        if (distance_to_lib <= 30)
             return true;
         return false;
     }

@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.sharedlib.Object.ComWithDatabase;
 import com.example.sharedlib.R;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class FormGroupsActivity extends BaseActivity {
-    private DatabaseReference mDatabase;
     private ArrayList commentList = new ArrayList<ComWithDatabase>();
 
 
@@ -30,7 +31,7 @@ public class FormGroupsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_groups);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Intent parentIntent = getIntent();
         String userName = parentIntent.getStringExtra("userName");
@@ -52,7 +53,7 @@ public class FormGroupsActivity extends BaseActivity {
         DatabaseReference ref = mDatabase.child("studyGroup");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     ComWithDatabase groupInfo = postSnapshot.getValue(ComWithDatabase.class);
@@ -65,16 +66,6 @@ public class FormGroupsActivity extends BaseActivity {
 
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
-                    /*
-                    String record = "Group Name: " + tempObj.getGroupName() +
-                            "Library Name:" + tempObj.getLibraryName() +
-                            "Level:" + tempObj.getLibraryLevel() +
-                            "Study Topic: " + tempObj.getStudyTopic() +
-                            "Start Time: " + tempObj.getStartTime() +
-                            "End Time: " + tempObj.getEndTime() +
-                            "Created by: " + tempObj.getTeamLeader() +
-                            "Key: " + tempObj.getId();
-                    */
                     String record = "Group Name: " + tempObj.getGroupName() + "\n" +
                             "Library: " + tempObj.getLibraryName() + "\n" +
                             "Level:" + tempObj.getLibraryLevel() + "\n" +
@@ -106,7 +97,7 @@ public class FormGroupsActivity extends BaseActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Getting Post failed, log a message
                 Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
                 // ...

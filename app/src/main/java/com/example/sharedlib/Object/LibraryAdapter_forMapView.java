@@ -55,8 +55,6 @@ public class LibraryAdapter_forMapView extends RecyclerView.Adapter<LibraryAdapt
         holder.botton_detail_lib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(mContext, "到时候点这个就跳到"+data.get(position).getName()+"图书馆",
-//                        Toast.LENGTH_SHORT).show();
                 Intent intent;
                 switch (data.get(position).getName()) {
                     case "ERC":
@@ -102,19 +100,17 @@ public class LibraryAdapter_forMapView extends RecyclerView.Adapter<LibraryAdapt
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imageView_lib = (ImageView) itemView.findViewById(R.id.library_image_mapView);
-            textView_name_lib = (TextView) itemView.findViewById(R.id.library_name_mapView);
-            textView_crowed_lib = (TextView) itemView.findViewById(R.id.library_crowed_mapView);
-            textView_distance_lib = (TextView) itemView.findViewById(R.id.library_distance_mapview);
-            botton_detail_lib = (Button) itemView.findViewById(R.id.button_libraryDetail_mapView);
+            imageView_lib = itemView.findViewById(R.id.library_image_mapView);
+            textView_name_lib = itemView.findViewById(R.id.library_name_mapView);
+            textView_crowed_lib = itemView.findViewById(R.id.library_crowed_mapView);
+            textView_distance_lib = itemView.findViewById(R.id.library_distance_mapview);
+            botton_detail_lib = itemView.findViewById(R.id.button_libraryDetail_mapView);
 
             itemView.findViewById(R.id.relativeLayout_library_mapView).setOnClickListener(this);
         }
 
-
         @Override
         public void onClick(View v) {
-            System.out.println("你点击了第" + String.valueOf(getAdapterPosition()) + "个图");
             parentRecycler.smoothScrollToPosition(getAdapterPosition());
         }
     }

@@ -16,16 +16,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends BaseActivity {
 
     private TextView userNameTextView;
     private TextView passwordTextView;
 
-    // [START declare_auth]
     private FirebaseAuth mAuth;
-    // [END declare_auth]
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +31,7 @@ public class MainActivity extends BaseActivity {
         userNameTextView = findViewById(R.id.text_name_main);
         passwordTextView = findViewById(R.id.text_password_main);
 
-        passwordTextView.setInputType(129);//不可见
+        passwordTextView.setInputType(129);
 
         Button loginButton = findViewById(R.id.button_login_main);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -113,18 +110,11 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        //updateUI(currentUser);
     }
     // [END on_start_check_user]
 
     private void signIn(String email, String password) {
         Log.d("signIn", "signIn:" + email);
-
-//        if (!checkFormat(email, password)) {
-//            return;
-//        }
 
         showProgressDialog();
 
@@ -135,9 +125,6 @@ public class MainActivity extends BaseActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("signIn", "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
                             Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
                             startActivity(intent);
                         } else {
@@ -148,12 +135,7 @@ public class MainActivity extends BaseActivity {
                             //updateUI(null);
                         }
 
-                        // [START_EXCLUDE]
-//                        if (!task.isSuccessful()) {
-//                            mStatusTextView.setText(R.string.auth_failed);
-//                        }
                         hideProgressDialog();
-                        // [END_EXCLUDE]
                     }
                 });
         // [END sign_in_with_email]

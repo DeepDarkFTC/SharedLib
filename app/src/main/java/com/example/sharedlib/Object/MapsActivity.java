@@ -87,7 +87,6 @@ public class MapsActivity extends AppCompatActivity
         Intent parentIntent = getIntent();
         userName_me = parentIntent.getStringExtra("userName");
 
-
     }
 
     @Override
@@ -115,21 +114,11 @@ public class MapsActivity extends AppCompatActivity
             int currentIndex, int newIndex,
             @Nullable LibraryAdapter_forMapView.ViewHolder currentHolder,
             @Nullable LibraryAdapter_forMapView.ViewHolder newHolder) {
-//        Library_forMapView current = lib_list.get(currentIndex);
-//        if (newIndex >= 0 && newIndex < scrollView.getAdapter().getItemCount()) {
-//            Library_forMapView next = lib_list.get(newIndex);
-//            System.out.println("这个地方地图上应该要变化了");
-//            forecastView.onScroll(1f - Math.abs(position), current, next);
-//        }
     }
 
     @Override
     public void onScrollEnd(@NonNull LibraryAdapter_forMapView.ViewHolder holder, int position) {
-//        marker_current.remove();
-//        marker_current = mMap.addMarker(new MarkerOptions()
-//                .position(lib_list.get(position).getLocation())
-//                .title(lib_list.get(position).getName())
-//                .draggable(false));
+
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lib_list.get(position).getLocation(), DEFAULT_ZOOM));
     }
 
@@ -279,7 +268,6 @@ public class MapsActivity extends AppCompatActivity
         }
         updateLocationUI();
     }
-
 
     /**
      * Updates the map's UI settings based on whether the user has granted location permission.

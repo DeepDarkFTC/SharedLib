@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.sharedlib.Object.ComWithDatabase;
 import com.example.sharedlib.Object.OverallSeatsSituation;
 import com.example.sharedlib.R;
@@ -23,8 +25,6 @@ public class SearchSeatsActivity extends BaseActivity {
 
     private TextView userNameTextView;
     private OverallSeatsSituation overallSeatsSituation = new OverallSeatsSituation();
-
-    private DatabaseReference mDatabase;
     private ArrayList commentList = new ArrayList();
 
 
@@ -33,7 +33,7 @@ public class SearchSeatsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_seats);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Intent parentIntent = getIntent();
         String userName = parentIntent.getStringExtra("userName");
@@ -100,7 +100,7 @@ public class SearchSeatsActivity extends BaseActivity {
         DatabaseReference ref = mDatabase.child("libraryOccupation");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     ComWithDatabase comment = new ComWithDatabase(postSnapshot.getKey(), postSnapshot.getValue().toString());
@@ -114,11 +114,9 @@ public class SearchSeatsActivity extends BaseActivity {
                 double gibData = 0.0;
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
-                    Log.v("数目", i + "");
                     temp.add(tempObj.getComment() + " " + tempObj.getDate());
                     String record = temp.get(i).toString();
                     String[] infoSegment = record.split(" ");
-                    Log.v("查看查看", record);
                     if (infoSegment[0].equals("Architecture")) {
                         arcData += Integer.parseInt(infoSegment[4]);
                     }
@@ -133,26 +131,29 @@ public class SearchSeatsActivity extends BaseActivity {
                     }
                 }
                 overallSeatsSituation.setArcSeats(arcData / 5 + "");
-                arcSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getArcSeats() + "%" + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getArcSeats())) + "%");
+                arcSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getArcSeats() + "%"
+                        + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getArcSeats())) + "%");
 
                 overallSeatsSituation.setBaiSeats(baiData / 5 + "");
-                baiSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getBaiSeats() + "%" + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getBaiSeats())) + "%");
+                baiSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getBaiSeats() + "%"
+                        + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getBaiSeats())) + "%");
 
                 overallSeatsSituation.setErcSeats(ercData / 5 + "");
-                ercSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getErcSeats() + "%" + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getErcSeats())) + "%");
+                ercSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getErcSeats() + "%"
+                        + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getErcSeats())) + "%");
 
                 overallSeatsSituation.setGibSeats(gibData / 5 + "");
-                gibSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getGibSeats() + "%" + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getGibSeats())) + "%");
+                gibSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getGibSeats() + "%"
+                        + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getGibSeats())) + "%");
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Getting Post failed, log a message
                 Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
                 // ...
             }
         });
-
 
     }
 }

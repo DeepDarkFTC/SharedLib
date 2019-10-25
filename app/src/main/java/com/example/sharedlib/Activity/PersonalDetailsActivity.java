@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.sharedlib.Object.ComWithDatabase;
 import com.example.sharedlib.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,9 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 public class PersonalDetailsActivity extends BaseActivity {
 
     private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
     private String personalUsername;
-    private String personalEmail;
     private int personalStudyTime;
 
     @Override
@@ -40,15 +40,15 @@ public class PersonalDetailsActivity extends BaseActivity {
         final TextView studyTimeTextView = findViewById(R.id.text_studytime_person);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = mAuth.getCurrentUser();
-        personalEmail = user.getEmail();
+        String personalEmail = user.getEmail();
         emailTextView.setText("Email: " + personalEmail);
 
         DatabaseReference ref1 = mDatabase.child("studyTime").child(emailToUid(user.getEmail()));
         ref1.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
                     personalStudyTime = Integer.parseInt(dataSnapshot.getValue(ComWithDatabase.class).getDate());
@@ -57,7 +57,7 @@ public class PersonalDetailsActivity extends BaseActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Getting Post failed, log a message
                 Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
                 // ...
@@ -67,14 +67,14 @@ public class PersonalDetailsActivity extends BaseActivity {
         DatabaseReference ref2 = mDatabase.child("userName");
         ref2.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 personalUsername = dataSnapshot.child(emailToUid(user.getEmail())).getValue().toString();
                 userNameContentTextView.setText("Username: " + personalUsername);
                 userNameTextView.setText(personalUsername);
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Getting Post failed, log a message
                 Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
                 // ...
