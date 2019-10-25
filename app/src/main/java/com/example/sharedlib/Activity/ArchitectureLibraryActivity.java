@@ -23,9 +23,9 @@ import java.util.Collections;
 
 public class ArchitectureLibraryActivity extends BaseActivity {
 
-    private TextView userNameTextView;
+    private TextView userNameTextView;  // display username
     private DatabaseReference mDatabase;
-    private ArrayList commentList = new ArrayList<ComWithDatabase>();
+    private ArrayList commentList = new ArrayList<ComWithDatabase>();   // store the firebase data
     private double calResult = 0.0;
     private ObtainCurrentDate obtainCurrentDate = new ObtainCurrentDate();
 
@@ -36,22 +36,23 @@ public class ArchitectureLibraryActivity extends BaseActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
         final String libraryName = "Architecture Library";
         final String[] libraryLevel = {"Level 1", "Level 2", "Level 3", "Level 4", "Level 5"};
-
 
         Intent parentIntent = getIntent();
         String userName = parentIntent.getStringExtra("userName");
 
+        // set the username
         userNameTextView = findViewById(R.id.text_username_arc);
         userNameTextView.setText(userName);
 
+        // implement 5 library buttons
         Button arcLevel1 = findViewById(R.id.arc_l1);
         arcLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ArchitectureLibraryActivity.this, LibrarySeatsActivity.class);
+                Intent intent = new Intent(ArchitectureLibraryActivity.this,
+                        LibrarySeatsActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 intent.putExtra("location", libraryName + " " + libraryLevel[0]);
                 startActivity(intent);
@@ -65,7 +66,8 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         arcLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ArchitectureLibraryActivity.this, LibrarySeatsActivity.class);
+                Intent intent = new Intent(ArchitectureLibraryActivity.this,
+                        LibrarySeatsActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 intent.putExtra("location", libraryName + " " + libraryLevel[1]);
                 startActivity(intent);
@@ -79,7 +81,8 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         arcLevel3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ArchitectureLibraryActivity.this, LibrarySeatsActivity.class);
+                Intent intent = new Intent(ArchitectureLibraryActivity.this,
+                        LibrarySeatsActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 intent.putExtra("location", libraryName + " " + libraryLevel[2]);
                 startActivity(intent);
@@ -93,7 +96,8 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         arcLevel4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ArchitectureLibraryActivity.this, LibrarySeatsActivity.class);
+                Intent intent = new Intent(ArchitectureLibraryActivity.this,
+                        LibrarySeatsActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 intent.putExtra("location", libraryName + " " + libraryLevel[3]);
                 startActivity(intent);
@@ -107,7 +111,8 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         arcLevel5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ArchitectureLibraryActivity.this, LibrarySeatsActivity.class);
+                Intent intent = new Intent(ArchitectureLibraryActivity.this,
+                        LibrarySeatsActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 intent.putExtra("location", libraryName + " " + libraryLevel[4]);
                 startActivity(intent);
@@ -126,6 +131,7 @@ public class ArchitectureLibraryActivity extends BaseActivity {
         });
     }
 
+    // calculate the seats occupancy and seats vacancy
     public void calculatePercentage(final String location, final TextView textView) {
         final ArrayList<Integer> result = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -145,7 +151,8 @@ public class ArchitectureLibraryActivity extends BaseActivity {
                 Log.v("commentList size", commentList.size() + "");
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
-                    if (LibrarySeatsActivity.timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
+                    if (LibrarySeatsActivity.timeDifference(obtainCurrentDate.getDateAndTime(),
+                            tempObj.getDate()) < 1) {
                         result.add(0, Integer.parseInt(tempObj.getComment()));
                     }
                 }
@@ -164,14 +171,16 @@ public class ArchitectureLibraryActivity extends BaseActivity {
                 } else {
                     calResult = sum / num;
                 }
-                textView.setText("Occupancy: " + calResult + "%" + "     " + "Vacancy: " + (100 - calResult) + "%");
+                textView.setText("Occupancy: " + calResult + "%" + "     " +
+                        "Vacancy: " + (100 - calResult) + "%");
                 mDatabase.child("libraryOccupation").child(location).setValue(calResult);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
-                Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
+                Log.w("Database error", "loadPost:onCancelled",
+                        databaseError.toException());
                 // ...
             }
         });

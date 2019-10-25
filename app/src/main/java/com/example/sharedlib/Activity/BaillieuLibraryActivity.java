@@ -10,7 +10,7 @@ import com.example.sharedlib.R;
 
 public class BaillieuLibraryActivity extends BaseActivity {
 
-    private TextView userNameTextView;
+    private TextView userNameTextView;  // display username
     private ArchitectureLibraryActivity arch = new ArchitectureLibraryActivity();
 
     @Override
@@ -28,6 +28,7 @@ public class BaillieuLibraryActivity extends BaseActivity {
         userNameTextView = findViewById(R.id.text_username_bailieu);
         userNameTextView.setText(userName);
 
+        // implement 5 library buttons
         Button baiLevel1 = findViewById(R.id.bai_l1);
         baiLevel1.setOnClickListener(new View.OnClickListener() {
             @Override

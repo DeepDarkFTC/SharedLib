@@ -23,8 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class FormGroupsActivity extends BaseActivity {
-    private ArrayList commentList = new ArrayList<ComWithDatabase>();
 
+    private ArrayList commentList = new ArrayList<ComWithDatabase>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class FormGroupsActivity extends BaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 commentList.clear();
+                // get the data from firebase
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     ComWithDatabase groupInfo = postSnapshot.getValue(ComWithDatabase.class);
                     commentList.add(groupInfo);
@@ -64,6 +65,7 @@ public class FormGroupsActivity extends BaseActivity {
                 ArrayList temp = new ArrayList();
                 final ArrayList objectList = new ArrayList<ComWithDatabase>();
 
+                // change to String to display
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
                     String record = "Group Name: " + tempObj.getGroupName() + "\n" +
@@ -76,19 +78,25 @@ public class FormGroupsActivity extends BaseActivity {
                     temp.add(record);
                     objectList.add(tempObj);
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroupsActivity.this, android.R.layout.simple_list_item_1, temp);
+
+                // set the adapter for the listView
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(FormGroupsActivity.this,
+                        android.R.layout.simple_list_item_1, temp);
                 ListView listView = findViewById(R.id.listview_infolist_formgroup);
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent intent = new Intent(FormGroupsActivity.this, GroupDetailsActivity.class);
+                        Intent intent = new Intent(FormGroupsActivity.this,
+                                GroupDetailsActivity.class);
                         ComWithDatabase info = (ComWithDatabase) objectList.get(i);
 
                         intent.putExtra("userName", userNameTextView.getText().toString());
                         intent.putExtra("groupName", info.getGroupName());
-                        intent.putExtra("groupLocation", info.getLibraryName() + " " + info.getLibraryLevel());
-                        intent.putExtra("studyTime", "From: " + info.getStartTime() + "\nTo  : " + info.getEndTime());
+                        intent.putExtra("groupLocation", info.getLibraryName() + " "
+                                + info.getLibraryLevel());
+                        intent.putExtra("studyTime", "From: " + info.getStartTime()
+                                + "\nTo  : " + info.getEndTime());
                         intent.putExtra("key", info.getId());
 
                         startActivity(intent);

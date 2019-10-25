@@ -56,6 +56,7 @@ public class BaseActivity extends Activity {
         return email;
     }
 
+    // implement the logout function
     public void logoutMethod(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Message");

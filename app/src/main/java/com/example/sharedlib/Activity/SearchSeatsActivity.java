@@ -27,7 +27,6 @@ public class SearchSeatsActivity extends BaseActivity {
     private OverallSeatsSituation overallSeatsSituation = new OverallSeatsSituation();
     private ArrayList commentList = new ArrayList();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +40,13 @@ public class SearchSeatsActivity extends BaseActivity {
         userNameTextView = findViewById(R.id.text_username_searchseats);
         userNameTextView.setText(userName);
 
+        // 4 library buttons
         ImageButton architectureLibrary = findViewById(R.id.button_arc_searchseats);
         architectureLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchSeatsActivity.this, ArchitectureLibraryActivity.class);
+                Intent intent = new Intent(SearchSeatsActivity.this,
+                        ArchitectureLibraryActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
@@ -57,7 +58,8 @@ public class SearchSeatsActivity extends BaseActivity {
         bailieuLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchSeatsActivity.this, BaillieuLibraryActivity.class);
+                Intent intent = new Intent(SearchSeatsActivity.this,
+                        BaillieuLibraryActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
@@ -69,7 +71,8 @@ public class SearchSeatsActivity extends BaseActivity {
         ercLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchSeatsActivity.this, ErcLibraryActivity.class);
+                Intent intent = new Intent(SearchSeatsActivity.this,
+                        ErcLibraryActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
@@ -81,7 +84,8 @@ public class SearchSeatsActivity extends BaseActivity {
         giblinLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchSeatsActivity.this, GiblinLibraryActivity.class);
+                Intent intent = new Intent(SearchSeatsActivity.this,
+                        GiblinLibraryActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 startActivity(intent);
             }
@@ -97,13 +101,15 @@ public class SearchSeatsActivity extends BaseActivity {
             }
         });
 
+        // exchange data to firebase
         DatabaseReference ref = mDatabase.child("libraryOccupation");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    ComWithDatabase comment = new ComWithDatabase(postSnapshot.getKey(), postSnapshot.getValue().toString());
+                    ComWithDatabase comment = new ComWithDatabase(postSnapshot.getKey(),
+                            postSnapshot.getValue().toString());
                     commentList.add(0, comment);
                 }
                 Log.d("Database content", commentList.toString());
@@ -130,6 +136,8 @@ public class SearchSeatsActivity extends BaseActivity {
                         gibData += Integer.parseInt(infoSegment[4]);
                     }
                 }
+
+                // calculate the occupancy and vacancy
                 overallSeatsSituation.setArcSeats(arcData / 5 + "");
                 arcSeatsTextView.setText("Occupancy: " + overallSeatsSituation.getArcSeats() + "%"
                         + "     " + "Vacancy: " + (100 - Double.parseDouble(overallSeatsSituation.getArcSeats())) + "%");

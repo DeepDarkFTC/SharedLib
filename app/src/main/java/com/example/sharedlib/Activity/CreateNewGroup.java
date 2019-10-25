@@ -45,12 +45,14 @@ public class CreateNewGroup extends BaseActivity {
         mAuth = FirebaseAuth.getInstance();
 
         final Intent parentIntent = getIntent();
-
         final EditText groupName = findViewById(R.id.text_name_newgroup);
-
         final Spinner library = findViewById(R.id.spinner_library_newgroup);
-        final String[] librayList = {"Architecture Library", "Baillieu Library", "ERC Library", "Giblin Library"};
-        ArrayAdapter<String> libraryAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, librayList);
+        final String[] librayList = {"Architecture Library", "Baillieu Library",
+                "ERC Library", "Giblin Library"};
+
+        // adapter of the listView
+        ArrayAdapter<String> libraryAdapter = new ArrayAdapter<>(this,
+                R.layout.support_simple_spinner_dropdown_item, librayList);
         library.setAdapter(libraryAdapter);
         library.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -65,7 +67,8 @@ public class CreateNewGroup extends BaseActivity {
 
         final Spinner level = findViewById(R.id.spinner_level_newgroup);
         final String[] levelList = {"Level 1", "Level 2", "Level 3", "Level 4", "Level 5"};
-        ArrayAdapter<String> levelAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, levelList);
+        ArrayAdapter<String> levelAdapter = new ArrayAdapter<>(this,
+                R.layout.support_simple_spinner_dropdown_item, levelList);
         level.setAdapter(levelAdapter);
         level.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -80,6 +83,7 @@ public class CreateNewGroup extends BaseActivity {
 
         final EditText studyTheme = findViewById(R.id.text_content_newgroup);
 
+        // implement the create button
         Button createButton = findViewById(R.id.button_form_newgroup);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +148,7 @@ public class CreateNewGroup extends BaseActivity {
 
     }
 
+    // check the format of input content
     public Boolean checkFormat(String groupName, String studyTheme, String studyTimeStart, String studyTimeEnd) {
         if (groupName.equals("")) {
             new AlertDialog.Builder(this)
@@ -180,6 +185,7 @@ public class CreateNewGroup extends BaseActivity {
         return true;
     }
 
+    // set the start time
     private void showStartDatePicker() {
         Calendar selectedDate = Calendar.getInstance();
         Calendar startDate = Calendar.getInstance();
@@ -217,6 +223,7 @@ public class CreateNewGroup extends BaseActivity {
         pvTime.show();
     }
 
+    // set the end time
     private void showEndDatePicker() {
         Calendar selectedDate = Calendar.getInstance();
         Calendar startDate = Calendar.getInstance();
@@ -252,6 +259,7 @@ public class CreateNewGroup extends BaseActivity {
         pvTime.show();
     }
 
+    // format the time
     private String getTime(Date date) {
         Log.d("getTime()", "choice date millis: " + date.getTime());
         SimpleDateFormat format = new SimpleDateFormat("MM-dd HH:mm");

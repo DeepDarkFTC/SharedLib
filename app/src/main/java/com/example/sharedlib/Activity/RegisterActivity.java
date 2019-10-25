@@ -27,14 +27,12 @@ public class RegisterActivity extends BaseActivity {
     private FirebaseAuth mAuth;
     // [END declare_auth]
 
-
     private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
 
         // [START initialize_auth]
         // Initialize Firebase Auth
@@ -43,19 +41,23 @@ public class RegisterActivity extends BaseActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
         final TextView emailTextView = findViewById(R.id.register_email);
         final TextView userNameTextView = findViewById(R.id.register_username);
         final TextView passwordTextView = findViewById(R.id.register_password);
         passwordTextView.setInputType(129);
 
+        // write data in firebase
         Button registerButton = findViewById(R.id.register);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkFormat(emailTextView.getText().toString(), userNameTextView.getText().toString(), passwordTextView.getText().toString())) {
+                if (checkFormat(emailTextView.getText().toString(),
+                        userNameTextView.getText().toString(),
+                        passwordTextView.getText().toString())) {
                     // send message to firebase include [userName,Psd,SecurityQ,answer]
-                    createAccount(emailTextView.getText().toString(), userNameTextView.getText().toString(), passwordTextView.getText().toString());
+                    createAccount(emailTextView.getText().toString(),
+                            userNameTextView.getText().toString(),
+                            passwordTextView.getText().toString());
                 }
             }
         });
@@ -106,6 +108,7 @@ public class RegisterActivity extends BaseActivity {
         // [END create_user_with_email]
     }
 
+    // check the content of input data
     public Boolean checkFormat(String email, String userName, String password) {
         String emailFormat = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
         if (email.equals("")) {

@@ -56,8 +56,10 @@ public class RankingActivity extends BaseActivity {
                 commentList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
+                    // read the firebase data
                     ComWithDatabase childComment = postSnapshot.getValue(ComWithDatabase.class);
-                    ComWithDatabase comment = new ComWithDatabase(postSnapshot.getKey(), childComment.getComment(), childComment.getDate());
+                    ComWithDatabase comment = new ComWithDatabase(postSnapshot.getKey(),
+                            childComment.getComment(), childComment.getDate());
                     commentList.add(comment);
                     Log.d("Database content", commentList.toString());
 
@@ -69,6 +71,7 @@ public class RankingActivity extends BaseActivity {
                         sortByTime(temp);
                     }
 
+                    // record the data to be displayed
                     String[] result = new String[temp.size()];
                     String rank = "No ranking";
                     TextView rankTextView = findViewById(R.id.text_rank_ranking);
@@ -85,7 +88,8 @@ public class RankingActivity extends BaseActivity {
                         }
                     }
 
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(RankingActivity.this, android.R.layout.simple_list_item_1, result);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(RankingActivity.this,
+                            android.R.layout.simple_list_item_1, result);
                     ListView listView = findViewById(R.id.listview_ranklist_ranking);
                     listView.setAdapter(adapter);
 
@@ -109,6 +113,7 @@ public class RankingActivity extends BaseActivity {
         });
     }
 
+    // sort the array based on time
     public void sortByTime(ArrayList list) {
         Collections.sort(list, new Comparator() {
             @Override
@@ -126,6 +131,7 @@ public class RankingActivity extends BaseActivity {
         });
     }
 
+    // change second to date
     public String secToTime(int time) {
         String timeStr;
         int hour = 0;
@@ -150,6 +156,7 @@ public class RankingActivity extends BaseActivity {
         return timeStr;
     }
 
+    // reformat the tme
     public String unitFormat(int i) {
         String retStr;
         if (i >= 0 && i < 10)

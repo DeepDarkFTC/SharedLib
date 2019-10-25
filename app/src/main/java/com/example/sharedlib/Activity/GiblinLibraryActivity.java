@@ -27,11 +27,13 @@ public class GiblinLibraryActivity extends BaseActivity {
         userNameTextView = findViewById(R.id.text_username_giblin);
         userNameTextView.setText(userName);
 
+        // implement 5 library buttons
         Button gibLevel1 = findViewById(R.id.gib_l1);
         gibLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GiblinLibraryActivity.this, LibrarySeatsActivity.class);
+                Intent intent = new Intent(GiblinLibraryActivity.this,
+                        LibrarySeatsActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 intent.putExtra("location", libraryName + " " + libraryLevel[0]);
                 startActivity(intent);
@@ -45,7 +47,8 @@ public class GiblinLibraryActivity extends BaseActivity {
         gibLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GiblinLibraryActivity.this, LibrarySeatsActivity.class);
+                Intent intent = new Intent(GiblinLibraryActivity.this,
+                        LibrarySeatsActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 intent.putExtra("location", libraryName + " " + libraryLevel[1]);
                 startActivity(intent);
@@ -59,7 +62,8 @@ public class GiblinLibraryActivity extends BaseActivity {
         gibLevel3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GiblinLibraryActivity.this, LibrarySeatsActivity.class);
+                Intent intent = new Intent(GiblinLibraryActivity.this,
+                        LibrarySeatsActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 intent.putExtra("location", libraryName + " " + libraryLevel[2]);
                 startActivity(intent);
@@ -73,7 +77,8 @@ public class GiblinLibraryActivity extends BaseActivity {
         gibLevel4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GiblinLibraryActivity.this, LibrarySeatsActivity.class);
+                Intent intent = new Intent(GiblinLibraryActivity.this,
+                        LibrarySeatsActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 intent.putExtra("location", libraryName + " " + libraryLevel[3]);
                 startActivity(intent);
@@ -87,7 +92,8 @@ public class GiblinLibraryActivity extends BaseActivity {
         gibLevel5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GiblinLibraryActivity.this, LibrarySeatsActivity.class);
+                Intent intent = new Intent(GiblinLibraryActivity.this,
+                        LibrarySeatsActivity.class);
                 intent.putExtra("userName", userNameTextView.getText().toString());
                 intent.putExtra("location", libraryName + " " + libraryLevel[4]);
                 startActivity(intent);

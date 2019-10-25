@@ -22,8 +22,8 @@ import java.util.List;
 public class SeatAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> data;
-    private List<String> displayData;
+    private List<String> data;  // data from firebase
+    private List<String> displayData;   // data used to display
 
     private ListView listView;
     private DatabaseReference mDatabase;
@@ -94,8 +94,8 @@ public class SeatAdapter extends BaseAdapter {
     }
 
     public class ViewHolder {
-        TextView mTv;
-        TextView numberView;
+        TextView mTv;   // display specific information
+        TextView numberView;    // overall thumb up/down
         Button good;
         Button bad;
         int number;
@@ -126,14 +126,17 @@ public class SeatAdapter extends BaseAdapter {
             int number = Integer.parseInt(thumbData1[0]);
             String key = keyData[1];
 
+            // thumb up and thumb down
             switch (v.getId()) {
                 case R.id.button_good_listview:
                     thumbCountTextView.setText((number + 1) + "");
-                    mDatabase.child("searchSeats").child("location").child(location).child(key).child("thumbNumber").setValue(String.valueOf(number + 1));
+                    mDatabase.child("searchSeats").child("location").child(location).child(key).
+                            child("thumbNumber").setValue(String.valueOf(number + 1));
                     break;
                 case R.id.button_bad_listview:
                     thumbCountTextView.setText((number - 1) + "");
-                    mDatabase.child("searchSeats").child("location").child(location).child(key).child("thumbNumber").setValue(String.valueOf(number - 1));
+                    mDatabase.child("searchSeats").child("location").child(location).child(key).
+                            child("thumbNumber").setValue(String.valueOf(number - 1));
             }
         }
     }

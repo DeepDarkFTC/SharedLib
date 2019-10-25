@@ -61,25 +61,32 @@ public class GroupDetailsActivity extends BaseActivity {
 
         final Button groupButton = findViewById(R.id.button_join_group);
 
-        DatabaseReference ref1 = mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail()));
+        DatabaseReference ref1 = mDatabase.child("groupMember").
+                child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail()));
         ref1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                // member already in the group
                 if (dataSnapshot.exists()) {
                     flag = false;
                     groupButton.setText("Quit This Group");
                 }
 
+                // set the listener of the button
                 groupButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (flag) {   // join button
-                            mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail())).setValue(true);
+                            mDatabase.child("groupMember").
+                                    child(parentIntent.getStringExtra("key")).
+                                    child(emailToUid(user.getEmail())).setValue(true);
                             flag = false;
                             groupButton.setText("Quit This Group");
                         } else {   // quit button
-                            mDatabase.child("groupMember").child(parentIntent.getStringExtra("key")).child(emailToUid(user.getEmail())).removeValue();
+                            mDatabase.child("groupMember").
+                                    child(parentIntent.getStringExtra("key")).
+                                    child(emailToUid(user.getEmail())).removeValue();
                             flag = true;
                             groupButton.setText("Join This Group");
                         }
@@ -92,12 +99,15 @@ public class GroupDetailsActivity extends BaseActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Getting Post failed, log a message
-                Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
+                Log.w("Database error", "loadPost:onCancelled",
+                        databaseError.toException());
                 // ...
             }
         });
 
-        DatabaseReference ref2 = mDatabase.child("groupMember").child(parentIntent.getStringExtra("key"));
+        // display the members in the group
+        DatabaseReference ref2 = mDatabase.child("groupMember").
+                child(parentIntent.getStringExtra("key"));
         ref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -117,7 +127,8 @@ public class GroupDetailsActivity extends BaseActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
-                Log.w("Database error", "loadPost:onCancelled", databaseError.toException());
+                Log.w("Database error", "loadPost:onCancelled",
+                        databaseError.toException());
                 // ...
             }
         });

@@ -33,8 +33,6 @@ public class PersonalDetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_personal_details);
 
         final TextView userNameTextView = findViewById(R.id.text_username_personaldetail);
-
-
         final TextView userNameContentTextView = findViewById(R.id.text_name_person);
         final TextView emailTextView = findViewById(R.id.text_mail_person);
         final TextView studyTimeTextView = findViewById(R.id.text_studytime_person);
@@ -50,6 +48,7 @@ public class PersonalDetailsActivity extends BaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                // get the study time of the user
                 if (dataSnapshot.exists()) {
                     personalStudyTime = Integer.parseInt(dataSnapshot.getValue(ComWithDatabase.class).getDate());
                     studyTimeTextView.setText("Total study time: " + personalStudyTime);
@@ -64,6 +63,7 @@ public class PersonalDetailsActivity extends BaseActivity {
             }
         });
 
+        // get the username
         DatabaseReference ref2 = mDatabase.child("userName");
         ref2.addValueEventListener(new ValueEventListener() {
             @Override
@@ -89,6 +89,7 @@ public class PersonalDetailsActivity extends BaseActivity {
             }
         });
 
+        // reset the username
         Button resetNameButton = findViewById(R.id.button_resetname_person);
         resetNameButton.setOnClickListener(new View.OnClickListener() {
             @Override

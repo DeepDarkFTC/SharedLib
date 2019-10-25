@@ -38,7 +38,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // send message to firebase
-
                 if (checkFormat(userNameTextView.getText().toString(), passwordTextView.getText().toString())) {
                     signIn(userNameTextView.getText().toString(), passwordTextView.getText().toString());
                 }
@@ -69,6 +68,7 @@ public class MainActivity extends BaseActivity {
         // [END initialize_auth]
     }
 
+    // check the input content
     public Boolean checkFormat(String userName, String password) {
         String email = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
         if (userName.equals("")) {

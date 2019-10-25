@@ -25,6 +25,7 @@ public class ResetPasswordActivity extends BaseActivity {
 
         final EditText emailEditText = findViewById(R.id.text_Mail_reset);
 
+        // reset the password
         Button resetButton = findViewById(R.id.button_reset_reset);
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,12 +41,14 @@ public class ResetPasswordActivity extends BaseActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Log.d("Reset password", "Email sent.");
-                                        Toast.makeText(ResetPasswordActivity.this, "The email has been sent.",
+                                        Toast.makeText(ResetPasswordActivity.this,
+                                                "The email has been sent.",
                                                 Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(ResetPasswordActivity.this, MainActivity.class);
                                         startActivity(intent);
                                     } else {
-                                        Toast.makeText(ResetPasswordActivity.this, "Cannot find this email.",
+                                        Toast.makeText(ResetPasswordActivity.this,
+                                                "Cannot find this email.",
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -55,6 +58,7 @@ public class ResetPasswordActivity extends BaseActivity {
         });
     }
 
+    // check the input data
     public Boolean checkFormat(String userName) {
         String email = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
         if (userName.equals("")) {

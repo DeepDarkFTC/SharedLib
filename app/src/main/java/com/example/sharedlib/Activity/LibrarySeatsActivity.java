@@ -55,8 +55,11 @@ public class LibrarySeatsActivity extends BaseActivity {
     private Location mLastKnownLocation;
 
     public static long timeDifference(String time1, String time2) {
+
+        // set date format
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
+        // calculate the difference of the two dates
         try {
             Date d1 = df.parse(time1);
             Date d2 = df.parse(time2);
@@ -107,9 +110,9 @@ public class LibrarySeatsActivity extends BaseActivity {
                 }
                 Log.d("Database content", commentList.toString());
                 Collections.reverse(commentList);   // displayed by upload date
-                ArrayList<String> temp = new ArrayList<String>();
+                ArrayList<String> data = new ArrayList<String>();   // record from firebase
 
-                ArrayList<String> displayData = new ArrayList<>();
+                ArrayList<String> displayData = new ArrayList<>();  // set the record to be displayed
 
                 for (int i = 0; i < commentList.size(); i++) {
                     ComWithDatabase tempObj = (ComWithDatabase) commentList.get(i);
@@ -125,15 +128,15 @@ public class LibrarySeatsActivity extends BaseActivity {
                             + "uploaded by: " + tempObj.getUser() + "\n";
 
                     if (timeDifference(obtainCurrentDate.getDateAndTime(), tempObj.getDate()) < 1) {
-                        temp.add(0, record);
+                        data.add(0, record);
                         displayData.add(0, displayRecord);
                     }
                 }
-                int len = temp.size();
+                int len = data.size();
                 Log.d("seat", String.valueOf(len));
 
                 ListView listView = findViewById(R.id.seatsComments);
-                SeatAdapter adapter = new SeatAdapter(temp, displayData, listView);
+                SeatAdapter adapter = new SeatAdapter(data, displayData, listView);
                 listView.setAdapter(adapter);
             }
 
@@ -163,6 +166,7 @@ public class LibrarySeatsActivity extends BaseActivity {
             }
         });
 
+        // upload button implementation
         Button upload = findViewById(R.id.button_update_libraryseats);
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,6 +274,7 @@ public class LibrarySeatsActivity extends BaseActivity {
         }
     }
 
+    // get the distance between current location and library
     private float getDistance(LatLng goalLocation) {
         float[] results = new float[1];
         if (mLastKnownLocation != null) {
@@ -279,6 +284,7 @@ public class LibrarySeatsActivity extends BaseActivity {
         return results[0];
     }
 
+    // check the current location
     private boolean checkInLib(String command) {
         int distance_to_lib;
         switch (command) {

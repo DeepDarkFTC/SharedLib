@@ -208,6 +208,7 @@ public class StudyTimeActivity extends BaseActivity {
         });
     }
 
+    // reformat the time
     private void setFormat(Chronometer chronometer) {
         int hour = (int) ((SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000 / 60 / 60);
         int minute = (int) ((SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000 / 60) % 60;

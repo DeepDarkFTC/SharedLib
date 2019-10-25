@@ -22,7 +22,8 @@ public class ObtainCurrentDate {
         String min = String.valueOf(calendar.get(Calendar.MINUTE));
         String second = String.valueOf(calendar.get(Calendar.SECOND));
 
-        String date = format(day) + "/" + format(month) + "/" + year + " " + format(hour) + ":" + format(min) + ":" + format(second) + " ";
+        String date = format(day) + "/" + format(month) + "/" + year + " " + format(hour) + ":"
+                + format(min) + ":" + format(second) + " ";
         return date;
     }
 
